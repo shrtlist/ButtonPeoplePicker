@@ -137,12 +137,7 @@
     
 	self.group = controller.group;
 	
-	if (controller.groupName.text.length > 0) {
-		fullname.text = controller.groupName.text;
-	}
-	else {
-		[self updatePersonInfo];
-	}
+	[self updatePersonInfo];
 	
 	// Dismiss the ButtonPeoplePicker.
 	[self.navigationController dismissModalViewControllerAnimated:YES];

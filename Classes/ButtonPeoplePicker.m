@@ -10,7 +10,7 @@
 
 @implementation ButtonPeoplePicker
 
-@synthesize delegate, group, namesLabel, groupName;
+@synthesize delegate, group, namesLabel;
 @synthesize filteredPeople;
 
 #pragma mark -
@@ -62,7 +62,6 @@
 
 	[namesLabel release];
 	[deleteLabel release];
-	[groupName release];
 	[tView release];
 	[searchField release];
 	[people release];
@@ -82,8 +81,7 @@
 // Action receiver for the clicking of Cancel button
 -(IBAction)cancelClick:(id)sender
 {
-	[self.group removeAllObjects];	
-	self.groupName = nil;
+	[self.group removeAllObjects];
 
 	[self.delegate buttonPeoplePickerDidFinish:self];
 }

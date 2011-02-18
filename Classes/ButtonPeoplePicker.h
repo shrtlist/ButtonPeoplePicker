@@ -18,7 +18,6 @@
 
 	IBOutlet UILabel *namesLabel;
 	IBOutlet UILabel *deleteLabel;
-	IBOutlet UITextField *groupName;
 	IBOutlet UIView *buttonView;
 	IBOutlet UITableView *tView;
 	IBOutlet UITextField *searchField;
@@ -31,7 +30,6 @@
 }
 
 @property (nonatomic, retain) UILabel *namesLabel;
-@property (nonatomic, retain) UITextField *groupName;
 @property (nonatomic, assign) id <ButtonPeoplePickerDelegate> delegate;
 @property (nonatomic, retain) NSMutableArray *filteredPeople;
 @property (nonatomic, retain) NSMutableArray *group;
