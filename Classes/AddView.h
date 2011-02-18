@@ -7,7 +7,7 @@
 #import "ButtonPeoplePicker.h"
 #import "AppDelegate.h"
 
-@interface AddView : UIViewController <UINavigationControllerDelegate, AddPeopleViewControllerDelegate> 
+@interface AddView : UIViewController <UINavigationControllerDelegate, ButtonPeoplePickerDelegate> 
 {
 	NSMutableArray *group;
 	

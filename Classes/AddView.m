@@ -131,9 +131,9 @@
 
 
 #pragma mark -
-#pragma mark AddPeopleViewControllerDelegate protocol method
+#pragma mark ButtonPeoplePickerDelegate protocol method
 
-- (void)addPeopleViewControllerDidFinish:(ButtonPeoplePicker *)controller {
+- (void)buttonPeoplePickerDidFinish:(ButtonPeoplePicker *)controller {
     
 	self.group = controller.group;
 	

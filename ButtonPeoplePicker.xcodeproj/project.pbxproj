@@ -237,7 +237,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Boomerang_Prefix.pch;
+				GCC_PREFIX_HEADER = ButtonPeoplePicker_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = ButtonPeoplePicker;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -252,7 +252,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Boomerang_Prefix.pch;
+				GCC_PREFIX_HEADER = ButtonPeoplePicker_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = ButtonPeoplePicker;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -283,7 +283,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: MirageBox Ltd";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Boomerang_Prefix.pch;
+				GCC_PREFIX_HEADER = ButtonPeoplePicker_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = ButtonPeoplePicker;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6E1B4E0B-B759-4C30-98FB-A3DC3E90F381";

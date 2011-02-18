@@ -85,13 +85,13 @@
 	[self.group removeAllObjects];	
 	self.groupName = nil;
 
-	[self.delegate addPeopleViewControllerDidFinish:self];
+	[self.delegate buttonPeoplePickerDidFinish:self];
 }
 
 // Action receiver for the clicking of Done button
 -(IBAction)doneClick:(id)sender
 {
-	[self.delegate addPeopleViewControllerDidFinish:self];
+	[self.delegate buttonPeoplePickerDidFinish:self];
 }
 
 // Action receiver for the selecting of name button

@@ -7,14 +7,14 @@
 #import "ButtonPeoplePicker.h"
 #import "AddPersonViewController.h"
 
-@protocol AddPeopleViewControllerDelegate;
+@protocol ButtonPeoplePickerDelegate;
 
 @interface ButtonPeoplePicker : UIViewController <AddPersonViewControllerDelegate,
 													   UITableViewDataSource,
 													   UITableViewDelegate,
 													   UIKeyInput>
 {
-	id <AddPeopleViewControllerDelegate> delegate;
+	id <ButtonPeoplePickerDelegate> delegate;
 
 	UILabel *namesLabel;
 	IBOutlet UILabel *deleteLabel;
@@ -31,7 +31,7 @@
 
 @property (nonatomic, retain) IBOutlet UILabel *namesLabel;
 @property (nonatomic, retain) IBOutlet UITextField *groupName;
-@property (nonatomic, assign) id <AddPeopleViewControllerDelegate> delegate;
+@property (nonatomic, assign) id <ButtonPeoplePickerDelegate> delegate;
 @property (nonatomic, retain) NSMutableArray *filteredPeople;
 @property (nonatomic, retain) NSMutableArray *group;
 
@@ -46,6 +46,6 @@
 
 @end
 
-@protocol AddPeopleViewControllerDelegate
-- (void)addPeopleViewControllerDidFinish:(ButtonPeoplePicker *)controller;
+@protocol ButtonPeoplePickerDelegate
+- (void)buttonPeoplePickerDidFinish:(ButtonPeoplePicker *)controller;
 @end
