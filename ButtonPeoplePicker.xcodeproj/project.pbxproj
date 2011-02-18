@@ -11,17 +11,17 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
-		83318FDC0FBAB9DF00377A71 /* AddView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83318FDB0FBAB9DF00377A71 /* AddView.xib */; };
-		846F69E012E8FD4E00B59C71 /* AddPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 846F69DE12E8FD4E00B59C71 /* AddPersonViewController.m */; };
-		84952E85130E4D7C0044A2FD /* bottom-button-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 84952E84130E4D7C0044A2FD /* bottom-button-bg.png */; };
-		84952F53130E66F70044A2FD /* AddPersonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84952F52130E66F70044A2FD /* AddPersonView.xib */; };
-		84F9C99A130DD8BD0027DE2E /* ButtonCorners.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F9C998130DD8BD0027DE2E /* ButtonCorners.png */; };
-		84F9C99B130DD8BD0027DE2E /* ButtonCorners@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F9C999130DD8BD0027DE2E /* ButtonCorners@2x.png */; };
-		84F9C9AE130DDB2B0027DE2E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9C9AD130DDB2B0027DE2E /* AppDelegate.m */; };
-		84F9C9C0130DDCE70027DE2E /* AddView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9C9BF130DDCE70027DE2E /* AddView.m */; };
-		84F9C9CC130DDDBB0027DE2E /* ButtonPeoplePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F9C9CB130DDDBB0027DE2E /* ButtonPeoplePicker.xib */; };
-		84F9C9DB130DDED40027DE2E /* ButtonPeoplePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9C9DA130DDED40027DE2E /* ButtonPeoplePicker.m */; };
+		8407DD53130F1FF600F5713F /* AddPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8407DD4C130F1FF600F5713F /* AddPersonViewController.m */; };
+		8407DD54130F1FF600F5713F /* AddView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8407DD4E130F1FF600F5713F /* AddView.m */; };
+		8407DD55130F1FF600F5713F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8407DD50130F1FF600F5713F /* AppDelegate.m */; };
+		8407DD56130F1FF600F5713F /* ButtonPeoplePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8407DD52130F1FF600F5713F /* ButtonPeoplePicker.m */; };
+		8407DD5C130F202E00F5713F /* AddPersonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD58130F202E00F5713F /* AddPersonView.xib */; };
+		8407DD5D130F202E00F5713F /* AddView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD59130F202E00F5713F /* AddView.xib */; };
+		8407DD5E130F202E00F5713F /* ButtonPeoplePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD5A130F202E00F5713F /* ButtonPeoplePicker.xib */; };
+		8407DD5F130F202E00F5713F /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD5B130F202E00F5713F /* MainWindow.xib */; };
+		8407DD63130F205F00F5713F /* bottom-button-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD60130F205F00F5713F /* bottom-button-bg.png */; };
+		8407DD64130F205F00F5713F /* ButtonCorners.png in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD61130F205F00F5713F /* ButtonCorners.png */; };
+		8407DD65130F205F00F5713F /* ButtonCorners@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD62130F205F00F5713F /* ButtonCorners@2x.png */; };
 		8E1075130FE22BF900355D09 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E1075120FE22BF900355D09 /* AddressBook.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,24 +29,24 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		8306E04C1213B9CE00F53872 /* Button Picker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Button Picker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		83318FDB0FBAB9DF00377A71 /* AddView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddView.xib; sourceTree = "<group>"; };
-		84224DF7130DEF0500E7F1F2 /* ButtonPeoplePicker_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ButtonPeoplePicker_Prefix.pch; path = Examples/iPhone/ButtonPeoplePicker/ButtonPeoplePicker_Prefix.pch; sourceTree = DEVELOPER_DIR; };
-		846F69DD12E8FD4E00B59C71 /* AddPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddPersonViewController.h; path = Examples/iPhone/boomerangiphone/Classes/AddPersonViewController.h; sourceTree = DEVELOPER_DIR; };
-		846F69DE12E8FD4E00B59C71 /* AddPersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddPersonViewController.m; path = Examples/iPhone/boomerangiphone/Classes/AddPersonViewController.m; sourceTree = DEVELOPER_DIR; };
-		84952E84130E4D7C0044A2FD /* bottom-button-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bottom-button-bg.png"; path = "Examples/iPhone/ButtonPeoplePicker/bottom-button-bg.png"; sourceTree = DEVELOPER_DIR; };
-		84952F52130E66F70044A2FD /* AddPersonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AddPersonView.xib; path = Examples/iPhone/ButtonPeoplePicker/AddPersonView.xib; sourceTree = DEVELOPER_DIR; };
-		84F9C998130DD8BD0027DE2E /* ButtonCorners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonCorners.png; path = Examples/iPhone/ButtonPeoplePicker/Images/ButtonCorners.png; sourceTree = DEVELOPER_DIR; };
-		84F9C999130DD8BD0027DE2E /* ButtonCorners@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCorners@2x.png"; path = "Examples/iPhone/ButtonPeoplePicker/Images/ButtonCorners@2x.png"; sourceTree = DEVELOPER_DIR; };
-		84F9C9AC130DDB2B0027DE2E /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Examples/iPhone/ButtonPeoplePicker/Classes/AppDelegate.h; sourceTree = DEVELOPER_DIR; };
-		84F9C9AD130DDB2B0027DE2E /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Examples/iPhone/ButtonPeoplePicker/Classes/AppDelegate.m; sourceTree = DEVELOPER_DIR; };
-		84F9C9BE130DDCE70027DE2E /* AddView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddView.h; path = Examples/iPhone/ButtonPeoplePicker/Classes/AddView.h; sourceTree = DEVELOPER_DIR; };
-		84F9C9BF130DDCE70027DE2E /* AddView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddView.m; path = Examples/iPhone/ButtonPeoplePicker/Classes/AddView.m; sourceTree = DEVELOPER_DIR; };
-		84F9C9CB130DDDBB0027DE2E /* ButtonPeoplePicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ButtonPeoplePicker.xib; path = Examples/iPhone/ButtonPeoplePicker/ButtonPeoplePicker.xib; sourceTree = DEVELOPER_DIR; };
-		84F9C9D9130DDED40027DE2E /* ButtonPeoplePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ButtonPeoplePicker.h; path = Examples/iPhone/ButtonPeoplePicker/Classes/ButtonPeoplePicker.h; sourceTree = DEVELOPER_DIR; };
-		84F9C9DA130DDED40027DE2E /* ButtonPeoplePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ButtonPeoplePicker.m; path = Examples/iPhone/ButtonPeoplePicker/Classes/ButtonPeoplePicker.m; sourceTree = DEVELOPER_DIR; };
+		8306E04C1213B9CE00F53872 /* ButtonPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ButtonPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8407DD4B130F1FF600F5713F /* AddPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPersonViewController.h; sourceTree = "<group>"; };
+		8407DD4C130F1FF600F5713F /* AddPersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPersonViewController.m; sourceTree = "<group>"; };
+		8407DD4D130F1FF600F5713F /* AddView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddView.h; sourceTree = "<group>"; };
+		8407DD4E130F1FF600F5713F /* AddView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddView.m; sourceTree = "<group>"; };
+		8407DD4F130F1FF600F5713F /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		8407DD50130F1FF600F5713F /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		8407DD51130F1FF600F5713F /* ButtonPeoplePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonPeoplePicker.h; sourceTree = "<group>"; };
+		8407DD52130F1FF600F5713F /* ButtonPeoplePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonPeoplePicker.m; sourceTree = "<group>"; };
+		8407DD57130F200700F5713F /* ButtonPeoplePicker_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonPeoplePicker_Prefix.pch; sourceTree = "<group>"; };
+		8407DD58130F202E00F5713F /* AddPersonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddPersonView.xib; sourceTree = "<group>"; };
+		8407DD59130F202E00F5713F /* AddView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddView.xib; sourceTree = "<group>"; };
+		8407DD5A130F202E00F5713F /* ButtonPeoplePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonPeoplePicker.xib; sourceTree = "<group>"; };
+		8407DD5B130F202E00F5713F /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		8407DD60130F205F00F5713F /* bottom-button-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bottom-button-bg.png"; path = "Images/bottom-button-bg.png"; sourceTree = "<group>"; };
+		8407DD61130F205F00F5713F /* ButtonCorners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonCorners.png; path = Images/ButtonCorners.png; sourceTree = "<group>"; };
+		8407DD62130F205F00F5713F /* ButtonCorners@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCorners@2x.png"; path = "Images/ButtonCorners@2x.png"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E1075120FE22BF900355D09 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -69,14 +69,14 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				846F69DD12E8FD4E00B59C71 /* AddPersonViewController.h */,
-				846F69DE12E8FD4E00B59C71 /* AddPersonViewController.m */,
-				84F9C9BE130DDCE70027DE2E /* AddView.h */,
-				84F9C9BF130DDCE70027DE2E /* AddView.m */,
-				84F9C9AC130DDB2B0027DE2E /* AppDelegate.h */,
-				84F9C9AD130DDB2B0027DE2E /* AppDelegate.m */,
-				84F9C9D9130DDED40027DE2E /* ButtonPeoplePicker.h */,
-				84F9C9DA130DDED40027DE2E /* ButtonPeoplePicker.m */,
+				8407DD4B130F1FF600F5713F /* AddPersonViewController.h */,
+				8407DD4C130F1FF600F5713F /* AddPersonViewController.m */,
+				8407DD4D130F1FF600F5713F /* AddView.h */,
+				8407DD4E130F1FF600F5713F /* AddView.m */,
+				8407DD4F130F1FF600F5713F /* AppDelegate.h */,
+				8407DD50130F1FF600F5713F /* AppDelegate.m */,
+				8407DD51130F1FF600F5713F /* ButtonPeoplePicker.h */,
+				8407DD52130F1FF600F5713F /* ButtonPeoplePicker.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -84,7 +84,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8306E04C1213B9CE00F53872 /* Button Picker.app */,
+				8306E04C1213B9CE00F53872 /* ButtonPicker.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,7 +104,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				84224DF7130DEF0500E7F1F2 /* ButtonPeoplePicker_Prefix.pch */,
+				8407DD57130F200700F5713F /* ButtonPeoplePicker_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
@@ -134,9 +134,9 @@
 		83D515AB0FF0BD5F00AD43CA /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				84952E84130E4D7C0044A2FD /* bottom-button-bg.png */,
-				84F9C998130DD8BD0027DE2E /* ButtonCorners.png */,
-				84F9C999130DD8BD0027DE2E /* ButtonCorners@2x.png */,
+				8407DD60130F205F00F5713F /* bottom-button-bg.png */,
+				8407DD61130F205F00F5713F /* ButtonCorners.png */,
+				8407DD62130F205F00F5713F /* ButtonCorners@2x.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -144,10 +144,10 @@
 		83D515B70FF0BD6B00AD43CA /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
-				84952F52130E66F70044A2FD /* AddPersonView.xib */,
-				83318FDB0FBAB9DF00377A71 /* AddView.xib */,
-				84F9C9CB130DDDBB0027DE2E /* ButtonPeoplePicker.xib */,
-				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				8407DD58130F202E00F5713F /* AddPersonView.xib */,
+				8407DD59130F202E00F5713F /* AddView.xib */,
+				8407DD5A130F202E00F5713F /* ButtonPeoplePicker.xib */,
+				8407DD5B130F202E00F5713F /* MainWindow.xib */,
 			);
 			name = Xibs;
 			sourceTree = "<group>";
@@ -169,7 +169,7 @@
 			);
 			name = ButtonPeoplePicker;
 			productName = Boomerang;
-			productReference = 8306E04C1213B9CE00F53872 /* Button Picker.app */;
+			productReference = 8306E04C1213B9CE00F53872 /* ButtonPicker.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -204,13 +204,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
-				83318FDC0FBAB9DF00377A71 /* AddView.xib in Resources */,
-				84F9C99A130DD8BD0027DE2E /* ButtonCorners.png in Resources */,
-				84F9C99B130DD8BD0027DE2E /* ButtonCorners@2x.png in Resources */,
-				84F9C9CC130DDDBB0027DE2E /* ButtonPeoplePicker.xib in Resources */,
-				84952E85130E4D7C0044A2FD /* bottom-button-bg.png in Resources */,
-				84952F53130E66F70044A2FD /* AddPersonView.xib in Resources */,
+				8407DD5C130F202E00F5713F /* AddPersonView.xib in Resources */,
+				8407DD5D130F202E00F5713F /* AddView.xib in Resources */,
+				8407DD5E130F202E00F5713F /* ButtonPeoplePicker.xib in Resources */,
+				8407DD5F130F202E00F5713F /* MainWindow.xib in Resources */,
+				8407DD63130F205F00F5713F /* bottom-button-bg.png in Resources */,
+				8407DD64130F205F00F5713F /* ButtonCorners.png in Resources */,
+				8407DD65130F205F00F5713F /* ButtonCorners@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,10 +222,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				846F69E012E8FD4E00B59C71 /* AddPersonViewController.m in Sources */,
-				84F9C9AE130DDB2B0027DE2E /* AppDelegate.m in Sources */,
-				84F9C9C0130DDCE70027DE2E /* AddView.m in Sources */,
-				84F9C9DB130DDED40027DE2E /* ButtonPeoplePicker.m in Sources */,
+				8407DD53130F1FF600F5713F /* AddPersonViewController.m in Sources */,
+				8407DD54130F1FF600F5713F /* AddView.m in Sources */,
+				8407DD55130F1FF600F5713F /* AppDelegate.m in Sources */,
+				8407DD56130F1FF600F5713F /* ButtonPeoplePicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,7 +243,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ButtonPeoplePicker_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				PRODUCT_NAME = "Button Picker";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				PRODUCT_NAME = ButtonPicker;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos4.2;
 			};
@@ -258,7 +259,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ButtonPeoplePicker_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				PRODUCT_NAME = "Button Picker";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				PRODUCT_NAME = ButtonPicker;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos4.2;
 			};
@@ -272,7 +274,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9AF190BE-7933-4BC3-A2EF-9D79E16D1375";
 				SDKROOT = iphoneos;
@@ -289,7 +291,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ButtonPeoplePicker_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				PRODUCT_NAME = "Button Picker";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				PRODUCT_NAME = ButtonPicker;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6E1B4E0B-B759-4C30-98FB-A3DC3E90F381";
 				SDKROOT = iphoneos4.2;
 			};
@@ -303,7 +306,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
