@@ -13,9 +13,9 @@
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		83318FDC0FBAB9DF00377A71 /* AddView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83318FDB0FBAB9DF00377A71 /* AddView.xib */; };
-		846F69DB12E8FC4F00B59C71 /* AddPersonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846F69DA12E8FC4F00B59C71 /* AddPersonView.xib */; };
 		846F69E012E8FD4E00B59C71 /* AddPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 846F69DE12E8FD4E00B59C71 /* AddPersonViewController.m */; };
 		84952E85130E4D7C0044A2FD /* bottom-button-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 84952E84130E4D7C0044A2FD /* bottom-button-bg.png */; };
+		84952F53130E66F70044A2FD /* AddPersonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84952F52130E66F70044A2FD /* AddPersonView.xib */; };
 		84F9C99A130DD8BD0027DE2E /* ButtonCorners.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F9C998130DD8BD0027DE2E /* ButtonCorners.png */; };
 		84F9C99B130DD8BD0027DE2E /* ButtonCorners@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F9C999130DD8BD0027DE2E /* ButtonCorners@2x.png */; };
 		84F9C9AE130DDB2B0027DE2E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9C9AD130DDB2B0027DE2E /* AppDelegate.m */; };
@@ -34,10 +34,10 @@
 		8306E04C1213B9CE00F53872 /* Button Picker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Button Picker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83318FDB0FBAB9DF00377A71 /* AddView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddView.xib; sourceTree = "<group>"; };
 		84224DF7130DEF0500E7F1F2 /* ButtonPeoplePicker_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ButtonPeoplePicker_Prefix.pch; path = Examples/iPhone/ButtonPeoplePicker/ButtonPeoplePicker_Prefix.pch; sourceTree = DEVELOPER_DIR; };
-		846F69DA12E8FC4F00B59C71 /* AddPersonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AddPersonView.xib; path = Examples/iPhone/boomerangiphone/AddPersonView.xib; sourceTree = DEVELOPER_DIR; };
 		846F69DD12E8FD4E00B59C71 /* AddPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddPersonViewController.h; path = Examples/iPhone/boomerangiphone/Classes/AddPersonViewController.h; sourceTree = DEVELOPER_DIR; };
 		846F69DE12E8FD4E00B59C71 /* AddPersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddPersonViewController.m; path = Examples/iPhone/boomerangiphone/Classes/AddPersonViewController.m; sourceTree = DEVELOPER_DIR; };
 		84952E84130E4D7C0044A2FD /* bottom-button-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bottom-button-bg.png"; path = "Examples/iPhone/ButtonPeoplePicker/bottom-button-bg.png"; sourceTree = DEVELOPER_DIR; };
+		84952F52130E66F70044A2FD /* AddPersonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AddPersonView.xib; path = Examples/iPhone/ButtonPeoplePicker/AddPersonView.xib; sourceTree = DEVELOPER_DIR; };
 		84F9C998130DD8BD0027DE2E /* ButtonCorners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonCorners.png; path = Examples/iPhone/ButtonPeoplePicker/Images/ButtonCorners.png; sourceTree = DEVELOPER_DIR; };
 		84F9C999130DD8BD0027DE2E /* ButtonCorners@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCorners@2x.png"; path = "Examples/iPhone/ButtonPeoplePicker/Images/ButtonCorners@2x.png"; sourceTree = DEVELOPER_DIR; };
 		84F9C9AC130DDB2B0027DE2E /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Examples/iPhone/ButtonPeoplePicker/Classes/AppDelegate.h; sourceTree = DEVELOPER_DIR; };
@@ -144,7 +144,7 @@
 		83D515B70FF0BD6B00AD43CA /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
-				846F69DA12E8FC4F00B59C71 /* AddPersonView.xib */,
+				84952F52130E66F70044A2FD /* AddPersonView.xib */,
 				83318FDB0FBAB9DF00377A71 /* AddView.xib */,
 				84F9C9CB130DDDBB0027DE2E /* ButtonPeoplePicker.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
@@ -206,11 +206,11 @@
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				83318FDC0FBAB9DF00377A71 /* AddView.xib in Resources */,
-				846F69DB12E8FC4F00B59C71 /* AddPersonView.xib in Resources */,
 				84F9C99A130DD8BD0027DE2E /* ButtonCorners.png in Resources */,
 				84F9C99B130DD8BD0027DE2E /* ButtonCorners@2x.png in Resources */,
 				84F9C9CC130DDDBB0027DE2E /* ButtonPeoplePicker.xib in Resources */,
 				84952E85130E4D7C0044A2FD /* bottom-button-bg.png in Resources */,
+				84952F53130E66F70044A2FD /* AddPersonView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
