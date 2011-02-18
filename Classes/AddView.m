@@ -5,6 +5,7 @@
 //
 
 #import "AddView.h"
+#import <AddressBook/AddressBook.h>
 
 @implementation AddView
 
@@ -13,51 +14,17 @@
 #pragma mark -
 #pragma mark Lifecycle methods
 
-- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle
-{
-	[super initWithNibName:nibName bundle:nibBundle];
-	
-	appDelegate = [[UIApplication sharedApplication] delegate];
-	
-	personFullName = nil;
-	personImage = nil;
-	
-	return self;
-}
-
 - (void)viewDidLoad 
 {
 	[super viewDidLoad];
 	
 	self.title = @"ButtonPeoplePicker Demo";
 	fullname.text = @"Add people...";
-
-	CGRect personPortrait = { 8.0f, 8.0f, 53.0f, 53.0f };
-	
-	personImageView = [[UIImageView alloc] init];
-	personImageView.frame = personPortrait;
-	[self.view addSubview:personImageView];
-	
-	personImageBorderView = [[UIImageView alloc] initWithImage:[UIImage imageNamed: @"person-photo-cover.png"]];
-	personImageBorderView.frame = personPortrait;
-	[self.view addSubview:personImageBorderView];
 }
 
 - (void)dealloc 
 {
-	[personImageView release];
-	[personImageBorderView release];
-	
-	if(personFullName != nil)
-	{
-		[personFullName release];
-	}
-	
-	if(personImage != nil)
-	{
-		[personImage release];
-	}
-
+	[fullname release];
     [super dealloc];
 }
 
@@ -97,25 +64,11 @@
 		NSDictionary *personDictionary = (NSDictionary *)[self.group objectAtIndex:i];
 		
 		ABRecordRef abPerson = (ABRecordRef)[personDictionary valueForKey:@"person"];
-		
-		if (abPerson != nil && ABPersonHasImageData(abPerson))
-		{
-			NSData *personImgData = (NSData *)ABPersonCopyImageData(abPerson);
-			personImageView.image = [UIImage imageWithData:personImgData];
-			[personImgData release];
-		}
-		else
-		{
-			personImageView.image = [UIImage imageNamed: @"icon-default-person.png"];
-		}
 
 		NSString *name = (NSString *)ABRecordCopyCompositeName(abPerson);
 		
 		if (i < (count - 1)) {
 			[tempString appendString:[NSString stringWithFormat:@"%@, ", name]];
-		}
-		else if (count > 2) {
-			[tempString appendString:[NSString stringWithFormat:@"and %i others", count]];
 		}
 		else {
 			[tempString appendString:[NSString stringWithFormat:@"%@", name]];
