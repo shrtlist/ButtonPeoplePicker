@@ -10,9 +10,9 @@
 @protocol ButtonPeoplePickerDelegate;
 
 @interface ButtonPeoplePicker : UIViewController <AddPersonViewControllerDelegate,
-													   UITableViewDataSource,
-													   UITableViewDelegate,
-													   UIKeyInput>
+												  UITableViewDataSource,
+												  UITableViewDelegate,
+												  UIKeyInput>
 {
 	id <ButtonPeoplePickerDelegate> delegate;
 

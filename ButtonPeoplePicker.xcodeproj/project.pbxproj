@@ -67,14 +67,14 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				84F9C9D9130DDED40027DE2E /* ButtonPeoplePicker.h */,
-				84F9C9DA130DDED40027DE2E /* ButtonPeoplePicker.m */,
 				846F69DD12E8FD4E00B59C71 /* AddPersonViewController.h */,
 				846F69DE12E8FD4E00B59C71 /* AddPersonViewController.m */,
 				84F9C9BE130DDCE70027DE2E /* AddView.h */,
 				84F9C9BF130DDCE70027DE2E /* AddView.m */,
 				84F9C9AC130DDB2B0027DE2E /* AppDelegate.h */,
 				84F9C9AD130DDB2B0027DE2E /* AppDelegate.m */,
+				84F9C9D9130DDED40027DE2E /* ButtonPeoplePicker.h */,
+				84F9C9DA130DDED40027DE2E /* ButtonPeoplePicker.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

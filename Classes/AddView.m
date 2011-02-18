@@ -1,9 +1,7 @@
 //
 //  AddView.m
-//  Boomerang
 //
-//  Created by Keegan Flanigan on 5/13/09.
-//  Copyright 2009 MirageBox. All rights reserved.
+//  Created by shrtlist.com
 //
 
 #import "AddView.h"
@@ -31,7 +29,7 @@
 {
 	[super viewDidLoad];
 	
-	self.title = @"Group Expense";
+	self.title = @"ButtonPeoplePicker Demo";
 	fullname.text = @"Add people...";
 
 	CGRect personPortrait = { 8.0f, 8.0f, 53.0f, 53.0f };
