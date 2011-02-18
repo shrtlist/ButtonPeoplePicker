@@ -9,7 +9,7 @@
 
 @implementation ButtonPeoplePicker
 
-@synthesize delegate, group, namesLabel;
+@synthesize delegate, group;
 @synthesize filteredPeople;
 
 #pragma mark -
@@ -57,7 +57,6 @@
 
 - (void)dealloc 
 {
-	[namesLabel release];
 	[deleteLabel release];
 	[tView release];
 	[searchField release];
@@ -136,8 +135,12 @@
 	NSArray *personArray = (NSArray *)ABAddressBookCopyPeopleWithName(addressBook, (CFStringRef)name);
 	
 	ABRecordRef person = [personArray lastObject];
-	
-	NSDictionary *personDictionary = [NSDictionary dictionaryWithObjectsAndKeys:(id)person, @"person", [NSNumber numberWithInt:identifier], @"valueIdentifier", nil];
+
+	ABRecordID abRecordID = ABRecordGetRecordID(person);
+
+	NSDictionary *personDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+									  [NSNumber numberWithInt:abRecordID], @"abRecordID",
+									  [NSNumber numberWithInt:identifier], @"valueIdentifier", nil];
 
 	[self removePersonFromGroup:personDictionary];
 	
@@ -172,7 +175,9 @@
 	else {
 		NSDictionary *personDictionary = [self.filteredPeople objectAtIndex:indexPath.row];
 		
-		ABRecordRef abPerson = [personDictionary valueForKey:@"person"];
+		ABRecordID abRecordID = (ABRecordID)[[personDictionary valueForKey:@"abRecordID"] intValue];
+		
+		ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(addressBook, abRecordID);
 		
 		ABMultiValueIdentifier identifier = [[personDictionary valueForKey:@"valueIdentifier"] intValue];
 		
@@ -265,7 +270,11 @@
 					// Get the address identifier for this address
 					ABMultiValueIdentifier identifier = ABMultiValueGetIdentifierAtIndex(emailsProperty, index);
 					
-					NSDictionary *personDictionary = [NSDictionary dictionaryWithObjectsAndKeys:(id)person, @"person", [NSNumber numberWithInt:identifier], @"valueIdentifier", nil];
+					ABRecordID abRecordID = ABRecordGetRecordID(person);
+					
+					NSDictionary *personDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+													 [NSNumber numberWithInt:abRecordID], @"abRecordID",
+													 [NSNumber numberWithInt:identifier], @"valueIdentifier", nil];
 
 					// Add each personDictionary to filteredPeople
 					[self.filteredPeople addObject:personDictionary];
@@ -342,8 +351,11 @@
 	for (int i = 0; i < self.group.count; i++) {
 		
 		NSDictionary *personDictionary = (NSDictionary *)[self.group objectAtIndex:i];
+		
+		ABRecordID abRecordID = (ABRecordID)[[personDictionary valueForKey:@"abRecordID"] intValue];
 
-		ABRecordRef abPerson = (ABRecordRef)[personDictionary valueForKey:@"person"];
+		ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(addressBook, abRecordID);
+
 		NSString *name = (NSString *)ABRecordCopyCompositeName(abPerson);
 		
 		ABMultiValueIdentifier identifier = [[personDictionary valueForKey:@"valueIdentifier"] intValue];
@@ -444,9 +456,13 @@
 	
 	// Save changes to the address book
 	ABAddressBookSave(addressBook, nil);
-	
-	NSDictionary *personDictionary = [NSDictionary dictionaryWithObjectsAndKeys:(id)personRef, @"person", [NSNumber numberWithInt:0], @"valueIdentifier", nil];
-	
+
+	ABRecordID abRecordID = ABRecordGetRecordID(personRef);
+
+	NSDictionary *personDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+									 [NSNumber numberWithInt:abRecordID], @"abRecordID",
+									 [NSNumber numberWithInt:0], @"valueIdentifier", nil];
+
 	CFRelease(personRef);
 	
 	[self addPersonToGroup:personDictionary];

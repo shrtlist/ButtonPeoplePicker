@@ -17,7 +17,6 @@
 {
 	id <ButtonPeoplePickerDelegate> delegate;
 
-	IBOutlet UILabel *namesLabel;
 	IBOutlet UILabel *deleteLabel;
 	IBOutlet UIView *buttonView;
 	IBOutlet UITableView *tView;
@@ -32,7 +31,6 @@
 	ABAddressBookRef addressBook;
 }
 
-@property (nonatomic, retain) UILabel *namesLabel;
 @property (nonatomic, assign) id <ButtonPeoplePickerDelegate> delegate;
 @property (nonatomic, retain) NSMutableArray *filteredPeople;
 @property (nonatomic, retain) NSMutableArray *group;

@@ -54,7 +54,9 @@
 #pragma mark Update Person info
 
 -(void)updatePersonInfo {
-	
+
+	ABAddressBookRef addressBook = ABAddressBookCreate();
+
 	int count = self.group.count;
 	
 	NSMutableString *tempString = [NSMutableString string];
@@ -63,7 +65,9 @@
 		
 		NSDictionary *personDictionary = (NSDictionary *)[self.group objectAtIndex:i];
 		
-		ABRecordRef abPerson = (ABRecordRef)[personDictionary valueForKey:@"person"];
+		ABRecordID abRecordID = (ABRecordID)[[personDictionary valueForKey:@"abRecordID"] intValue];
+		
+		ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(addressBook, abRecordID);
 
 		NSString *name = (NSString *)ABRecordCopyCompositeName(abPerson);
 		
@@ -78,6 +82,8 @@
 	}
 	
 	fullname.text = tempString;
+	
+	CFRelease(addressBook);
 }
 
 

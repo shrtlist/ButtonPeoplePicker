@@ -15,6 +15,7 @@
 		83318FDC0FBAB9DF00377A71 /* AddView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83318FDB0FBAB9DF00377A71 /* AddView.xib */; };
 		846F69DB12E8FC4F00B59C71 /* AddPersonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846F69DA12E8FC4F00B59C71 /* AddPersonView.xib */; };
 		846F69E012E8FD4E00B59C71 /* AddPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 846F69DE12E8FD4E00B59C71 /* AddPersonViewController.m */; };
+		84952E85130E4D7C0044A2FD /* bottom-button-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 84952E84130E4D7C0044A2FD /* bottom-button-bg.png */; };
 		84F9C99A130DD8BD0027DE2E /* ButtonCorners.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F9C998130DD8BD0027DE2E /* ButtonCorners.png */; };
 		84F9C99B130DD8BD0027DE2E /* ButtonCorners@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F9C999130DD8BD0027DE2E /* ButtonCorners@2x.png */; };
 		84F9C9AE130DDB2B0027DE2E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9C9AD130DDB2B0027DE2E /* AppDelegate.m */; };
@@ -36,6 +37,7 @@
 		846F69DA12E8FC4F00B59C71 /* AddPersonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AddPersonView.xib; path = Examples/iPhone/boomerangiphone/AddPersonView.xib; sourceTree = DEVELOPER_DIR; };
 		846F69DD12E8FD4E00B59C71 /* AddPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddPersonViewController.h; path = Examples/iPhone/boomerangiphone/Classes/AddPersonViewController.h; sourceTree = DEVELOPER_DIR; };
 		846F69DE12E8FD4E00B59C71 /* AddPersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddPersonViewController.m; path = Examples/iPhone/boomerangiphone/Classes/AddPersonViewController.m; sourceTree = DEVELOPER_DIR; };
+		84952E84130E4D7C0044A2FD /* bottom-button-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bottom-button-bg.png"; path = "Examples/iPhone/ButtonPeoplePicker/bottom-button-bg.png"; sourceTree = DEVELOPER_DIR; };
 		84F9C998130DD8BD0027DE2E /* ButtonCorners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonCorners.png; path = Examples/iPhone/ButtonPeoplePicker/Images/ButtonCorners.png; sourceTree = DEVELOPER_DIR; };
 		84F9C999130DD8BD0027DE2E /* ButtonCorners@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCorners@2x.png"; path = "Examples/iPhone/ButtonPeoplePicker/Images/ButtonCorners@2x.png"; sourceTree = DEVELOPER_DIR; };
 		84F9C9AC130DDB2B0027DE2E /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Examples/iPhone/ButtonPeoplePicker/Classes/AppDelegate.h; sourceTree = DEVELOPER_DIR; };
@@ -132,6 +134,7 @@
 		83D515AB0FF0BD5F00AD43CA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				84952E84130E4D7C0044A2FD /* bottom-button-bg.png */,
 				84F9C998130DD8BD0027DE2E /* ButtonCorners.png */,
 				84F9C999130DD8BD0027DE2E /* ButtonCorners@2x.png */,
 			);
@@ -207,6 +210,7 @@
 				84F9C99A130DD8BD0027DE2E /* ButtonCorners.png in Resources */,
 				84F9C99B130DD8BD0027DE2E /* ButtonCorners@2x.png in Resources */,
 				84F9C9CC130DDDBB0027DE2E /* ButtonPeoplePicker.xib in Resources */,
+				84952E85130E4D7C0044A2FD /* bottom-button-bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
