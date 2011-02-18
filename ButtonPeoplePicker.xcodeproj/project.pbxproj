@@ -30,7 +30,7 @@
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		8306E04C1213B9CE00F53872 /* ButtonPeoplePicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ButtonPeoplePicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8306E04C1213B9CE00F53872 /* Button Picker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Button Picker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83318FDB0FBAB9DF00377A71 /* AddView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddView.xib; sourceTree = "<group>"; };
 		84224DF7130DEF0500E7F1F2 /* ButtonPeoplePicker_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ButtonPeoplePicker_Prefix.pch; path = Examples/iPhone/ButtonPeoplePicker/ButtonPeoplePicker_Prefix.pch; sourceTree = DEVELOPER_DIR; };
 		846F69DA12E8FC4F00B59C71 /* AddPersonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AddPersonView.xib; path = Examples/iPhone/boomerangiphone/AddPersonView.xib; sourceTree = DEVELOPER_DIR; };
@@ -82,7 +82,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8306E04C1213B9CE00F53872 /* ButtonPeoplePicker.app */,
+				8306E04C1213B9CE00F53872 /* Button Picker.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -166,7 +166,7 @@
 			);
 			name = ButtonPeoplePicker;
 			productName = Boomerang;
-			productReference = 8306E04C1213B9CE00F53872 /* ButtonPeoplePicker.app */;
+			productReference = 8306E04C1213B9CE00F53872 /* Button Picker.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -239,7 +239,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ButtonPeoplePicker_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				PRODUCT_NAME = ButtonPeoplePicker;
+				PRODUCT_NAME = "Button Picker";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos4.2;
 			};
@@ -254,7 +254,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ButtonPeoplePicker_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				PRODUCT_NAME = ButtonPeoplePicker;
+				PRODUCT_NAME = "Button Picker";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos4.2;
 			};
@@ -285,7 +285,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ButtonPeoplePicker_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				PRODUCT_NAME = ButtonPeoplePicker;
+				PRODUCT_NAME = "Button Picker";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6E1B4E0B-B759-4C30-98FB-A3DC3E90F381";
 				SDKROOT = iphoneos4.2;
 			};
