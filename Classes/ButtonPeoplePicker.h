@@ -6,6 +6,7 @@
 
 #import "ButtonPeoplePicker.h"
 #import "AddPersonViewController.h"
+#import <AddressBook/AddressBook.h>
 
 @protocol ButtonPeoplePickerDelegate;
 
@@ -27,6 +28,8 @@
 	NSArray *people;
 	NSMutableArray *filteredPeople;	// The content filtered as a result of a search.
 	NSMutableArray *group;
+
+	ABAddressBookRef addressBook;
 }
 
 @property (nonatomic, retain) UILabel *namesLabel;

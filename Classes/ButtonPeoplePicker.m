@@ -6,7 +6,6 @@
 
 #import "ButtonPeoplePicker.h"
 #import "AddPersonViewController.h"
-#import "AppDelegate.h"
 
 @implementation ButtonPeoplePicker
 
@@ -43,9 +42,9 @@
 {
     [super viewDidLoad];
 
-	AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+	addressBook = ABAddressBookCreate();
 	
-	people = (NSArray *)ABAddressBookCopyArrayOfAllPeople(appDelegate.addressBook);
+	people = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
 	
 	// Create a filtered list that will contain people for the search results table.
 	self.filteredPeople = [NSMutableArray array];
@@ -57,15 +56,16 @@
 }
 
 - (void)dealloc 
-{	
-    [super dealloc];
-
+{
 	[namesLabel release];
 	[deleteLabel release];
 	[tView release];
 	[searchField release];
 	[people release];
 	[filteredPeople release];
+	CFRelease(addressBook);
+	
+	[super dealloc];
 }
 
 #pragma mark -
@@ -130,12 +130,10 @@
 	// Hide the delete label
 	deleteLabel.hidden = YES;
 
-	AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-
 	NSString *name = selectedButton.titleLabel.text;
 	NSInteger identifier = selectedButton.tag;
 	
-	NSArray *personArray = (NSArray *)ABAddressBookCopyPeopleWithName(appDelegate.addressBook, (CFStringRef)name);
+	NSArray *personArray = (NSArray *)ABAddressBookCopyPeopleWithName(addressBook, (CFStringRef)name);
 	
 	ABRecordRef person = [personArray lastObject];
 	
@@ -421,8 +419,6 @@
 
 - (void)addPersonViewControllerDidFinish:(AddPersonViewController *)controller {
 	
-	AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-	
 	NSString *firstName = controller.firstNameTextField.text;
 	NSString *lastName = controller.lastNameTextField.text;
 	NSString *email = controller.emailTextField.text;
@@ -444,10 +440,10 @@
 	CFRelease(emailProperty);
 		
 	// Add the person to the address book
-	ABAddressBookAddRecord(appDelegate.addressBook, personRef, nil);
+	ABAddressBookAddRecord(addressBook, personRef, nil);
 	
 	// Save changes to the address book
-	ABAddressBookSave(appDelegate.addressBook, nil);
+	ABAddressBookSave(addressBook, nil);
 	
 	NSDictionary *personDictionary = [NSDictionary dictionaryWithObjectsAndKeys:(id)personRef, @"person", [NSNumber numberWithInt:0], @"valueIdentifier", nil];
 	

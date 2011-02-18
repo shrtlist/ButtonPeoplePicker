@@ -10,23 +10,19 @@
 
 @synthesize window;
 @synthesize navController;
-@synthesize addressBook;
 
 #pragma mark -
 #pragma mark UIApplicationDelegate methods
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
-{
-	addressBook = ABAddressBookCreate();
-	
+{	
 	[window addSubview:navController.view];
     [window makeKeyAndVisible];
 }
 
 - (void)dealloc 
 {
-	CFRelease(addressBook);
-	
+	[navController release];
     [window release];
     [super dealloc];
 }
