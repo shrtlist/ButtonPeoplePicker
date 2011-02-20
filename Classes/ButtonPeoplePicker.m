@@ -165,12 +165,14 @@
 	if (cell == nil) {
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellID] autorelease];
 	}
+    
+    cell.accessoryType = UITableViewCellAccessoryNone;
 		
 	// If this is the last row in filteredPeople, take special action
 	if (self.filteredPeople.count == indexPath.row) {
-		// Take special action
 		cell.textLabel.text	= @"Add Email";
-		cell.detailTextLabel.text = searchField.text;
+		cell.detailTextLabel.text = nil;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	}
 	else {
 		NSDictionary *personDictionary = [self.filteredPeople objectAtIndex:indexPath.row];
