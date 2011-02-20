@@ -22,6 +22,8 @@
 		8407DD63130F205F00F5713F /* bottom-button-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD60130F205F00F5713F /* bottom-button-bg.png */; };
 		8407DD64130F205F00F5713F /* ButtonCorners.png in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD61130F205F00F5713F /* ButtonCorners.png */; };
 		8407DD65130F205F00F5713F /* ButtonCorners@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD62130F205F00F5713F /* ButtonCorners@2x.png */; };
+		8407DD67130F3CB900F5713F /* README in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD66130F3CB900F5713F /* README */; };
+		8407DD69131067EA00F5713F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8407DD68131067EA00F5713F /* AddressBookUI.framework */; };
 		8E1075130FE22BF900355D09 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E1075120FE22BF900355D09 /* AddressBook.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +49,8 @@
 		8407DD60130F205F00F5713F /* bottom-button-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bottom-button-bg.png"; path = "Images/bottom-button-bg.png"; sourceTree = "<group>"; };
 		8407DD61130F205F00F5713F /* ButtonCorners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonCorners.png; path = Images/ButtonCorners.png; sourceTree = "<group>"; };
 		8407DD62130F205F00F5713F /* ButtonCorners@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCorners@2x.png"; path = "Images/ButtonCorners@2x.png"; sourceTree = "<group>"; };
+		8407DD66130F3CB900F5713F /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		8407DD68131067EA00F5713F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E1075120FE22BF900355D09 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -56,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8407DD69131067EA00F5713F /* AddressBookUI.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -92,6 +97,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				8407DD68131067EA00F5713F /* AddressBookUI.framework */,
+				8407DD66130F3CB900F5713F /* README */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -211,6 +218,7 @@
 				8407DD63130F205F00F5713F /* bottom-button-bg.png in Resources */,
 				8407DD64130F205F00F5713F /* ButtonCorners.png in Resources */,
 				8407DD65130F205F00F5713F /* ButtonCorners@2x.png in Resources */,
+				8407DD67130F3CB900F5713F /* README in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
