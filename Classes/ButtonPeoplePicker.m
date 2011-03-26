@@ -1,19 +1,28 @@
-//
-//  ButtonPeoplePicker.m
-//
-//  Created by shrtlist.com
-//
+/*
+ * Copyright 2010 Marco Abundo
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "ButtonPeoplePicker.h"
 #import "AddPersonViewController.h"
 
 @implementation ButtonPeoplePicker
 
-@synthesize delegate, group;
-@synthesize filteredPeople;
+@synthesize delegate, group, filteredPeople;
 
 #pragma mark -
-#pragma mark UIViewController lifecycle methods
+#pragma mark Lifecycle methods
 
 // Returns a newly initialized view controller with the nib file in the specified bundle.
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle
@@ -70,20 +79,13 @@
 #pragma mark -
 #pragma mark Respond to touch and become first responder.
 
-- (BOOL)canBecomeFirstResponder {
+- (BOOL)canBecomeFirstResponder
+{
 	return YES;
 }
 
 #pragma mark -
 #pragma mark Button actions
-
-// Action receiver for the clicking of Cancel button
--(IBAction)cancelClick:(id)sender
-{
-	[self.group removeAllObjects];
-
-	[self.delegate buttonPeoplePickerDidFinish:self];
-}
 
 // Action receiver for the clicking of Done button
 -(IBAction)doneClick:(id)sender
@@ -91,23 +93,34 @@
 	[self.delegate buttonPeoplePickerDidFinish:self];
 }
 
+// Action receiver for the clicking of Cancel button
+- (IBAction)cancelClick:(id)sender
+{
+	[self.group removeAllObjects];
+	[self.delegate buttonPeoplePickerDidFinish:self];
+}
+
 // Action receiver for the selecting of name button
--(IBAction)buttonSelected:(id)sender {
+- (IBAction)buttonSelected:(id)sender {
 
 	selectedButton = (UIButton *)sender;
 	
 	// Clear other button states
-	for (UIView *subview in buttonView.subviews) {
-		if ([subview isKindOfClass:[UIButton class]] && subview != selectedButton) {
+	for (UIView *subview in buttonView.subviews)
+    {
+		if ([subview isKindOfClass:[UIButton class]] && subview != selectedButton)
+        {
 			((UIButton *)subview).selected = NO;
 		}
 	}
 
-	if (selectedButton.selected) {
+	if (selectedButton.selected)
+    {
 		selectedButton.selected = NO;
 		deleteLabel.hidden = YES;
 	}
-	else {
+	else
+    {
 		selectedButton.selected = YES;
 		deleteLabel.hidden = NO;
 	}
@@ -118,14 +131,15 @@
 #pragma mark -
 #pragma mark UIKeyInput protocol methods
 
-- (BOOL)hasText {
+- (BOOL)hasText
+{
 	return NO;
 }
 
 - (void)insertText:(NSString *)text {}
 
-- (void)deleteBackward {
-	
+- (void)deleteBackward
+{	
 	// Hide the delete label
 	deleteLabel.hidden = YES;
 
@@ -150,14 +164,15 @@
 #pragma mark -
 #pragma mark UITableViewDataSource protocol methods
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
 	// do we have search text? if yes, are there search results? if yes, return number of results, otherwise, return 1 (add email row)
 	// if there are no search results, the table is empty, so return 0
 	return searchField.text.length > 0 ? MAX( 1, self.filteredPeople.count ) : 0 ;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{	
 	static NSString *kCellID = @"cellID";
 	
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellID];
@@ -174,7 +189,8 @@
 		cell.detailTextLabel.text = nil;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	}
-	else {
+	else
+    {
 		NSDictionary *personDictionary = [self.filteredPeople objectAtIndex:indexPath.row];
 		
 		ABRecordID abRecordID = (ABRecordID)[[personDictionary valueForKey:@"abRecordID"] intValue];
@@ -191,14 +207,14 @@
 		
 		ABMultiValueRef emailProperty = ABRecordCopyValue(abPerson, kABPersonEmailProperty);
 		
-		if (emailProperty) {
+		if (emailProperty)
+        {
 			CFIndex index = ABMultiValueGetIndexForIdentifier(emailProperty, identifier);
 			
-			if (index != -1) {
+			if (index != -1)
+            {
 				NSString *email = (NSString *)ABMultiValueCopyValueAtIndex(emailProperty, index);
-				
 				cell.detailTextLabel.text = email;
-				
 				[email release];
 			}
 			else {
@@ -215,15 +231,17 @@
 #pragma mark -
 #pragma mark UITableViewDelegate protocol method
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
 	[tableView setHidden:YES];
 
 	// Handle the special case
-	if (indexPath.row == self.filteredPeople.count) {
+	if (indexPath.row == self.filteredPeople.count)
+    {
 		[self displayAddPersonViewController];
 	}
-	else {
+	else
+    {
 		NSDictionary *personDictionary = [self.filteredPeople objectAtIndex:indexPath.row];
 		
 		[self addPersonToGroup:personDictionary];
@@ -232,12 +250,11 @@
 	searchField.text = nil;
 }
 
-
 #pragma mark -
 #pragma mark Update the filteredPeople array based on the search text.
 
-- (void)filterContentForSearchText:(NSString*)searchText {
-
+- (void)filterContentForSearchText:(NSString*)searchText
+{
 	// First clear the filtered array.
 	[self.filteredPeople removeAllObjects];
 
@@ -248,16 +265,16 @@
 	 Search the main list for people whose firstname OR lastname OR organization matches searchText; add items that match to the filtered array.
 	 */
 	
-	for (id person in people) {
-		
+	for (id person in people)
+    {
 		// Access the person's email addresses (an ABMultiValueRef)
 		ABMultiValueRef emailsProperty = ABRecordCopyValue(person, kABPersonEmailProperty);
 		
-		if (emailsProperty) {
-			
+		if (emailsProperty)
+        {
 			// Iterate through the email address multivalue
-			for (CFIndex index = 0; index < ABMultiValueGetCount(emailsProperty); index++) {
-					
+			for (CFIndex index = 0; index < ABMultiValueGetCount(emailsProperty); index++)
+            {
 				NSString *firstName = (NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
 				NSString *lastName = (NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
 				NSString *organization = (NSString *)ABRecordCopyValue(person, kABPersonOrganizationProperty);
@@ -267,8 +284,8 @@
 				if ([beginsPredicate evaluateWithObject:firstName] ||
 					[beginsPredicate evaluateWithObject:lastName] ||
 					[beginsPredicate evaluateWithObject:organization] ||
-					[beginsPredicate evaluateWithObject:emailString]) {
-
+					[beginsPredicate evaluateWithObject:emailString])
+                {
 					// Get the address identifier for this address
 					ABMultiValueIdentifier identifier = ABMultiValueGetIdentifierAtIndex(emailsProperty, index);
 					
@@ -296,13 +313,12 @@
 #pragma mark -
 #pragma mark textFieldDidChange notification method to the searchField control.
 
-- (void)textFieldDidChange {
-	
-	if (searchField.text.length > 0) {
+- (void)textFieldDidChange
+{
+	if (searchField.text.length > 0)
+    {
 		[tView setHidden:NO];
-		
 		[self filterContentForSearchText:searchField.text];
-		
 		[tView reloadData];
 	}
 	else {
@@ -313,45 +329,44 @@
 #pragma mark -
 #pragma mark Add and remove a person to/from the group
 
-- (void)addPersonToGroup:(NSDictionary *)personDictionary {
-	
-	if (self.group == nil) {
+- (void)addPersonToGroup:(NSDictionary *)personDictionary
+{
+	if (self.group == nil)
+    {
 		self.group = [NSMutableArray array];
 	}
 	
 	[self.group addObject:personDictionary];
-	
 	[self layoutNameButtons];
 }
 
-- (void)removePersonFromGroup:(NSDictionary *)personDictionary {
-	
-	[self.group removeObject:personDictionary];
-	
+- (void)removePersonFromGroup:(NSDictionary *)personDictionary
+{
+	[self.group removeObject:personDictionary];	
 	[self layoutNameButtons];
 }
 
 #pragma mark -
 #pragma mark Update Person info
 
--(void)layoutNameButtons {
-
+-(void)layoutNameButtons
+{
 	// Remove existing buttons
-	for (UIView *subview in buttonView.subviews) {
-		if ([subview isKindOfClass:[UIButton class]]) {
+	for (UIView *subview in buttonView.subviews)
+    {
+		if ([subview isKindOfClass:[UIButton class]])
+        {
 			[subview removeFromSuperview];
 		}
 	}
 	
 	CGFloat PADDING = 5.0;
-	
 	CGFloat maxWidth = buttonView.frame.size.width - PADDING;
-	
 	CGFloat xPosition = PADDING;
 	CGFloat yPosition = PADDING;
 
-	for (int i = 0; i < self.group.count; i++) {
-		
+	for (int i = 0; i < self.group.count; i++)
+    {
 		NSDictionary *personDictionary = (NSDictionary *)[self.group objectAtIndex:i];
 		
 		ABRecordID abRecordID = (ABRecordID)[[personDictionary valueForKey:@"abRecordID"] intValue];
@@ -383,7 +398,8 @@
 		// Get the width and height of the name string given a font size
 		CGSize nameSize = [name sizeWithFont:[UIFont systemFontOfSize:16.0]];
 
-		if ((xPosition + nameSize.width + PADDING) > maxWidth) {
+		if ((xPosition + nameSize.width + PADDING) > maxWidth)
+        {
 			// Reset horizontal position to left edge of superview's frame
 			xPosition = PADDING;
 			
@@ -393,9 +409,7 @@
 		
 		// Create the button's frame
 		CGRect buttonFrame = CGRectMake(xPosition, yPosition, nameSize.width + (PADDING * 2), nameSize.height);
-		
 		[button setFrame:buttonFrame];
-
 		[buttonView addSubview:button];
 		
 		// Calculate xPosition for the next button in the loop
@@ -410,15 +424,14 @@
 	}
 	
 	[buttonView setHidden:NO];
-	
 	[searchField becomeFirstResponder];
 }
 
 #pragma mark -
 #pragma mark display the AddPersonViewController modally
 
--(void)displayAddPersonViewController {
-	
+-(void)displayAddPersonViewController
+{	
 	AddPersonViewController *apvc = [[AddPersonViewController alloc] init];
 	apvc.initialText = searchField.text;
 	apvc.delegate = self;
@@ -431,8 +444,8 @@
 #pragma mark -
 #pragma mark AddPersonViewControllerDelegate method
 
-- (void)addPersonViewControllerDidFinish:(AddPersonViewController *)controller {
-	
+- (void)addPersonViewControllerDidFinish:(AddPersonViewController *)controller
+{
 	NSString *firstName = controller.firstNameTextField.text;
 	NSString *lastName = controller.lastNameTextField.text;
 	NSString *email = controller.emailTextField.text;
@@ -441,7 +454,8 @@
 
 	ABRecordSetValue(personRef, kABPersonFirstNameProperty, firstName, nil);
 	
-	if (lastName) {
+	if (lastName)
+    {
 		ABRecordSetValue(personRef, kABPersonLastNameProperty, lastName, nil);
 	}
 	

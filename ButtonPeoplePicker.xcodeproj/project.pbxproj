@@ -97,7 +97,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				8407DD68131067EA00F5713F /* AddressBookUI.framework */,
 				8407DD66130F3CB900F5713F /* README */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -131,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				8E1075120FE22BF900355D09 /* AddressBook.framework */,
+				8407DD68131067EA00F5713F /* AddressBookUI.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
@@ -254,7 +254,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PRODUCT_NAME = ButtonPicker;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos4.2;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -270,7 +270,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PRODUCT_NAME = ButtonPicker;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos4.2;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};
@@ -302,7 +302,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PRODUCT_NAME = ButtonPicker;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6E1B4E0B-B759-4C30-98FB-A3DC3E90F381";
-				SDKROOT = iphoneos4.2;
+				SDKROOT = iphoneos;
 			};
 			name = Distribution;
 		};
