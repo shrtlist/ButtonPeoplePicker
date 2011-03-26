@@ -21,7 +21,7 @@
 }
 
 @property (nonatomic, assign) id <AddPersonViewControllerDelegate> delegate;
-@property (nonatomic, retain) NSString *initialText;
+@property (nonatomic, copy) NSString *initialText;
 @property (nonatomic, readonly) IBOutlet UITextField *firstNameTextField;
 @property (nonatomic, readonly) IBOutlet UITextField *lastNameTextField;
 @property (nonatomic, readonly) IBOutlet UITextField *emailTextField;
