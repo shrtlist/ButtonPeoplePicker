@@ -36,9 +36,6 @@
 {
     delegate = nil;
     [initialText release];
-    [firstNameTextField release];
-    [lastNameTextField release];
-    [emailTextField release];
 
     [super dealloc];
 }
