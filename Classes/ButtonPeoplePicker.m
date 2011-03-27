@@ -17,9 +17,19 @@
 #import "ButtonPeoplePicker.h"
 #import "AddPersonViewController.h"
 
+@interface ButtonPeoplePicker ()
+
+- (void)layoutNameButtons;
+- (void)addPersonToGroup:(NSDictionary *)personDictionary;
+- (void)removePersonFromGroup:(NSDictionary *)personDictionary;
+- (void)displayAddPersonViewController;
+
+@end
+
+
 @implementation ButtonPeoplePicker
 
-@synthesize delegate, group, filteredPeople;
+@synthesize delegate, group;
 
 #pragma mark -
 #pragma mark Lifecycle methods
@@ -56,7 +66,7 @@
 	people = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
 	
 	// Create a filtered list that will contain people for the search results table.
-	self.filteredPeople = [NSMutableArray array];
+	filteredPeople = [[NSMutableArray alloc] init];
 	
 	// Add a "textFieldDidChange" notification method to the text field control.
 	[searchField addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
@@ -64,14 +74,16 @@
 	[self layoutNameButtons];
 }
 
-- (void)dealloc 
+- (void)dealloc
 {
+	delegate = nil;
 	[deleteLabel release];
+	[buttonView release];
 	[tView release];
 	[searchField release];
 	[people release];
-	[filteredPeople release];
 	CFRelease(addressBook);
+	[filteredPeople release];
 	
 	[super dealloc];
 }
@@ -96,7 +108,7 @@
 // Action receiver for the clicking of Cancel button
 - (IBAction)cancelClick:(id)sender
 {
-	[self.group removeAllObjects];
+	[group removeAllObjects];
 	[self.delegate buttonPeoplePickerDidFinish:self];
 }
 
@@ -168,7 +180,7 @@
 {
 	// do we have search text? if yes, are there search results? if yes, return number of results, otherwise, return 1 (add email row)
 	// if there are no search results, the table is empty, so return 0
-	return searchField.text.length > 0 ? MAX( 1, self.filteredPeople.count ) : 0 ;
+	return searchField.text.length > 0 ? MAX( 1, filteredPeople.count ) : 0 ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -184,14 +196,14 @@
     cell.accessoryType = UITableViewCellAccessoryNone;
 		
 	// If this is the last row in filteredPeople, take special action
-	if (self.filteredPeople.count == indexPath.row) {
+	if (filteredPeople.count == indexPath.row) {
 		cell.textLabel.text	= @"Add Email";
 		cell.detailTextLabel.text = nil;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	}
 	else
     {
-		NSDictionary *personDictionary = [self.filteredPeople objectAtIndex:indexPath.row];
+		NSDictionary *personDictionary = [filteredPeople objectAtIndex:indexPath.row];
 		
 		ABRecordID abRecordID = (ABRecordID)[[personDictionary valueForKey:@"abRecordID"] intValue];
 		
@@ -236,13 +248,13 @@
 	[tableView setHidden:YES];
 
 	// Handle the special case
-	if (indexPath.row == self.filteredPeople.count)
+	if (indexPath.row == filteredPeople.count)
     {
 		[self displayAddPersonViewController];
 	}
 	else
     {
-		NSDictionary *personDictionary = [self.filteredPeople objectAtIndex:indexPath.row];
+		NSDictionary *personDictionary = [filteredPeople objectAtIndex:indexPath.row];
 		
 		[self addPersonToGroup:personDictionary];
 	}
@@ -256,7 +268,7 @@
 - (void)filterContentForSearchText:(NSString*)searchText
 {
 	// First clear the filtered array.
-	[self.filteredPeople removeAllObjects];
+	[filteredPeople removeAllObjects];
 
 	// beginswith[cd] predicate
 	NSPredicate *beginsPredicate = [NSPredicate predicateWithFormat:@"(SELF beginswith[cd] %@)", searchText];
@@ -296,7 +308,7 @@
 													 [NSNumber numberWithInt:identifier], @"valueIdentifier", nil];
 
 					// Add each personDictionary to filteredPeople
-					[self.filteredPeople addObject:personDictionary];
+					[filteredPeople addObject:personDictionary];
 				}
 
 				[firstName release];
@@ -331,18 +343,18 @@
 
 - (void)addPersonToGroup:(NSDictionary *)personDictionary
 {
-	if (self.group == nil)
+	if (group == nil)
     {
-		self.group = [NSMutableArray array];
+		group = [[NSMutableArray alloc] init];
 	}
 	
-	[self.group addObject:personDictionary];
+	[group addObject:personDictionary];
 	[self layoutNameButtons];
 }
 
 - (void)removePersonFromGroup:(NSDictionary *)personDictionary
 {
-	[self.group removeObject:personDictionary];	
+	[group removeObject:personDictionary];	
 	[self layoutNameButtons];
 }
 
@@ -365,9 +377,9 @@
 	CGFloat xPosition = PADDING;
 	CGFloat yPosition = PADDING;
 
-	for (int i = 0; i < self.group.count; i++)
+	for (int i = 0; i < group.count; i++)
     {
-		NSDictionary *personDictionary = (NSDictionary *)[self.group objectAtIndex:i];
+		NSDictionary *personDictionary = (NSDictionary *)[group objectAtIndex:i];
 		
 		ABRecordID abRecordID = (ABRecordID)[[personDictionary valueForKey:@"abRecordID"] intValue];
 
@@ -432,13 +444,11 @@
 
 -(void)displayAddPersonViewController
 {	
-	AddPersonViewController *apvc = [[AddPersonViewController alloc] init];
-	apvc.initialText = searchField.text;
-	apvc.delegate = self;
-	
-	[self.navigationController presentModalViewController:apvc animated:YES];
-
-	[apvc release];
+	AddPersonViewController *addPersonViewController = [[AddPersonViewController alloc] init];
+	[addPersonViewController setInitialText:searchField.text];
+	[addPersonViewController setDelegate:self];
+	[self.navigationController presentModalViewController:addPersonViewController animated:YES];
+	[addPersonViewController release];
 }
 
 #pragma mark -
@@ -446,26 +456,26 @@
 
 - (void)addPersonViewControllerDidFinish:(AddPersonViewController *)controller
 {
-	NSString *firstName = controller.firstNameTextField.text;
-	NSString *lastName = controller.lastNameTextField.text;
-	NSString *email = controller.emailTextField.text;
-	
+	NSString *firstName = [NSString stringWithString:controller.firstName];
+	NSString *lastName = [NSString stringWithString:controller.lastName];
+	NSString *email = [NSString stringWithString:controller.email];
+
 	ABRecordRef personRef = ABPersonCreate();
 
 	ABRecordSetValue(personRef, kABPersonFirstNameProperty, firstName, nil);
-	
-	if (lastName)
+
+	if (lastName && (lastName.length > 0))
     {
 		ABRecordSetValue(personRef, kABPersonLastNameProperty, lastName, nil);
 	}
 	
-	ABMutableMultiValueRef emailProperty = ABMultiValueCreateMutable(kABPersonEmailProperty);
-	
-	ABMultiValueAddValueAndLabel(emailProperty, email, kABHomeLabel, nil);
-	
-	ABRecordSetValue(personRef, kABPersonEmailProperty, emailProperty, nil);
-	
-	CFRelease(emailProperty);
+	if (email && (email.length > 0))
+	{
+		ABMutableMultiValueRef emailProperty = ABMultiValueCreateMutable(kABPersonEmailProperty);
+		ABMultiValueAddValueAndLabel(emailProperty, email, kABHomeLabel, nil);
+		ABRecordSetValue(personRef, kABPersonEmailProperty, emailProperty, nil);
+		CFRelease(emailProperty);
+	}
 		
 	// Add the person to the address book
 	ABAddressBookAddRecord(addressBook, personRef, nil);

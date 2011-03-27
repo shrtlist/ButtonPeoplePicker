@@ -21,8 +21,8 @@
 	IBOutlet UILabel *fullname;
 }
 
-@property (nonatomic, retain) NSMutableArray *group;
+@property (nonatomic, copy) NSMutableArray *group;
 
-- (IBAction)addPeopleClick:(id)sender;
+- (IBAction)showButtonPeoplePicker:(id)sender;
 
 @end

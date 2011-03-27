@@ -33,9 +33,8 @@
 - (void)viewDidLoad 
 {
 	[super viewDidLoad];
-	
-	self.title = @"ButtonPeoplePicker Demo";
-	fullname.text = @"Add people...";
+
+	[self setTitle:@"ButtonPeoplePicker Demo"];
 }
 
 - (void)dealloc 
@@ -50,21 +49,16 @@
 #pragma mark -
 #pragma mark Button actions
 
-// Action receiver for the clicking of 'plus' button
--(IBAction)addPeopleClick:(id)sender
+// Action receiver for the clicking of 'Show ButtonPeoplePicker' button
+-(IBAction)showButtonPeoplePicker:(id)sender
 {
 	ButtonPeoplePicker *addPeopleViewController = [[ButtonPeoplePicker alloc] init];
-	
-	addPeopleViewController.delegate = self;
-	
-	addPeopleViewController.group = self.group;
-	
+    [addPeopleViewController setDelegate:self];
+
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:addPeopleViewController];
-	
-	[addPeopleViewController release];
-	
 	[self presentModalViewController:navController animated:YES];
 	
+	[addPeopleViewController release];
 	[navController release];
 }
 
@@ -74,14 +68,12 @@
 - (void)updatePersonInfo
 {
 	ABAddressBookRef addressBook = ABAddressBookCreate();
-
-	int count = self.group.count;
 	
 	NSMutableString *tempString = [NSMutableString string];
 	
-	for (int i = 0; i < count; i++) {
+	for (int i = 0; i < group.count; i++) {
 		
-		NSDictionary *personDictionary = (NSDictionary *)[self.group objectAtIndex:i];
+		NSDictionary *personDictionary = (NSDictionary *)[group objectAtIndex:i];
 		
 		ABRecordID abRecordID = (ABRecordID)[[personDictionary valueForKey:@"abRecordID"] intValue];
 		
@@ -89,17 +81,19 @@
 
 		NSString *name = (NSString *)ABRecordCopyCompositeName(abPerson);
 		
-		if (i < (count - 1)) {
+		if (i < (group.count - 1))
+        {
 			[tempString appendString:[NSString stringWithFormat:@"%@, ", name]];
 		}
-		else {
+		else
+        {
 			[tempString appendString:[NSString stringWithFormat:@"%@", name]];
 		}
 		
 		[name release];
 	}
-	
-	fullname.text = tempString;
+
+	[fullname setText:tempString];
 	
 	CFRelease(addressBook);
 }
@@ -108,10 +102,9 @@
 #pragma mark -
 #pragma mark ButtonPeoplePickerDelegate protocol method
 
-- (void)buttonPeoplePickerDidFinish:(ButtonPeoplePicker *)controller {
-    
-	self.group = controller.group;
-	
+- (void)buttonPeoplePickerDidFinish:(ButtonPeoplePicker *)controller
+{
+    [self setGroup:controller.group];
 	[self updatePersonInfo];
 	
 	// Dismiss the ButtonPeoplePicker.

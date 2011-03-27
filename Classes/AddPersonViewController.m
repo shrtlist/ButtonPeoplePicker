@@ -18,7 +18,7 @@
 
 @implementation AddPersonViewController
 
-@synthesize delegate, initialText, firstNameTextField, lastNameTextField, emailTextField;
+@synthesize delegate, initialText, firstName, lastName, email;
 
 #pragma mark -
 #pragma mark Lifecycle methods
@@ -28,14 +28,17 @@
 {
     [super viewDidLoad];
 	
-	firstNameTextField.text = initialText;
+	[firstNameTextField setText:initialText];
 	[firstNameTextField becomeFirstResponder];
 }
 
 - (void)dealloc
 {
-    delegate = nil;
-    [initialText release];
+	delegate = nil;
+	[firstNameTextField release];
+	[lastNameTextField release];
+	[emailTextField release];
+	[initialText release];
 
     [super dealloc];
 }
@@ -46,6 +49,10 @@
 // Action receiver for the clicking of Add button
 - (IBAction)addClick:(id)sender
 {
+	firstName = firstNameTextField.text;
+	lastName = lastNameTextField.text;
+	email = emailTextField.text;
+
 	[delegate addPersonViewControllerDidFinish:self];
 }
 

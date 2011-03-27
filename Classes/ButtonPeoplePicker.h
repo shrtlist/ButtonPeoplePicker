@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-#import "ButtonPeoplePicker.h"
 #import "AddPersonViewController.h"
 #import <AddressBook/AddressBook.h>
 
@@ -32,21 +31,16 @@
 	UIButton *selectedButton;
 	
 	NSArray *people;
+	NSMutableArray *filteredPeople;
 	ABAddressBookRef addressBook;
 }
 
 @property (nonatomic, assign) id <ButtonPeoplePickerDelegate> delegate;
-@property (nonatomic, retain) NSMutableArray *filteredPeople;
-@property (nonatomic, retain) NSMutableArray *group;
+@property (nonatomic, assign, readonly) NSMutableArray *group;
 
 - (IBAction)cancelClick:(id)sender;
 - (IBAction)doneClick:(id)sender;
 - (IBAction)buttonSelected:(id)sender;
-
-- (void)layoutNameButtons;
-- (void)addPersonToGroup:(NSDictionary *)personDictionary;
-- (void)removePersonFromGroup:(NSDictionary *)personDictionary;
-- (void)displayAddPersonViewController;
 
 @end
 

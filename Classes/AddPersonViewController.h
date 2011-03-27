@@ -18,12 +18,15 @@
 
 @interface AddPersonViewController : UIViewController <UITextFieldDelegate>
 {
+	IBOutlet UITextField *firstNameTextField;
+	IBOutlet UITextField *lastNameTextField;
+	IBOutlet UITextField *emailTextField;
 }
 
 @property (nonatomic, assign) id <AddPersonViewControllerDelegate> delegate;
-@property (nonatomic, assign) IBOutlet UITextField *firstNameTextField;
-@property (nonatomic, assign) IBOutlet UITextField *lastNameTextField;
-@property (nonatomic, assign) IBOutlet UITextField *emailTextField;
+@property (nonatomic, assign, readonly) NSString *firstName;
+@property (nonatomic, assign, readonly) NSString *lastName;
+@property (nonatomic, assign, readonly) NSString *email;
 @property (nonatomic, copy) NSString *initialText;
 
 - (IBAction)addClick:(id)sender;
