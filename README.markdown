@@ -1,13 +1,13 @@
 # ButtonPeoplePicker
 
 ## Features
-The accompanying code comprises a UIView subclass that you can use in your iPhone applications to pick people from the Address Book.
+An iPhone UI contact picker to select multiple people from the Address Book, with type-ahead and auto-completion.
 
 ButtonPeoplePicker.h/ButtonPeoplePicker.m
-The UIViewController subclass that encapsulates the picker functionality. This is the only class you need to interact with.
+The UIViewController subclass that encapsulates the contact picker functionality. This is the only class you need to interact with.
 
 AddPersonViewController.h/AddPersonViewController.m
-A UIViewController displayed when there is no matching person in the Address Book.
+A UIViewController displayed when there is no matching person in the Address Book. The new contact will be added to the Address Book.
 
 All other files
 A sample iPhone application showing how to include a ButtonPeoplePicker in your own applications.
