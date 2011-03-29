@@ -1,0 +1,21 @@
+# ButtonPeoplePicker
+
+## Features
+The accompanying code comprises a UIView subclass that you can use in your iPhone applications to pick people from the Address Book.
+
+ButtonPeoplePicker.h/ButtonPeoplePicker.m
+The UIView subclass that encapsulates the picker functionality. This is the only class you need to interact with.
+
+AddPersonViewController.h/AddPersonViewController.m
+A UIView displayed when there is no matching person in the Address Book.
+
+All other files
+A sample iPhone application showing how to embed a ButtonPeoplePicker in your own applications.
+
+ 
+## Screenshot
+
+![](https://github.com/mabundo/ButtonPeoplePicker/raw/master/Screenshots/ButtonPeoplePicker.png)
+
+## License
+The source code is available under the Apache License, Version 2.0
