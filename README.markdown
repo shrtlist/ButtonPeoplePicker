@@ -26,9 +26,9 @@ A sample iPhone application showing how to include a ButtonPeoplePicker in your 
 
 ![](https://github.com/mabundo/ButtonPeoplePicker/raw/master/Screenshots/SelectForDelete.png)
 
-![](https://github.com/mabundo/ButtonPeoplePicker/raw/master/Screenshots/AddPerson.png)
-
 ![](https://github.com/mabundo/ButtonPeoplePicker/raw/master/Screenshots/AddEmail.png)
+
+![](https://github.com/mabundo/ButtonPeoplePicker/raw/master/Screenshots/AddPerson.png)
 
 ## License
 The source code is available under the Apache License, Version 2.0
