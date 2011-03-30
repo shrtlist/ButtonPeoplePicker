@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Marco Abundo
+ * Copyright 2011 Marco Abundo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,29 +19,18 @@
 
 @interface AddView () // Private methods
 
-- (void)updatePersonInfo;
+- (void)updatePersonInfo:(NSArray *)group;
 
 @end
 
 @implementation AddView
 
-@synthesize group;
-
 #pragma mark -
 #pragma mark Lifecycle methods
 
-- (void)viewDidLoad 
-{
-	[super viewDidLoad];
-
-	[self setTitle:@"ButtonPeoplePicker Demo"];
-}
-
 - (void)dealloc 
 {
-	[fullname release];
-    [group release];
-
+	[namesLabel release];
     [super dealloc];
 }
 
@@ -61,7 +50,7 @@
 #pragma mark -
 #pragma mark Update Person info
 
-- (void)updatePersonInfo
+- (void)updatePersonInfo:(NSArray *)group
 {
 	ABAddressBookRef addressBook = ABAddressBookCreate();
 	
@@ -89,7 +78,7 @@
 		[name release];
 	}
 
-	[fullname setText:tempString];
+	[namesLabel setText:tempString];
 	
 	CFRelease(addressBook);
 }
@@ -100,8 +89,7 @@
 
 - (void)buttonPeoplePickerDidFinish:(ButtonPeoplePicker *)controller
 {
-    [self setGroup:controller.group];
-	[self updatePersonInfo];
+	[self updatePersonInfo:controller.group];
 	
 	// Dismiss the ButtonPeoplePicker.
 	[self dismissModalViewControllerAnimated:YES];
