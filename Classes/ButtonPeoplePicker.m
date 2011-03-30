@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Marco Abundo
+ * Copyright 2011 Marco Abundo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,6 +42,8 @@
 	addressBook = ABAddressBookCreate();
 	
 	people = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
+    
+    group = [[NSMutableArray alloc] init];
 	
 	// Create a filtered list that will contain people for the search results table.
 	filteredPeople = [[NSMutableArray alloc] init];
@@ -61,6 +63,7 @@
 	[searchField release];
     [doneButton release];
 	[people release];
+    [group release];
 	CFRelease(addressBook);
 	[filteredPeople release];
 	
@@ -326,11 +329,6 @@
 
 - (void)addPersonToGroup:(NSDictionary *)personDictionary
 {
-	if (group == nil)
-    {
-		group = [[NSMutableArray alloc] init];
-	}
-    
     ABRecordID abRecordID = (ABRecordID)[[personDictionary valueForKey:@"abRecordID"] intValue];
     
     // Check for an existing entry for this person, if so remove it
@@ -339,7 +337,6 @@
         if ((abRecordID == (ABRecordID)[[personDict valueForKey:@"abRecordID"] intValue]))
         {
             [group removeObject:personDict];
-
             break;
         }
     }
