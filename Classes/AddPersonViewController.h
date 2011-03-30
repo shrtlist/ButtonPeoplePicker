@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Marco Abundo
+ * Copyright 2011 Marco Abundo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,10 +24,10 @@
 }
 
 @property (nonatomic, assign) id <AddPersonViewControllerDelegate> delegate;
-@property (nonatomic, assign, readonly) NSString *firstName;
-@property (nonatomic, assign, readonly) NSString *lastName;
-@property (nonatomic, assign, readonly) NSString *email;
-@property (nonatomic, copy) NSString *initialText;
+@property (nonatomic, copy, readonly) NSString *firstName;
+@property (nonatomic, copy, readonly) NSString *lastName;
+@property (nonatomic, copy, readonly) NSString *email;
+@property (nonatomic, assign) NSString *initialText;
 
 - (IBAction)addClick:(id)sender;
 - (IBAction)cancelClick:(id)sender;
