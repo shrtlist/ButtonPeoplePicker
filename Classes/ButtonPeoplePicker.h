@@ -28,6 +28,7 @@
 	IBOutlet UIView *buttonView;
 	IBOutlet UITableView *uiTableView;
 	IBOutlet UITextField *searchField;
+    IBOutlet UIBarButtonItem *doneButton;
 	UIButton *selectedButton;
 	
 	NSArray *people;

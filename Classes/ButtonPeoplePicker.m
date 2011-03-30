@@ -59,6 +59,7 @@
 	[buttonView release];
 	[uiTableView release];
 	[searchField release];
+    [doneButton release];
 	[people release];
 	CFRelease(addressBook);
 	[filteredPeople release];
@@ -314,7 +315,8 @@
 		[self filterContentForSearchText:searchField.text];
 		[uiTableView reloadData];
 	}
-	else {
+	else
+    {
 		[uiTableView setHidden:YES];
 	}
 }
@@ -428,6 +430,15 @@
 		
 		[name release];
 	}
+    
+    if (group.count > 0)
+    {
+        [doneButton setEnabled:YES];
+    }
+    else
+    {
+        [doneButton setEnabled:NO];
+    }
 	
 	[buttonView setHidden:NO];
 	[searchField becomeFirstResponder];
