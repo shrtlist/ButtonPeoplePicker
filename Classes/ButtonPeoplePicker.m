@@ -167,15 +167,17 @@
 	
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellID];
 	
-	if (cell == nil) {
+	if (cell == nil)
+    {
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellID] autorelease];
 	}
     
     cell.accessoryType = UITableViewCellAccessoryNone;
 		
 	// If this is the last row in filteredPeople, take special action
-	if (filteredPeople.count == indexPath.row) {
-		cell.textLabel.text	= @"Add Email";
+	if (filteredPeople.count == indexPath.row)
+    {
+		cell.textLabel.text	= @"Add Person";
 		cell.detailTextLabel.text = nil;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	}
@@ -207,7 +209,8 @@
 				cell.detailTextLabel.text = email;
 				[email release];
 			}
-			else {
+			else
+            {
 				cell.detailTextLabel.text = nil;
 			}
 		}
