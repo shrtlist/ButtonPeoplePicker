@@ -57,7 +57,7 @@
 	delegate = nil;
 	[deleteLabel release];
 	[buttonView release];
-	[tView release];
+	[tableView release];
 	[searchField release];
 	[people release];
 	CFRelease(addressBook);
@@ -310,12 +310,12 @@
 {
 	if (searchField.text.length > 0)
     {
-		[tView setHidden:NO];
+		[tableView setHidden:NO];
 		[self filterContentForSearchText:searchField.text];
-		[tView reloadData];
+		[tableView reloadData];
 	}
 	else {
-		[tView setHidden:YES];
+		[tableView setHidden:YES];
 	}
 }
 

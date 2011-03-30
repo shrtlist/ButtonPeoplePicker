@@ -26,7 +26,7 @@
 {
 	IBOutlet UILabel *deleteLabel;
 	IBOutlet UIView *buttonView;
-	IBOutlet UITableView *tView;
+	IBOutlet UITableView *tableView;
 	IBOutlet UITextField *searchField;
 	UIButton *selectedButton;
 	

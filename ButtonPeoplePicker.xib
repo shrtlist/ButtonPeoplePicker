@@ -187,7 +187,6 @@
 						<string key="NSFrame">{{0, 88}, {320, 156}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<reference key="IBUIBackgroundColor" ref="255217321"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -238,14 +237,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">tView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="796131667"/>
-					</object>
-					<int key="connectionID">30</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">deleteLabel</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="15862948"/>
@@ -291,6 +282,14 @@
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">47</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">tableView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="796131667"/>
+					</object>
+					<int key="connectionID">48</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -443,7 +442,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">47</int>
+			<int key="maxID">48</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -497,7 +496,7 @@
 							<string>buttonView</string>
 							<string>deleteLabel</string>
 							<string>searchField</string>
-							<string>tView</string>
+							<string>tableView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -514,7 +513,7 @@
 							<string>buttonView</string>
 							<string>deleteLabel</string>
 							<string>searchField</string>
-							<string>tView</string>
+							<string>tableView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -531,7 +530,7 @@
 								<string key="candidateClassName">UITextField</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">tView</string>
+								<string key="name">tableView</string>
 								<string key="candidateClassName">UITableView</string>
 							</object>
 						</object>
