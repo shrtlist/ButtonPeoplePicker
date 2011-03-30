@@ -57,7 +57,7 @@
 	delegate = nil;
 	[deleteLabel release];
 	[buttonView release];
-	[tableView release];
+	[uiTableView release];
 	[searchField release];
 	[people release];
 	CFRelease(addressBook);
@@ -80,14 +80,14 @@
 // Action receiver for the clicking of Done button
 -(IBAction)doneClick:(id)sender
 {
-	[self.delegate buttonPeoplePickerDidFinish:self];
+	[delegate buttonPeoplePickerDidFinish:self];
 }
 
 // Action receiver for the clicking of Cancel button
 - (IBAction)cancelClick:(id)sender
 {
 	[group removeAllObjects];
-	[self.delegate buttonPeoplePickerDidFinish:self];
+	[delegate buttonPeoplePickerDidFinish:self];
 }
 
 // Action receiver for the selecting of name button
@@ -310,12 +310,12 @@
 {
 	if (searchField.text.length > 0)
     {
-		[tableView setHidden:NO];
+		[uiTableView setHidden:NO];
 		[self filterContentForSearchText:searchField.text];
-		[tableView reloadData];
+		[uiTableView reloadData];
 	}
 	else {
-		[tableView setHidden:YES];
+		[uiTableView setHidden:YES];
 	}
 }
 
@@ -328,9 +328,22 @@
     {
 		group = [[NSMutableArray alloc] init];
 	}
-	
-	[group addObject:personDictionary];
-	[self layoutNameButtons];
+    
+    ABRecordID abRecordID = (ABRecordID)[[personDictionary valueForKey:@"abRecordID"] intValue];
+    
+    // Check for an existing entry for this person, if so remove it
+    for (NSDictionary *personDict in group)
+    {
+        if ((abRecordID == (ABRecordID)[[personDict valueForKey:@"abRecordID"] intValue]))
+        {
+            [group removeObject:personDict];
+
+            break;
+        }
+    }
+    
+    [group addObject:personDictionary];
+    [self layoutNameButtons];
 }
 
 - (void)removePersonFromGroup:(NSDictionary *)personDictionary

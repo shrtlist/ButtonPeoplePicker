@@ -285,11 +285,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">tableView</string>
+						<string key="label">uiTableView</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="796131667"/>
 					</object>
-					<int key="connectionID">48</int>
+					<int key="connectionID">49</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -442,7 +442,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">48</int>
+			<int key="maxID">49</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -496,7 +496,7 @@
 							<string>buttonView</string>
 							<string>deleteLabel</string>
 							<string>searchField</string>
-							<string>tableView</string>
+							<string>uiTableView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -513,7 +513,7 @@
 							<string>buttonView</string>
 							<string>deleteLabel</string>
 							<string>searchField</string>
-							<string>tableView</string>
+							<string>uiTableView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -530,7 +530,7 @@
 								<string key="candidateClassName">UITextField</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">tableView</string>
+								<string key="name">uiTableView</string>
 								<string key="candidateClassName">UITableView</string>
 							</object>
 						</object>
