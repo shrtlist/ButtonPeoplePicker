@@ -52,14 +52,10 @@
 // Action receiver for the clicking of 'Show ButtonPeoplePicker' button
 -(IBAction)showButtonPeoplePicker:(id)sender
 {
-	ButtonPeoplePicker *addPeopleViewController = [[ButtonPeoplePicker alloc] init];
-    [addPeopleViewController setDelegate:self];
-
-	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:addPeopleViewController];
-	[self presentModalViewController:navController animated:YES];
-	
-	[addPeopleViewController release];
-	[navController release];
+	ButtonPeoplePicker *buttonPeoplePicker = [[ButtonPeoplePicker alloc] init];
+    [buttonPeoplePicker setDelegate:self];
+    [self presentModalViewController:buttonPeoplePicker animated:YES];
+	[buttonPeoplePicker release];
 }
 
 #pragma mark -
@@ -108,7 +104,7 @@
 	[self updatePersonInfo];
 	
 	// Dismiss the ButtonPeoplePicker.
-	[self.navigationController dismissModalViewControllerAnimated:YES];
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 @end

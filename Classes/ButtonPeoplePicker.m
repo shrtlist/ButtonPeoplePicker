@@ -17,7 +17,7 @@
 #import "ButtonPeoplePicker.h"
 #import "AddPersonViewController.h"
 
-@interface ButtonPeoplePicker ()
+@interface ButtonPeoplePicker () // Private methods
 
 - (void)layoutNameButtons;
 - (void)addPersonToGroup:(NSDictionary *)personDictionary;
@@ -33,28 +33,6 @@
 
 #pragma mark -
 #pragma mark Lifecycle methods
-
-// Returns a newly initialized view controller with the nib file in the specified bundle.
-- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle
-{
-	[super initWithNibName:nibName bundle:nibBundle];
-	
-	self.navigationItem.title = @"Add people";
-	
-	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelClick:)];
-	
-	self.navigationItem.leftBarButtonItem = cancelButton;
-	
-	[cancelButton release];
-	
-	UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(doneClick:)];
-	
-	self.navigationItem.rightBarButtonItem = doneButton;
-	
-	[doneButton release];
-	
-	return self;
-}
 
 // Perform additional initialization after the nib file is loaded
 - (void)viewDidLoad 
@@ -447,7 +425,7 @@
 	AddPersonViewController *addPersonViewController = [[AddPersonViewController alloc] init];
 	[addPersonViewController setInitialText:searchField.text];
 	[addPersonViewController setDelegate:self];
-	[self.navigationController presentModalViewController:addPersonViewController animated:YES];
+	[self presentModalViewController:addPersonViewController animated:YES];
 	[addPersonViewController release];
 }
 
