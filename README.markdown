@@ -4,10 +4,10 @@
 An iPhone UI contact picker to select multiple people from the Address Book, with type-ahead and auto-completion.
 
 ### ButtonPeoplePicker.h/ButtonPeoplePicker.m
-The UIViewController subclass that encapsulates the contact picker functionality. This is the only class you need to interact with.
+A custom view controller that encapsulates the contact picker functionality. This is the only class you need to interact with.
 
 ### AddPersonViewController.h/AddPersonViewController.m
-A UIViewController subclass displayed when there is no matching person in the Address Book. The new contact will be added to the Address Book.
+A custom view controller displayed modally when there is no matching person in the Address Book. The new contact will be added to the Address Book.
 
 Included is a sample Xcode project showing how to include a ButtonPeoplePicker in your own applications.
 
