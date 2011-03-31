@@ -38,9 +38,6 @@
 	[firstNameTextField release];
 	[lastNameTextField release];
 	[emailTextField release];
-    [firstName release];
-    [lastName release];
-    [email release];
 
     [super dealloc];
 }
