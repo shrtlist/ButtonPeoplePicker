@@ -37,7 +37,7 @@
 }
 
 @property (nonatomic, assign) id <ButtonPeoplePickerDelegate> delegate;
-@property (nonatomic, copy, readonly) NSMutableArray *group;
+@property (nonatomic, readonly) NSMutableArray *group;
 
 - (IBAction)cancelClick:(id)sender;
 - (IBAction)doneClick:(id)sender;
