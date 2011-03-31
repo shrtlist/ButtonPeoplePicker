@@ -15,7 +15,6 @@
  */
 
 #import "ButtonPeoplePicker.h"
-#import "AddPersonViewController.h"
 
 @interface ButtonPeoplePicker () // Private methods
 
