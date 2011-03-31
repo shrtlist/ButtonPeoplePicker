@@ -24,9 +24,9 @@
 }
 
 @property (nonatomic, assign) id <AddPersonViewControllerDelegate> delegate;
-@property (nonatomic, copy, readonly) NSString *firstName;
-@property (nonatomic, copy, readonly) NSString *lastName;
-@property (nonatomic, copy, readonly) NSString *email;
+@property (nonatomic, readonly) NSString *firstName;
+@property (nonatomic, readonly) NSString *lastName;
+@property (nonatomic, readonly) NSString *email;
 @property (nonatomic, assign) NSString *initialText;
 
 - (IBAction)addClick:(id)sender;
