@@ -79,4 +79,13 @@
 	return YES;
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+	if (textField == emailTextField)
+	{
+		addButton.alpha = 1.0;
+		addButton.enabled = YES;
+	}
+}
+
 @end

@@ -21,6 +21,7 @@
 	IBOutlet UITextField *firstNameTextField;
 	IBOutlet UITextField *lastNameTextField;
 	IBOutlet UITextField *emailTextField;
+	IBOutlet UIButton *addButton;
 }
 
 @property (nonatomic, assign) id <AddPersonViewControllerDelegate> delegate;
