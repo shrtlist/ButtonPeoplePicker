@@ -38,6 +38,7 @@
 	[firstNameTextField release];
 	[lastNameTextField release];
 	[emailTextField release];
+	[addButton release];
 
     [super dealloc];
 }
