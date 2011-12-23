@@ -17,26 +17,15 @@
 #import "AddView.h"
 #import <AddressBook/AddressBook.h>
 
-@interface AddView () // Private methods
-
+@interface AddView () // Class extension
 - (void)updatePersonInfo:(NSArray *)group;
-
 @end
 
 @implementation AddView
 
-#pragma mark -
-#pragma mark Lifecycle methods
+@synthesize namesLabel;
 
-- (void)dealloc 
-{
-	[namesLabel release];
-    [super dealloc];
-}
-
-
-#pragma mark -
-#pragma mark Button actions
+#pragma mark - Button actions
 
 // Action receiver for the clicking of 'Show ButtonPeoplePicker' button
 -(IBAction)showButtonPeoplePicker:(id)sender
@@ -44,11 +33,9 @@
 	ButtonPeoplePicker *buttonPeoplePicker = [[ButtonPeoplePicker alloc] init];
     [buttonPeoplePicker setDelegate:self];
     [self presentModalViewController:buttonPeoplePicker animated:YES];
-	[buttonPeoplePicker release];
 }
 
-#pragma mark -
-#pragma mark Update Person info
+#pragma mark - Update Person info
 
 - (void)updatePersonInfo:(NSArray *)group
 {
@@ -64,7 +51,7 @@
 		
 		ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(addressBook, abRecordID);
 
-		NSString *name = (NSString *)ABRecordCopyCompositeName(abPerson);
+		NSString *name = (__bridge_transfer NSString *)ABRecordCopyCompositeName(abPerson);
 		
 		if (i < (group.count - 1))
         {
@@ -75,7 +62,6 @@
 			[tempString appendString:[NSString stringWithFormat:@"%@", name]];
 		}
 		
-		[name release];
 	}
 
 	[namesLabel setText:tempString];
@@ -84,8 +70,7 @@
 }
 
 
-#pragma mark -
-#pragma mark ButtonPeoplePickerDelegate protocol method
+#pragma mark - ButtonPeoplePickerDelegate protocol method
 
 - (void)buttonPeoplePickerDidFinish:(ButtonPeoplePicker *)controller
 {

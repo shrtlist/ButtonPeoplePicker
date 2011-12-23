@@ -24,24 +24,22 @@
 												  UITableViewDelegate,
 												  UIKeyInput>
 {
-	IBOutlet UILabel *deleteLabel;
-	IBOutlet UIView *buttonView;
-	IBOutlet UITableView *uiTableView;
-	IBOutlet UITextField *searchField;
-    IBOutlet UIBarButtonItem *doneButton;
 	UIButton *selectedButton;
-	
-	NSArray *people;
-	NSMutableArray *filteredPeople;
 	ABAddressBookRef addressBook;
 }
 
-@property (nonatomic, assign) id <ButtonPeoplePickerDelegate> delegate;
-@property (nonatomic, readonly) NSMutableArray *group;
+@property (nonatomic, unsafe_unretained) id <ButtonPeoplePickerDelegate> delegate;
+@property (nonatomic, strong) NSMutableArray *group;
+@property (nonatomic, strong) NSArray *people;
+
+@property (nonatomic, strong) IBOutlet UILabel *deleteLabel;
+@property (nonatomic, strong) IBOutlet UIView *buttonView;
+@property (nonatomic, strong) IBOutlet UITableView *uiTableView;
+@property (nonatomic, strong) IBOutlet UITextField *searchField;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *doneButton;
 
 - (IBAction)cancelClick:(id)sender;
 - (IBAction)doneClick:(id)sender;
-- (IBAction)buttonSelected:(id)sender;
 
 @end
 

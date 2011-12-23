@@ -18,10 +18,17 @@
 
 @implementation AddPersonViewController
 
-@synthesize delegate, initialText, firstName, lastName, email;
+@synthesize delegate;
+@synthesize initialText;
+@synthesize firstName;
+@synthesize lastName;
+@synthesize email;
+@synthesize firstNameTextField;
+@synthesize lastNameTextField;
+@synthesize emailTextField;
+@synthesize addButton;
 
-#pragma mark -
-#pragma mark Lifecycle methods
+#pragma mark - View lifecycle methods
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -32,26 +39,21 @@
 	[firstNameTextField becomeFirstResponder];
 }
 
+#pragma mark - Memory management
+
 - (void)dealloc
 {
 	delegate = nil;
-	[firstNameTextField release];
-	[lastNameTextField release];
-	[emailTextField release];
-	[addButton release];
-
-    [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Button actions
+#pragma mark - Button actions
 
 // Action receiver for the clicking of Add button
 - (IBAction)addClick:(id)sender
 {
-	firstName = firstNameTextField.text;
-	lastName = lastNameTextField.text;
-	email = emailTextField.text;
+	self.firstName = firstNameTextField.text;
+	self.lastName = lastNameTextField.text;
+	self.email = emailTextField.text;
 
 	[delegate addPersonViewControllerDidFinish:self];
 }
@@ -62,8 +64,7 @@
 	[self dismissModalViewControllerAnimated:YES];
 }
 
-#pragma mark -
-#pragma mark UITextFieldDelegate methods
+#pragma mark - UITextFieldDelegate methods
 
 // Allow user to navigate textfields using the Next key on the keyboard
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

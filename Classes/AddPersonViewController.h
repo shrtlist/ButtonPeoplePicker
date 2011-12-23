@@ -17,18 +17,17 @@
 @protocol AddPersonViewControllerDelegate;
 
 @interface AddPersonViewController : UIViewController <UITextFieldDelegate>
-{
-	IBOutlet UITextField *firstNameTextField;
-	IBOutlet UITextField *lastNameTextField;
-	IBOutlet UITextField *emailTextField;
-	IBOutlet UIButton *addButton;
-}
 
-@property (nonatomic, assign) id <AddPersonViewControllerDelegate> delegate;
-@property (nonatomic, readonly) NSString *firstName;
-@property (nonatomic, readonly) NSString *lastName;
-@property (nonatomic, readonly) NSString *email;
-@property (nonatomic, assign) NSString *initialText;
+@property (nonatomic, unsafe_unretained) id <AddPersonViewControllerDelegate> delegate;
+@property (nonatomic, strong) NSString *firstName;
+@property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, strong) NSString *email;
+@property (nonatomic, unsafe_unretained) NSString *initialText;
+
+@property (nonatomic, strong) IBOutlet UITextField *firstNameTextField;
+@property (nonatomic, strong) IBOutlet UITextField *lastNameTextField;
+@property (nonatomic, strong) IBOutlet UITextField *emailTextField;
+@property (nonatomic, strong) IBOutlet UIButton *addButton;
 
 - (IBAction)addClick:(id)sender;
 - (IBAction)cancelClick:(id)sender;

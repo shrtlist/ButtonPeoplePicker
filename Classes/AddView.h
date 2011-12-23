@@ -16,10 +16,9 @@
 
 #import "ButtonPeoplePicker.h"
 
-@interface AddView : UIViewController <ButtonPeoplePickerDelegate> 
-{
-	IBOutlet UILabel *namesLabel;
-}
+@interface AddView : UIViewController <ButtonPeoplePickerDelegate>
+
+@property (nonatomic, strong) IBOutlet UILabel *namesLabel;
 
 - (IBAction)showButtonPeoplePicker:(id)sender;
 

@@ -16,22 +16,28 @@
 
 #import "ButtonPeoplePicker.h"
 
-@interface ButtonPeoplePicker () // Private methods
-
+@interface ButtonPeoplePicker () // Class extension
+@property (nonatomic, strong) NSMutableArray *filteredPeople;
 - (void)layoutNameButtons;
 - (void)addPersonToGroup:(NSDictionary *)personDictionary;
 - (void)removePersonFromGroup:(NSDictionary *)personDictionary;
 - (void)displayAddPersonViewController;
-
 @end
 
 
 @implementation ButtonPeoplePicker
 
-@synthesize delegate, group;
+@synthesize delegate;
+@synthesize people;
+@synthesize group;
+@synthesize filteredPeople;
+@synthesize deleteLabel;
+@synthesize buttonView;
+@synthesize uiTableView;
+@synthesize searchField;
+@synthesize doneButton;
 
-#pragma mark -
-#pragma mark Lifecycle methods
+#pragma mark - View lifecycle methods
 
 // Perform additional initialization after the nib file is loaded
 - (void)viewDidLoad 
@@ -40,12 +46,12 @@
 
 	addressBook = ABAddressBookCreate();
 	
-	people = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
+	self.people = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
     
-    group = [[NSMutableArray alloc] init];
+    self.group = [[NSMutableArray alloc] init];
 	
 	// Create a filtered list that will contain people for the search results table.
-	filteredPeople = [[NSMutableArray alloc] init];
+	self.filteredPeople = [[NSMutableArray alloc] init];
 	
 	// Add a "textFieldDidChange" notification method to the text field control.
 	[searchField addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
@@ -53,32 +59,22 @@
 	[self layoutNameButtons];
 }
 
+#pragma mark - Memory management
+
 - (void)dealloc
 {
 	delegate = nil;
-	[deleteLabel release];
-	[buttonView release];
-	[uiTableView release];
-	[searchField release];
-    [doneButton release];
-	[people release];
-    [group release];
 	CFRelease(addressBook);
-	[filteredPeople release];
-	
-	[super dealloc];
 }
 
-#pragma mark -
-#pragma mark Respond to touch and become first responder.
+#pragma mark - Respond to touch and become first responder.
 
 - (BOOL)canBecomeFirstResponder
 {
 	return YES;
 }
 
-#pragma mark -
-#pragma mark Button actions
+#pragma mark - Target-action methods
 
 // Action receiver for the clicking of Done button
 -(IBAction)doneClick:(id)sender
@@ -94,7 +90,7 @@
 }
 
 // Action receiver for the selecting of name button
-- (IBAction)buttonSelected:(id)sender {
+- (void)buttonSelected:(id)sender {
 
 	selectedButton = (UIButton *)sender;
 	
@@ -121,8 +117,7 @@
 	[self becomeFirstResponder];
 }
 
-#pragma mark -
-#pragma mark UIKeyInput protocol methods
+#pragma mark - UIKeyInput protocol methods
 
 - (BOOL)hasText
 {
@@ -139,9 +134,9 @@
 	NSString *name = selectedButton.titleLabel.text;
 	NSInteger identifier = selectedButton.tag;
 	
-	NSArray *personArray = (NSArray *)ABAddressBookCopyPeopleWithName(addressBook, (CFStringRef)name);
+	NSArray *personArray = (__bridge_transfer NSArray *)ABAddressBookCopyPeopleWithName(addressBook, (__bridge CFStringRef)name);
 	
-	ABRecordRef person = [personArray lastObject];
+	ABRecordRef person = (__bridge ABRecordRef)([personArray lastObject]);
 
 	ABRecordID abRecordID = ABRecordGetRecordID(person);
 
@@ -151,11 +146,9 @@
 
 	[self removePersonFromGroup:personDictionary];
 	
-	[personArray release];
 }
 
-#pragma mark -
-#pragma mark UITableViewDataSource protocol methods
+#pragma mark - UITableViewDataSource protocol methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -172,7 +165,7 @@
 	
 	if (cell == nil)
     {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellID] autorelease];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellID];
 	}
     
     cell.accessoryType = UITableViewCellAccessoryNone;
@@ -195,9 +188,8 @@
 		ABMultiValueIdentifier identifier = [[personDictionary valueForKey:@"valueIdentifier"] intValue];
 		
 		{
-			NSString *string = (NSString *)ABRecordCopyCompositeName(abPerson);
+			NSString *string = (__bridge_transfer NSString *)ABRecordCopyCompositeName(abPerson);
 			cell.textLabel.text = string;
-			[string release];
 		}
 		
 		ABMultiValueRef emailProperty = ABRecordCopyValue(abPerson, kABPersonEmailProperty);
@@ -208,9 +200,8 @@
 			
 			if (index != -1)
             {
-				NSString *email = (NSString *)ABMultiValueCopyValueAtIndex(emailProperty, index);
+				NSString *email = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailProperty, index);
 				cell.detailTextLabel.text = email;
-				[email release];
 			}
 			else
             {
@@ -224,8 +215,7 @@
 	return cell;
 }
 
-#pragma mark -
-#pragma mark UITableViewDelegate protocol method
+#pragma mark - UITableViewDelegate protocol method
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -246,8 +236,7 @@
 	searchField.text = nil;
 }
 
-#pragma mark -
-#pragma mark Update the filteredPeople array based on the search text.
+#pragma mark - Update the filteredPeople array based on the search text.
 
 - (void)filterContentForSearchText:(NSString*)searchText
 {
@@ -261,8 +250,10 @@
 	 Search the main list for people whose firstname OR lastname OR organization matches searchText; add items that match to the filtered array.
 	 */
 	
-	for (id person in people)
+	for (id record in people)
     {
+        ABRecordRef person = (__bridge ABRecordRef)record;
+
 		// Access the person's email addresses (an ABMultiValueRef)
 		ABMultiValueRef emailsProperty = ABRecordCopyValue(person, kABPersonEmailProperty);
 		
@@ -271,10 +262,10 @@
 			// Iterate through the email address multivalue
 			for (CFIndex index = 0; index < ABMultiValueGetCount(emailsProperty); index++)
             {
-				NSString *firstName = (NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
-				NSString *lastName = (NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
-				NSString *organization = (NSString *)ABRecordCopyValue(person, kABPersonOrganizationProperty);
-				NSString *emailString = (NSString *)ABMultiValueCopyValueAtIndex(emailsProperty, index);
+				NSString *firstName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+				NSString *lastName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
+				NSString *organization = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonOrganizationProperty);
+				NSString *emailString = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailsProperty, index);
 				
 				// Match by firstName, lastName, organization or email address
 				if ([beginsPredicate evaluateWithObject:firstName] ||
@@ -294,11 +285,6 @@
 					// Add each personDictionary to filteredPeople
 					[filteredPeople addObject:personDictionary];
 				}
-
-				[firstName release];
-				[lastName release];
-				[organization release];
-				[emailString release];
 			 }
 			
 			 CFRelease(emailsProperty);
@@ -306,8 +292,7 @@
 	}
 }
 
-#pragma mark -
-#pragma mark textFieldDidChange notification method to the searchField control.
+#pragma mark - textFieldDidChange notification method to the searchField control.
 
 - (void)textFieldDidChange
 {
@@ -323,8 +308,7 @@
 	}
 }
 
-#pragma mark -
-#pragma mark Add and remove a person to/from the group
+#pragma mark - Add and remove a person to/from the group
 
 - (void)addPersonToGroup:(NSDictionary *)personDictionary
 {
@@ -333,7 +317,7 @@
     // Check for an existing entry for this person, if so remove it
     for (NSDictionary *personDict in group)
     {
-        if ((abRecordID == (ABRecordID)[[personDict valueForKey:@"abRecordID"] intValue]))
+        if (abRecordID == (ABRecordID)[[personDict valueForKey:@"abRecordID"] intValue])
         {
             [group removeObject:personDict];
             break;
@@ -350,8 +334,7 @@
 	[self layoutNameButtons];
 }
 
-#pragma mark -
-#pragma mark Update Person info
+#pragma mark - Update Person info
 
 -(void)layoutNameButtons
 {
@@ -377,7 +360,7 @@
 
 		ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(addressBook, abRecordID);
 
-		NSString *name = (NSString *)ABRecordCopyCompositeName(abPerson);
+		NSString *name = (__bridge_transfer NSString *)ABRecordCopyCompositeName(abPerson);
 		
 		ABMultiValueIdentifier identifier = [[personDictionary valueForKey:@"valueIdentifier"] intValue];
 		
@@ -424,7 +407,6 @@
 		labelFrame.origin.y = yPosition + button.frame.size.height + PADDING;
 		[deleteLabel setFrame:labelFrame];
 		
-		[name release];
 	}
     
     if (group.count > 0)
@@ -440,8 +422,7 @@
 	[searchField becomeFirstResponder];
 }
 
-#pragma mark -
-#pragma mark display the AddPersonViewController modally
+#pragma mark - Display the AddPersonViewController modally
 
 -(void)displayAddPersonViewController
 {	
@@ -449,11 +430,9 @@
 	[addPersonViewController setInitialText:searchField.text];
 	[addPersonViewController setDelegate:self];
 	[self presentModalViewController:addPersonViewController animated:YES];
-	[addPersonViewController release];
 }
 
-#pragma mark -
-#pragma mark AddPersonViewControllerDelegate method
+#pragma mark - AddPersonViewControllerDelegate method
 
 - (void)addPersonViewControllerDidFinish:(AddPersonViewController *)controller
 {
@@ -463,17 +442,17 @@
 
 	ABRecordRef personRef = ABPersonCreate();
 
-	ABRecordSetValue(personRef, kABPersonFirstNameProperty, firstName, nil);
+	ABRecordSetValue(personRef, kABPersonFirstNameProperty, (__bridge CFTypeRef)firstName, nil);
 
 	if (lastName && (lastName.length > 0))
     {
-		ABRecordSetValue(personRef, kABPersonLastNameProperty, lastName, nil);
+		ABRecordSetValue(personRef, kABPersonLastNameProperty, (__bridge CFTypeRef)lastName, nil);
 	}
 	
 	if (email && (email.length > 0))
 	{
 		ABMutableMultiValueRef emailProperty = ABMultiValueCreateMutable(kABPersonEmailProperty);
-		ABMultiValueAddValueAndLabel(emailProperty, email, kABHomeLabel, nil);
+		ABMultiValueAddValueAndLabel(emailProperty, (__bridge CFTypeRef)email, kABHomeLabel, nil);
 		ABRecordSetValue(personRef, kABPersonEmailProperty, emailProperty, nil);
 		CFRelease(emailProperty);
 	}
