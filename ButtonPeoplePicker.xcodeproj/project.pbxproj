@@ -23,6 +23,7 @@
 		8407DD65130F205F00F5713F /* ButtonCorners@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD62130F205F00F5713F /* ButtonCorners@2x.png */; };
 		8407DD69131067EA00F5713F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8407DD68131067EA00F5713F /* AddressBookUI.framework */; };
 		8419FB9A14A42045007B2854 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8419FB9914A42045007B2854 /* Default@2x.png */; };
+		8419FBF514A4C544007B2854 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 8419FBF414A4C544007B2854 /* README.markdown */; };
 		8E1075130FE22BF900355D09 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E1075120FE22BF900355D09 /* AddressBook.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		8407DD62130F205F00F5713F /* ButtonCorners@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCorners@2x.png"; path = "Images/ButtonCorners@2x.png"; sourceTree = "<group>"; };
 		8407DD68131067EA00F5713F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		8419FB9914A42045007B2854 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Images/Default@2x.png"; sourceTree = "<group>"; };
+		8419FBF414A4C544007B2854 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E1075120FE22BF900355D09 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -95,6 +97,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				8419FBF414A4C544007B2854 /* README.markdown */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -216,6 +219,7 @@
 				8407DD64130F205F00F5713F /* ButtonCorners.png in Resources */,
 				8407DD65130F205F00F5713F /* ButtonCorners@2x.png in Resources */,
 				8419FB9A14A42045007B2854 /* Default@2x.png in Resources */,
+				8419FBF514A4C544007B2854 /* README.markdown in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
