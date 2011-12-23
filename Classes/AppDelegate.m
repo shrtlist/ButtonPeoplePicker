@@ -34,6 +34,9 @@
     UINavigationController *navController = [[UINavigationController alloc]
                                              initWithRootViewController:viewController];
     
+    // Set the navigationBar title
+    navController.navigationBar.topItem.title = @"ButtonPeoplePicker Demo";
+    
     [window setRootViewController:navController];
     [window makeKeyAndVisible];
 
