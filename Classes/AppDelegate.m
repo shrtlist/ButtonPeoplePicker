@@ -15,18 +15,29 @@
  */
 
 #import "AppDelegate.h"
+#import "AddView.h"
 
 @implementation AppDelegate
 
-#pragma mark -
-#pragma mark UIApplicationDelegate methods
+@synthesize window;
+
+#pragma mark - UIApplicationDelegate methods
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{	
-	[window addSubview:navController.view];
-    [window makeKeyAndVisible];
+{
+    // Override point for customization after application launch.
     
-    return NO;
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    AddView *viewController = [[AddView alloc] initWithNibName:@"AddView" bundle:nil];
+    
+    UINavigationController *navController = [[UINavigationController alloc]
+                                             initWithRootViewController:viewController];
+    
+    [window setRootViewController:navController];
+    [window makeKeyAndVisible];
+
+    return YES;
 }
 
 

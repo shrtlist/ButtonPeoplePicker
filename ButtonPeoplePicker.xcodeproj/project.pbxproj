@@ -18,11 +18,11 @@
 		8407DD5C130F202E00F5713F /* AddPersonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD58130F202E00F5713F /* AddPersonView.xib */; };
 		8407DD5D130F202E00F5713F /* AddView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD59130F202E00F5713F /* AddView.xib */; };
 		8407DD5E130F202E00F5713F /* ButtonPeoplePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD5A130F202E00F5713F /* ButtonPeoplePicker.xib */; };
-		8407DD5F130F202E00F5713F /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD5B130F202E00F5713F /* MainWindow.xib */; };
 		8407DD63130F205F00F5713F /* bottom-button-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD60130F205F00F5713F /* bottom-button-bg.png */; };
 		8407DD64130F205F00F5713F /* ButtonCorners.png in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD61130F205F00F5713F /* ButtonCorners.png */; };
 		8407DD65130F205F00F5713F /* ButtonCorners@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD62130F205F00F5713F /* ButtonCorners@2x.png */; };
 		8407DD69131067EA00F5713F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8407DD68131067EA00F5713F /* AddressBookUI.framework */; };
+		8419FB9A14A42045007B2854 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8419FB9914A42045007B2854 /* Default@2x.png */; };
 		8E1075130FE22BF900355D09 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E1075120FE22BF900355D09 /* AddressBook.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,11 +44,11 @@
 		8407DD58130F202E00F5713F /* AddPersonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddPersonView.xib; sourceTree = "<group>"; };
 		8407DD59130F202E00F5713F /* AddView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddView.xib; sourceTree = "<group>"; };
 		8407DD5A130F202E00F5713F /* ButtonPeoplePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonPeoplePicker.xib; sourceTree = "<group>"; };
-		8407DD5B130F202E00F5713F /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		8407DD60130F205F00F5713F /* bottom-button-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bottom-button-bg.png"; path = "Images/bottom-button-bg.png"; sourceTree = "<group>"; };
 		8407DD61130F205F00F5713F /* ButtonCorners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonCorners.png; path = Images/ButtonCorners.png; sourceTree = "<group>"; };
 		8407DD62130F205F00F5713F /* ButtonCorners@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCorners@2x.png"; path = "Images/ButtonCorners@2x.png"; sourceTree = "<group>"; };
 		8407DD68131067EA00F5713F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		8419FB9914A42045007B2854 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Images/Default@2x.png"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E1075120FE22BF900355D09 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -138,6 +138,7 @@
 		83D515AB0FF0BD5F00AD43CA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8419FB9914A42045007B2854 /* Default@2x.png */,
 				8407DD60130F205F00F5713F /* bottom-button-bg.png */,
 				8407DD61130F205F00F5713F /* ButtonCorners.png */,
 				8407DD62130F205F00F5713F /* ButtonCorners@2x.png */,
@@ -151,7 +152,6 @@
 				8407DD58130F202E00F5713F /* AddPersonView.xib */,
 				8407DD59130F202E00F5713F /* AddView.xib */,
 				8407DD5A130F202E00F5713F /* ButtonPeoplePicker.xib */,
-				8407DD5B130F202E00F5713F /* MainWindow.xib */,
 			);
 			name = Xibs;
 			sourceTree = "<group>";
@@ -212,10 +212,10 @@
 				8407DD5C130F202E00F5713F /* AddPersonView.xib in Resources */,
 				8407DD5D130F202E00F5713F /* AddView.xib in Resources */,
 				8407DD5E130F202E00F5713F /* ButtonPeoplePicker.xib in Resources */,
-				8407DD5F130F202E00F5713F /* MainWindow.xib in Resources */,
 				8407DD63130F205F00F5713F /* bottom-button-bg.png in Resources */,
 				8407DD64130F205F00F5713F /* ButtonCorners.png in Resources */,
 				8407DD65130F205F00F5713F /* ButtonCorners@2x.png in Resources */,
+				8419FB9A14A42045007B2854 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

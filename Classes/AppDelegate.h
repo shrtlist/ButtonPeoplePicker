@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-@interface AppDelegate : NSObject <UIApplicationDelegate> 
-{
-    IBOutlet UIWindow *window;
-    IBOutlet UINavigationController *navController;
-}
+@interface AppDelegate : UIResponder <UIApplicationDelegate> 
+
+@property (nonatomic, strong) UIWindow *window;
 
 @end
