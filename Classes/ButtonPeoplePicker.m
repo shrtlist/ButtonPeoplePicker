@@ -238,15 +238,18 @@
 	for (id record in people)
     {
         ABRecordRef person = (__bridge ABRecordRef)record;
-        
-        NSString *name = (__bridge_transfer NSString *)ABRecordCopyCompositeName(person);
 
+        NSString *compositeName = (__bridge_transfer NSString *)ABRecordCopyCompositeName(person);
+        NSString *firstName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+        NSString *lastName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
         NSString *organization = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonOrganizationProperty);
         
-        // Match by name or organization
-        if ([beginsPredicate evaluateWithObject:name] ||
+        // Match by firstName, lastName or organization
+        if ([beginsPredicate evaluateWithObject:compositeName] ||
+            [beginsPredicate evaluateWithObject:firstName] ||
+            [beginsPredicate evaluateWithObject:lastName] ||
             [beginsPredicate evaluateWithObject:organization])
-        {					
+        {
             ABRecordID abRecordID = ABRecordGetRecordID(person);
 
             // Add the matching abRecordID to filteredPeople
