@@ -50,7 +50,7 @@
 						<string key="NSFrameSize">{320, 44}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="416722624"/>
+						<reference key="NSNextKeyView" ref="715973443"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSArray" key="IBUIItems">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -74,7 +74,7 @@
 							</object>
 						</object>
 					</object>
-					<object class="IBUISearchBar" id="416722624">
+					<object class="IBUISearchBar" id="715973443">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">290</int>
 						<string key="NSFrame">{{0, 44}, {320, 44}}</string>
@@ -200,14 +200,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">uiTableView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="796131667"/>
-					</object>
-					<int key="connectionID">49</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">doneButton</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="359993480"/>
@@ -218,9 +210,17 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">searchField</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="416722624"/>
+						<reference key="destination" ref="715973443"/>
 					</object>
 					<int key="connectionID">53</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">contactsTableView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="796131667"/>
+					</object>
+					<int key="connectionID">55</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -265,7 +265,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
-						<reference key="source" ref="416722624"/>
+						<reference key="source" ref="715973443"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">54</int>
@@ -290,7 +290,7 @@
 							<reference ref="796131667"/>
 							<reference ref="805576484"/>
 							<reference ref="642166707"/>
-							<reference ref="416722624"/>
+							<reference ref="715973443"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -355,7 +355,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">52</int>
-						<reference key="object" ref="416722624"/>
+						<reference key="object" ref="715973443"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</object>
@@ -407,7 +407,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">54</int>
+			<int key="maxID">55</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -452,18 +452,18 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>buttonView</string>
+							<string>contactsTableView</string>
 							<string>deleteLabel</string>
 							<string>doneButton</string>
 							<string>searchField</string>
-							<string>uiTableView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIView</string>
+							<string>UITableView</string>
 							<string>UILabel</string>
 							<string>UIBarButtonItem</string>
 							<string>UISearchBar</string>
-							<string>UITableView</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -471,16 +471,20 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>buttonView</string>
+							<string>contactsTableView</string>
 							<string>deleteLabel</string>
 							<string>doneButton</string>
 							<string>searchField</string>
-							<string>uiTableView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
 								<string key="name">buttonView</string>
 								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">contactsTableView</string>
+								<string key="candidateClassName">UITableView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">deleteLabel</string>
@@ -493,10 +497,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">searchField</string>
 								<string key="candidateClassName">UISearchBar</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">uiTableView</string>
-								<string key="candidateClassName">UITableView</string>
 							</object>
 						</object>
 					</object>

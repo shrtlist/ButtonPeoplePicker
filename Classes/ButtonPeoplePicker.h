@@ -37,7 +37,7 @@
 
 @property (nonatomic, strong) IBOutlet UILabel *deleteLabel;
 @property (nonatomic, strong) IBOutlet UIView *buttonView;
-@property (nonatomic, strong) IBOutlet UITableView *uiTableView;
+@property (nonatomic, strong) IBOutlet UITableView *contactsTableView;
 @property (nonatomic, strong) IBOutlet UISearchBar *searchField;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *doneButton;
 

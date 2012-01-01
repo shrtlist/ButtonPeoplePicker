@@ -35,7 +35,7 @@
 @synthesize filteredPeople;
 @synthesize deleteLabel;
 @synthesize buttonView;
-@synthesize uiTableView;
+@synthesize contactsTableView;
 @synthesize searchField;
 @synthesize doneButton;
 
@@ -120,13 +120,13 @@
 {
 	if (searchField.text.length > 0)
     {
-		[uiTableView setHidden:NO];
+		[contactsTableView setHidden:NO];
 		[self filterContentForSearchText:searchField.text];
-		[uiTableView reloadData];
+		[contactsTableView reloadData];
 	}
 	else
     {
-		[uiTableView setHidden:YES];
+		[contactsTableView setHidden:YES];
 	}
 }
 
@@ -260,13 +260,13 @@
 {
     if (searchField.text.length > 0)
     {
-		[uiTableView setHidden:NO];
+		[contactsTableView setHidden:NO];
 		[self filterContentForSearchText:searchField.text];
-		[uiTableView reloadData];
+		[contactsTableView reloadData];
 	}
 	else
     {
-		[uiTableView setHidden:YES];
+		[contactsTableView setHidden:YES];
 	}
 }
 
