@@ -172,7 +172,7 @@
 	
 	if (cell == nil)
     {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellID];
 	}
     
     cell.accessoryType = UITableViewCellAccessoryNone;
@@ -181,6 +181,7 @@
 	if (filteredPeople.count == indexPath.row)
     {
 		cell.textLabel.text	= @"Add Person";
+        cell.detailTextLabel.text = nil;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	}
 	else
@@ -190,6 +191,7 @@
 		ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(addressBook, abRecordID);
 		
         cell.textLabel.text = (__bridge_transfer NSString *)ABRecordCopyCompositeName(abPerson);
+        cell.detailTextLabel.text = (__bridge_transfer NSString *)ABRecordCopyValue(abPerson, kABPersonOrganizationProperty);
 	}
  
 	return cell;
