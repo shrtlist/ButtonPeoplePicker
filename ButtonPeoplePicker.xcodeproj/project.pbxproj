@@ -76,12 +76,12 @@
 			children = (
 				8407DD4B130F1FF600F5713F /* AddPersonViewController.h */,
 				8407DD4C130F1FF600F5713F /* AddPersonViewController.m */,
+				8407DD51130F1FF600F5713F /* ButtonPeoplePicker.h */,
+				8407DD52130F1FF600F5713F /* ButtonPeoplePicker.m */,
 				8407DD4D130F1FF600F5713F /* AddView.h */,
 				8407DD4E130F1FF600F5713F /* AddView.m */,
 				8407DD4F130F1FF600F5713F /* AppDelegate.h */,
 				8407DD50130F1FF600F5713F /* AppDelegate.m */,
-				8407DD51130F1FF600F5713F /* ButtonPeoplePicker.h */,
-				8407DD52130F1FF600F5713F /* ButtonPeoplePicker.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -254,7 +254,7 @@
 				GCC_PREFIX_HEADER = ButtonPeoplePicker_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = ButtonPicker;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -272,7 +272,7 @@
 				GCC_PREFIX_HEADER = ButtonPeoplePicker_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = ButtonPicker;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -287,7 +287,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
@@ -305,7 +305,7 @@
 				GCC_PREFIX_HEADER = ButtonPeoplePicker_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = ButtonPicker;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6E1B4E0B-B759-4C30-98FB-A3DC3E90F381";
 				SDKROOT = iphoneos;
@@ -320,7 +320,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -334,7 +334,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 			};
 			name = Release;

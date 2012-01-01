@@ -40,14 +40,14 @@
 - (void)updatePersonInfo:(NSArray *)group
 {
 	ABAddressBookRef addressBook = ABAddressBookCreate();
-	
-	NSMutableString *tempString = [NSMutableString string];
+
+	NSMutableString *namesString = [NSMutableString string];
 	
 	for (int i = 0; i < group.count; i++) {
 		
-		NSDictionary *personDictionary = (NSDictionary *)[group objectAtIndex:i];
+		NSNumber *personID = (NSNumber *)[group objectAtIndex:i];
 		
-		ABRecordID abRecordID = (ABRecordID)[[personDictionary valueForKey:@"abRecordID"] intValue];
+		ABRecordID abRecordID = (ABRecordID)[personID intValue];
 		
 		ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(addressBook, abRecordID);
 
@@ -55,22 +55,21 @@
 		
 		if (i < (group.count - 1))
         {
-			[tempString appendString:[NSString stringWithFormat:@"%@, ", name]];
+			[namesString appendString:[NSString stringWithFormat:@"%@, ", name]];
 		}
 		else
         {
-			[tempString appendString:[NSString stringWithFormat:@"%@", name]];
+			[namesString appendString:[NSString stringWithFormat:@"%@", name]];
 		}
-		
 	}
 
-	[namesLabel setText:tempString];
+	[namesLabel setText:namesString];
 	
 	CFRelease(addressBook);
 }
 
 
-#pragma mark - ButtonPeoplePickerDelegate protocol method
+#pragma mark - ButtonPeoplePickerDelegate conformance
 
 - (void)buttonPeoplePickerDidFinish:(ButtonPeoplePicker *)controller
 {

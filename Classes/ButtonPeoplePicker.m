@@ -19,9 +19,10 @@
 @interface ButtonPeoplePicker () // Class extension
 @property (nonatomic, strong) NSMutableArray *filteredPeople;
 - (void)layoutNameButtons;
-- (void)addPersonToGroup:(NSDictionary *)personDictionary;
-- (void)removePersonFromGroup:(NSDictionary *)personDictionary;
+- (void)addPersonToGroup:(ABRecordID)abRecordID;
+- (void)removePersonFromGroup:(ABRecordID)abRecordID;
 - (void)displayAddPersonViewController;
+- (void)filterContentForSearchText:(NSString*)searchText;
 @end
 
 
@@ -48,10 +49,10 @@
 	
 	self.people = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
     
-    self.group = [[NSMutableArray alloc] init];
+    self.group = [NSMutableArray array];
 	
 	// Create a filtered list that will contain people for the search results table.
-	self.filteredPeople = [[NSMutableArray alloc] init];
+	self.filteredPeople = [NSMutableArray array];
 	
 	// Add a "textFieldDidChange" notification method to the text field control.
 	[searchField addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
@@ -63,7 +64,6 @@
 
 - (void)dealloc
 {
-	delegate = nil;
 	CFRelease(addressBook);
 }
 
@@ -117,7 +117,22 @@
 	[self becomeFirstResponder];
 }
 
-#pragma mark - UIKeyInput protocol methods
+// Action receiver for when the searchField text changed
+- (void)textFieldDidChange
+{
+	if (searchField.text.length > 0)
+    {
+		[uiTableView setHidden:NO];
+		[self filterContentForSearchText:searchField.text];
+		[uiTableView reloadData];
+	}
+	else
+    {
+		[uiTableView setHidden:YES];
+	}
+}
+
+#pragma mark - UIKeyInput conformance
 
 - (BOOL)hasText
 {
@@ -132,7 +147,6 @@
 	deleteLabel.hidden = YES;
 
 	NSString *name = selectedButton.titleLabel.text;
-	NSInteger identifier = selectedButton.tag;
 	
 	NSArray *personArray = (__bridge_transfer NSArray *)ABAddressBookCopyPeopleWithName(addressBook, (__bridge CFStringRef)name);
 	
@@ -140,15 +154,10 @@
 
 	ABRecordID abRecordID = ABRecordGetRecordID(person);
 
-	NSDictionary *personDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-									  [NSNumber numberWithInt:abRecordID], @"abRecordID",
-									  [NSNumber numberWithInt:identifier], @"valueIdentifier", nil];
-
-	[self removePersonFromGroup:personDictionary];
-	
+	[self removePersonFromGroup:abRecordID];
 }
 
-#pragma mark - UITableViewDataSource protocol methods
+#pragma mark - UITableViewDataSource conformance
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -165,7 +174,7 @@
 	
 	if (cell == nil)
     {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellID];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID];
 	}
     
     cell.accessoryType = UITableViewCellAccessoryNone;
@@ -174,63 +183,38 @@
 	if (filteredPeople.count == indexPath.row)
     {
 		cell.textLabel.text	= @"Add Person";
-		cell.detailTextLabel.text = nil;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	}
 	else
     {
-		NSDictionary *personDictionary = [filteredPeople objectAtIndex:indexPath.row];
-		
-		ABRecordID abRecordID = (ABRecordID)[[personDictionary valueForKey:@"abRecordID"] intValue];
+		ABRecordID abRecordID = (ABRecordID)[[filteredPeople objectAtIndex:indexPath.row] intValue];
 		
 		ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(addressBook, abRecordID);
 		
-		ABMultiValueIdentifier identifier = [[personDictionary valueForKey:@"valueIdentifier"] intValue];
-		
-		{
-			NSString *string = (__bridge_transfer NSString *)ABRecordCopyCompositeName(abPerson);
-			cell.textLabel.text = string;
-		}
-		
-		ABMultiValueRef emailProperty = ABRecordCopyValue(abPerson, kABPersonEmailProperty);
-		
-		if (emailProperty)
-        {
-			CFIndex index = ABMultiValueGetIndexForIdentifier(emailProperty, identifier);
-			
-			if (index != -1)
-            {
-				NSString *email = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailProperty, index);
-				cell.detailTextLabel.text = email;
-			}
-			else
-            {
-				cell.detailTextLabel.text = nil;
-			}
-		}
-		
-		if (emailProperty) CFRelease(emailProperty);
+        cell.textLabel.text = (__bridge_transfer NSString *)ABRecordCopyCompositeName(abPerson);
 	}
-	
+ 
 	return cell;
 }
 
-#pragma mark - UITableViewDelegate protocol method
+#pragma mark - UITableViewDelegate conformance
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[tableView setHidden:YES];
 
-	// Handle the special case
+    // If this is the last row in filteredPeople, take special action
 	if (indexPath.row == filteredPeople.count)
     {
 		[self displayAddPersonViewController];
 	}
 	else
     {
-		NSDictionary *personDictionary = [filteredPeople objectAtIndex:indexPath.row];
+		NSNumber *personID = [filteredPeople objectAtIndex:indexPath.row];
+        
+        ABRecordID abRecordID = [personID intValue];
 		
-		[self addPersonToGroup:personDictionary];
+		[self addPersonToGroup:abRecordID];
 	}
 
 	searchField.text = nil;
@@ -247,90 +231,50 @@
 	NSPredicate *beginsPredicate = [NSPredicate predicateWithFormat:@"(SELF beginswith[cd] %@)", searchText];
 
 	/*
-	 Search the main list for people whose firstname OR lastname OR organization matches searchText; add items that match to the filtered array.
+	 Search the main list for people whose firstname OR lastname OR organization matches searchText;
+     add items that match to the filtered array.
 	 */
 	
 	for (id record in people)
     {
         ABRecordRef person = (__bridge ABRecordRef)record;
 
-		// Access the person's email addresses (an ABMultiValueRef)
-		ABMultiValueRef emailsProperty = ABRecordCopyValue(person, kABPersonEmailProperty);
-		
-		if (emailsProperty)
-        {
-			// Iterate through the email address multivalue
-			for (CFIndex index = 0; index < ABMultiValueGetCount(emailsProperty); index++)
-            {
-				NSString *firstName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
-				NSString *lastName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
-				NSString *organization = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonOrganizationProperty);
-				NSString *emailString = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailsProperty, index);
-				
-				// Match by firstName, lastName, organization or email address
-				if ([beginsPredicate evaluateWithObject:firstName] ||
-					[beginsPredicate evaluateWithObject:lastName] ||
-					[beginsPredicate evaluateWithObject:organization] ||
-					[beginsPredicate evaluateWithObject:emailString])
-                {
-					// Get the address identifier for this address
-					ABMultiValueIdentifier identifier = ABMultiValueGetIdentifierAtIndex(emailsProperty, index);
-					
-					ABRecordID abRecordID = ABRecordGetRecordID(person);
-					
-					NSDictionary *personDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-													 [NSNumber numberWithInt:abRecordID], @"abRecordID",
-													 [NSNumber numberWithInt:identifier], @"valueIdentifier", nil];
+        NSString *firstName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+        NSString *lastName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
+        NSString *organization = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonOrganizationProperty);
+        
+        // Match by firstName, lastName, organization or email address
+        if ([beginsPredicate evaluateWithObject:firstName] ||
+            [beginsPredicate evaluateWithObject:lastName] ||
+            [beginsPredicate evaluateWithObject:organization])
+        {					
+            ABRecordID abRecordID = ABRecordGetRecordID(person);
 
-					// Add each personDictionary to filteredPeople
-					[filteredPeople addObject:personDictionary];
-				}
-			 }
-			
-			 CFRelease(emailsProperty);
-		}
-	}
-}
-
-#pragma mark - textFieldDidChange notification method to the searchField control.
-
-- (void)textFieldDidChange
-{
-	if (searchField.text.length > 0)
-    {
-		[uiTableView setHidden:NO];
-		[self filterContentForSearchText:searchField.text];
-		[uiTableView reloadData];
-	}
-	else
-    {
-		[uiTableView setHidden:YES];
+            // Add the matching abRecordID to filteredPeople
+            [filteredPeople addObject:[NSNumber numberWithInt:abRecordID]];
+        }
 	}
 }
 
 #pragma mark - Add and remove a person to/from the group
 
-- (void)addPersonToGroup:(NSDictionary *)personDictionary
+- (void)addPersonToGroup:(ABRecordID)abRecordID
 {
-    ABRecordID abRecordID = (ABRecordID)[[personDictionary valueForKey:@"abRecordID"] intValue];
-    
-    // Check for an existing entry for this person, if so remove it
-    for (NSDictionary *personDict in group)
+    NSNumber *personID = [NSNumber numberWithInt:abRecordID];
+
+    // Check for an existing entry for this person
+    if (![group containsObject:personID])
     {
-        if (abRecordID == (ABRecordID)[[personDict valueForKey:@"abRecordID"] intValue])
-        {
-            [group removeObject:personDict];
-            break;
-        }
+        [group addObject:personID];
+
+        [self layoutNameButtons];
     }
-    
-    [group addObject:personDictionary];
-    [self layoutNameButtons];
 }
 
-- (void)removePersonFromGroup:(NSDictionary *)personDictionary
+- (void)removePersonFromGroup:(ABRecordID)abRecordID
 {
-	[group removeObject:personDictionary];	
+	[group removeObject:[NSNumber numberWithInt:abRecordID]];
+
 	[self layoutNameButtons];
 }
 
@@ -346,40 +290,38 @@
 			[subview removeFromSuperview];
 		}
 	}
-	
+
 	CGFloat PADDING = 5.0;
 	CGFloat maxWidth = buttonView.frame.size.width - PADDING;
 	CGFloat xPosition = PADDING;
 	CGFloat yPosition = PADDING;
 
-	for (int i = 0; i < group.count; i++)
+	for (NSNumber *personID in group)
     {
-		NSDictionary *personDictionary = (NSDictionary *)[group objectAtIndex:i];
-		
-		ABRecordID abRecordID = (ABRecordID)[[personDictionary valueForKey:@"abRecordID"] intValue];
+		ABRecordID abRecordID = (ABRecordID)[personID intValue];
 
+        // Get the person record for abRecordID
 		ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(addressBook, abRecordID);
 
+        // Copy the name associated with this person record
 		NSString *name = (__bridge_transfer NSString *)ABRecordCopyCompositeName(abPerson);
+
+		// Create the button background images
+		UIImage *normalBackgroundImage = [UIImage imageNamed:@"ButtonCorners.png"];
+		normalBackgroundImage = [normalBackgroundImage stretchableImageWithLeftCapWidth:3.5 topCapHeight:3.5];
 		
-		ABMultiValueIdentifier identifier = [[personDictionary valueForKey:@"valueIdentifier"] intValue];
-		
-		// Create the button image
-		UIImage *image = [UIImage imageNamed:@"ButtonCorners.png"];
-		image = [image stretchableImageWithLeftCapWidth:3.5 topCapHeight:3.5];
-		
-		UIImage *image2 = [UIImage imageNamed:@"bottom-button-bg.png"];
-		image2 = [image2 stretchableImageWithLeftCapWidth:3.5 topCapHeight:3.5];
+		UIImage *selectedBackgroundImage = [UIImage imageNamed:@"bottom-button-bg.png"];
+		selectedBackgroundImage = [selectedBackgroundImage stretchableImageWithLeftCapWidth:3.5 topCapHeight:3.5];
 
 		// Create the button
 		UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
 		[button setTitle:name forState:UIControlStateNormal];
 		
 		// Use the identifier as a tag for future reference
-		[button setTag:identifier];
+		//[button setTag:identifier];
 		[button.titleLabel setFont:[UIFont systemFontOfSize:16.0]];
-		[button setBackgroundImage:image forState:UIControlStateNormal];
-		[button setBackgroundImage:image2 forState:UIControlStateSelected];
+		[button setBackgroundImage:normalBackgroundImage forState:UIControlStateNormal];
+		[button setBackgroundImage:selectedBackgroundImage forState:UIControlStateSelected];
 		[button addTarget:self action:@selector(buttonSelected:) forControlEvents:UIControlEventTouchUpInside];
 
 		// Get the width and height of the name string given a font size
@@ -397,16 +339,17 @@
 		// Create the button's frame
 		CGRect buttonFrame = CGRectMake(xPosition, yPosition, nameSize.width + (PADDING * 2), nameSize.height);
 		[button setFrame:buttonFrame];
+        
+        // Add the button to its superview
 		[buttonView addSubview:button];
 		
 		// Calculate xPosition for the next button in the loop
 		xPosition += button.frame.size.width + PADDING;
 		
-		// Calculate the y origin for the delete label
+		// Reposition the delete label
 		CGRect labelFrame = deleteLabel.frame;
 		labelFrame.origin.y = yPosition + button.frame.size.height + PADDING;
 		[deleteLabel setFrame:labelFrame];
-		
 	}
     
     if (group.count > 0)
@@ -425,30 +368,42 @@
 #pragma mark - Display the AddPersonViewController modally
 
 -(void)displayAddPersonViewController
-{	
+{
+    // Instantiate the AddPersonViewController
 	AddPersonViewController *addPersonViewController = [[AddPersonViewController alloc] init];
+    
+    // Set its initial text based on the searchField text
 	[addPersonViewController setInitialText:searchField.text];
+    
+    // Set it's delegate
 	[addPersonViewController setDelegate:self];
+    
+    // Present it modally
 	[self presentModalViewController:addPersonViewController animated:YES];
 }
 
-#pragma mark - AddPersonViewControllerDelegate method
+#pragma mark - AddPersonViewControllerDelegate conformance
 
 - (void)addPersonViewControllerDidFinish:(AddPersonViewController *)controller
 {
+    // Copy firstName, lastName and email strings from AddPersonViewController
 	NSString *firstName = [NSString stringWithString:controller.firstName];
 	NSString *lastName = [NSString stringWithString:controller.lastName];
 	NSString *email = [NSString stringWithString:controller.email];
 
+    // Create a new person record
 	ABRecordRef personRef = ABPersonCreate();
 
+    // Set the first name on the new person record
 	ABRecordSetValue(personRef, kABPersonFirstNameProperty, (__bridge CFTypeRef)firstName, nil);
 
+    // If there's a last name, set it on the new person record
 	if (lastName && (lastName.length > 0))
     {
 		ABRecordSetValue(personRef, kABPersonLastNameProperty, (__bridge CFTypeRef)lastName, nil);
 	}
-	
+
+    // If there's an email, set it on the new person record
 	if (email && (email.length > 0))
 	{
 		ABMutableMultiValueRef emailProperty = ABMultiValueCreateMutable(kABPersonEmailProperty);
@@ -457,22 +412,20 @@
 		CFRelease(emailProperty);
 	}
 		
-	// Add the person to the address book
+	// Add the new person record to the address book
 	ABAddressBookAddRecord(addressBook, personRef, nil);
 	
 	// Save changes to the address book
 	ABAddressBookSave(addressBook, nil);
 
+    // Get the new person record ID
 	ABRecordID abRecordID = ABRecordGetRecordID(personRef);
-
-	NSDictionary *personDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-									 [NSNumber numberWithInt:abRecordID], @"abRecordID",
-									 [NSNumber numberWithInt:0], @"valueIdentifier", nil];
 
 	CFRelease(personRef);
 	
-	[self addPersonToGroup:personDictionary];
-	
+	[self addPersonToGroup:abRecordID];
+
+    // We're done, dismiss the controller
 	[self dismissModalViewControllerAnimated:YES];
 }
 

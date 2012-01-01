@@ -39,19 +39,12 @@
 	[firstNameTextField becomeFirstResponder];
 }
 
-#pragma mark - Memory management
-
-- (void)dealloc
-{
-	delegate = nil;
-}
-
 #pragma mark - Button actions
 
 // Action receiver for the clicking of Add button
 - (IBAction)addClick:(id)sender
 {
-	self.firstName = firstNameTextField.text;
+    self.firstName = firstNameTextField.text;
 	self.lastName = lastNameTextField.text;
 	self.email = emailTextField.text;
 
@@ -64,11 +57,11 @@
 	[self dismissModalViewControllerAnimated:YES];
 }
 
-#pragma mark - UITextFieldDelegate methods
+#pragma mark - UITextFieldDelegate conformance
 
 // Allow user to navigate textfields using the Next key on the keyboard
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
-{	
+{
 	if (textField == firstNameTextField)
     {
 		[lastNameTextField becomeFirstResponder];
@@ -79,15 +72,6 @@
 	}
 
 	return YES;
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-	if (textField == emailTextField)
-	{
-		addButton.alpha = 1.0;
-		addButton.enabled = YES;
-	}
 }
 
 @end

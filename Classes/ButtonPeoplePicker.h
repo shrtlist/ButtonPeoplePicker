@@ -28,7 +28,7 @@
 	ABAddressBookRef addressBook;
 }
 
-@property (nonatomic, unsafe_unretained) id <ButtonPeoplePickerDelegate> delegate;
+@property (nonatomic, weak) id <ButtonPeoplePickerDelegate> delegate;
 @property (nonatomic, strong) NSMutableArray *group;
 @property (nonatomic, strong) NSArray *people;
 
