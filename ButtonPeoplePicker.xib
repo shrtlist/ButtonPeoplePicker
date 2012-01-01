@@ -85,6 +85,7 @@
 						<int key="IBUIContentMode">3</int>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBPlaceholder">Name or organization</string>
+						<bool key="IBShowsBookmarkButton">YES</bool>
 						<object class="IBUITextInputTraits" key="IBTextInputTraits">
 							<int key="IBUIAutocapitalizationType">1</int>
 							<int key="IBUIAutocorrectionType">1</int>
@@ -137,7 +138,7 @@
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="15862948"/>
-						<object class="NSColor" key="IBUIBackgroundColor">
+						<object class="NSColor" key="IBUIBackgroundColor" id="1006605735">
 							<int key="NSColorSpace">10</int>
 							<object class="NSImage" key="NSImage">
 								<int key="NSImageFlags">549453824</int>
@@ -222,7 +223,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="642166707"/>
-				<reference key="IBUIBackgroundColor" ref="255217321"/>
+				<reference key="IBUIBackgroundColor" ref="1006605735"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
