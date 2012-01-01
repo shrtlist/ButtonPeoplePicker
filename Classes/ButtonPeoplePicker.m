@@ -15,6 +15,7 @@
  */
 
 #import "ButtonPeoplePicker.h"
+#import <AddressBookUI/AddressBookUI.h>
 
 @interface ButtonPeoplePicker () // Class extension
 @property (nonatomic, strong) NSMutableArray *filteredPeople;
@@ -53,9 +54,6 @@
 	
 	// Create a filtered list that will contain people for the search results table.
 	self.filteredPeople = [NSMutableArray array];
-	
-	// Add a "textFieldDidChange" notification method to the text field control.
-	[searchField addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
 	
 	[self layoutNameButtons];
 }
@@ -256,6 +254,32 @@
 	}
 }
 
+#pragma mark - UISearchBarDelegate conformance
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    if (searchField.text.length > 0)
+    {
+		[uiTableView setHidden:NO];
+		[self filterContentForSearchText:searchField.text];
+		[uiTableView reloadData];
+	}
+	else
+    {
+		[uiTableView setHidden:YES];
+	}
+}
+
+- (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar
+{
+	// Create the people picker
+	ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
+	peoplePicker.peoplePickerDelegate = self;
+	
+	// Show the people picker modally
+	[self presentModalViewController:peoplePicker animated:YES];
+}
+
 #pragma mark - Add and remove a person to/from the group
 
 - (void)addPersonToGroup:(ABRecordID)abRecordID
@@ -427,6 +451,38 @@
 
     // We're done, dismiss the controller
 	[self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - ABPeoplePickerNavigationControllerDelegate methods
+
+// Displays the information of a selected person
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)picker shouldContinueAfterSelectingPerson:(ABRecordRef)person
+{
+	[self addPersonToGroup:ABRecordGetRecordID(person)];
+    
+	// Dismiss the people picker
+	[self dismissModalViewControllerAnimated:YES];
+	
+	// Dismiss the underlying search display controller
+	self.searchDisplayController.active = NO;
+
+    return NO;
+}
+
+// This should never get called since we dismiss the picker in the above method.
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier
+{	
+	return NO;
+}
+
+// Dismisses the people picker and shows the application when users tap Cancel. 
+- (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
+{
+	// Dismiss the people picker
+	[self dismissModalViewControllerAnimated:YES];
+	
+	// Dismiss the underlying search display controller
+	self.searchDisplayController.active = NO;
 }
 
 @end

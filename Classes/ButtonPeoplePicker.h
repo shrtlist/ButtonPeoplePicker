@@ -16,10 +16,13 @@
 
 #import "AddPersonViewController.h"
 #import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
 
 @protocol ButtonPeoplePickerDelegate;
 
 @interface ButtonPeoplePicker : UIViewController <AddPersonViewControllerDelegate,
+                                                  ABPeoplePickerNavigationControllerDelegate,
+                                                  UISearchBarDelegate,
 												  UITableViewDataSource,
 												  UITableViewDelegate,
 												  UIKeyInput>
@@ -35,7 +38,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *deleteLabel;
 @property (nonatomic, strong) IBOutlet UIView *buttonView;
 @property (nonatomic, strong) IBOutlet UITableView *uiTableView;
-@property (nonatomic, strong) IBOutlet UITextField *searchField;
+@property (nonatomic, strong) IBOutlet UISearchBar *searchField;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *doneButton;
 
 - (IBAction)cancelClick:(id)sender;
