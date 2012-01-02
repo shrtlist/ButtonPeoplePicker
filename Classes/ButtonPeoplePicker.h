@@ -33,7 +33,6 @@
 
 @property (nonatomic, weak) id <ButtonPeoplePickerDelegate> delegate;
 @property (nonatomic, strong) NSMutableArray *group;
-@property (nonatomic, strong) NSArray *people;
 
 @property (nonatomic, strong) IBOutlet UILabel *deleteLabel;
 @property (nonatomic, strong) IBOutlet UIView *buttonView;
