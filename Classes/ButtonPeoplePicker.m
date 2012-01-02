@@ -19,6 +19,7 @@
 
 @interface ButtonPeoplePicker () // Class extension
 @property (nonatomic, strong) NSMutableArray *filteredPeople;
+@property (nonatomic, strong) NSArray *people;
 - (void)layoutNameButtons;
 - (void)addPersonToGroup:(ABRecordID)abRecordID;
 - (void)removePersonFromGroup:(ABRecordID)abRecordID;
