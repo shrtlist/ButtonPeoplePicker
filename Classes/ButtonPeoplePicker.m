@@ -20,7 +20,7 @@
 @interface ButtonPeoplePicker () // Class extension
 @property (nonatomic, strong) NSMutableArray *filteredPeople;
 @property (nonatomic, strong) NSArray *people;
-- (void)layoutNameButtons;
+- (void)layoutScrollView;
 - (void)addPersonToGroup:(ABRecordID)abRecordID;
 - (void)removePersonFromGroup:(ABRecordID)abRecordID;
 - (void)displayAddPersonViewController;
@@ -35,10 +35,12 @@
 @synthesize group;
 @synthesize filteredPeople;
 @synthesize deleteLabel;
-@synthesize buttonView;
+@synthesize scrollView;
 @synthesize contactsTableView;
 @synthesize searchField;
 @synthesize doneButton;
+
+const CGFloat kPadding = 5.0;
 
 #pragma mark - View lifecycle methods
 
@@ -55,8 +57,13 @@
 	
 	// Create a filtered list that will contain people for the search results table.
 	self.filteredPeople = [NSMutableArray array];
-	
-	[self layoutNameButtons];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [searchField becomeFirstResponder];
 }
 
 #pragma mark - Memory management
@@ -94,7 +101,7 @@
 	selectedButton = (UIButton *)sender;
 	
 	// Clear other button states
-	for (UIView *subview in buttonView.subviews)
+	for (UIView *subview in scrollView.subviews)
     {
 		if ([subview isKindOfClass:[UIButton class]] && subview != selectedButton)
         {
@@ -149,7 +156,7 @@
 	
 	NSArray *personArray = (__bridge_transfer NSArray *)ABAddressBookCopyPeopleWithName(addressBook, (__bridge CFStringRef)name);
 	
-	ABRecordRef person = (__bridge ABRecordRef)([personArray lastObject]);
+	ABRecordRef person = (__bridge ABRecordRef)([personArray objectAtIndex:0]);
 
 	ABRecordID abRecordID = ABRecordGetRecordID(person);
 
@@ -232,7 +239,7 @@
 	NSPredicate *beginsPredicate = [NSPredicate predicateWithFormat:@"(SELF beginswith[cd] %@)", searchText];
 
 	/*
-	 Search the main list for people whose firstname OR lastname OR organization matches searchText;
+	 Search the main list for people whose name OR organization matches searchText;
      add items that match to the filtered array.
 	 */
 	
@@ -245,7 +252,7 @@
         NSString *lastName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
         NSString *organization = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonOrganizationProperty);
         
-        // Match by firstName, lastName or organization
+        // Match by name or organization
         if ([beginsPredicate evaluateWithObject:compositeName] ||
             [beginsPredicate evaluateWithObject:firstName] ||
             [beginsPredicate evaluateWithObject:lastName] ||
@@ -295,35 +302,34 @@
     if (![group containsObject:personID])
     {
         [group addObject:personID];
-
-        [self layoutNameButtons];
+        [self layoutScrollView];
     }
 }
 
 - (void)removePersonFromGroup:(ABRecordID)abRecordID
 {
-	[group removeObject:[NSNumber numberWithInt:abRecordID]];
+    NSNumber *personID = [NSNumber numberWithInt:abRecordID];
 
-	[self layoutNameButtons];
+	[group removeObject:personID];
+	[self layoutScrollView];
 }
 
 #pragma mark - Update Person info
 
--(void)layoutNameButtons
+-(void)layoutScrollView
 {
 	// Remove existing buttons
-	for (UIView *subview in buttonView.subviews)
+	for (UIView *subview in scrollView.subviews)
     {
 		if ([subview isKindOfClass:[UIButton class]])
         {
 			[subview removeFromSuperview];
 		}
 	}
-
-	CGFloat PADDING = 5.0;
-	CGFloat maxWidth = buttonView.frame.size.width - PADDING;
-	CGFloat xPosition = PADDING;
-	CGFloat yPosition = PADDING;
+    
+	CGFloat maxWidth = scrollView.frame.size.width - kPadding;
+	CGFloat xPosition = kPadding;
+	CGFloat yPosition = kPadding;
 
 	for (NSNumber *personID in group)
     {
@@ -337,10 +343,12 @@
 
 		// Create the button background images
 		UIImage *normalBackgroundImage = [UIImage imageNamed:@"ButtonCorners.png"];
-		normalBackgroundImage = [normalBackgroundImage stretchableImageWithLeftCapWidth:3.5 topCapHeight:3.5];
+		normalBackgroundImage = [normalBackgroundImage stretchableImageWithLeftCapWidth:3.5 
+                                                                           topCapHeight:3.5];
 		
 		UIImage *selectedBackgroundImage = [UIImage imageNamed:@"bottom-button-bg.png"];
-		selectedBackgroundImage = [selectedBackgroundImage stretchableImageWithLeftCapWidth:3.5 topCapHeight:3.5];
+		selectedBackgroundImage = [selectedBackgroundImage stretchableImageWithLeftCapWidth:3.5 
+                                                                               topCapHeight:3.5];
 
 		// Create the button
 		UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -354,30 +362,30 @@
 		[button addTarget:self action:@selector(buttonSelected:) forControlEvents:UIControlEventTouchUpInside];
 
 		// Get the width and height of the name string given a font size
-		CGSize nameSize = [name sizeWithFont:[UIFont systemFontOfSize:16.0]];
+        CGSize nameSize = [name sizeWithFont:[UIFont systemFontOfSize:16.0]];
 
-		if ((xPosition + nameSize.width + PADDING) > maxWidth)
+		if ((xPosition + nameSize.width + kPadding) > maxWidth)
         {
 			// Reset horizontal position to left edge of superview's frame
-			xPosition = PADDING;
+			xPosition = kPadding;
 			
 			// Set vertical position to a new 'line'
-			yPosition += nameSize.height + PADDING;
+			yPosition += nameSize.height + kPadding;
 		}
 		
 		// Create the button's frame
-		CGRect buttonFrame = CGRectMake(xPosition, yPosition, nameSize.width + (PADDING * 2), nameSize.height);
+		CGRect buttonFrame = CGRectMake(xPosition, yPosition, nameSize.width + (kPadding * 2), nameSize.height);
 		[button setFrame:buttonFrame];
         
         // Add the button to its superview
-		[buttonView addSubview:button];
+		[scrollView addSubview:button];
 		
 		// Calculate xPosition for the next button in the loop
-		xPosition += button.frame.size.width + PADDING;
+		xPosition += button.frame.size.width + kPadding;
 		
 		// Reposition the delete label
 		CGRect labelFrame = deleteLabel.frame;
-		labelFrame.origin.y = yPosition + button.frame.size.height + PADDING;
+		labelFrame.origin.y = yPosition + button.frame.size.height + kPadding;
 		[deleteLabel setFrame:labelFrame];
 	}
     
@@ -389,8 +397,12 @@
     {
         [doneButton setEnabled:NO];
     }
-	
-	[buttonView setHidden:NO];
+
+	// Set the content size so it can be scrollable
+    CGFloat height = yPosition + 30.0;
+	[scrollView setContentSize:CGSizeMake([scrollView bounds].size.width, height)];
+
+	[scrollView setHidden:NO];
 	[searchField becomeFirstResponder];
 }
 
