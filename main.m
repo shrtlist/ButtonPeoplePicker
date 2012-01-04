@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 Marco Abundo
+ * Copyright 2012 Marco Abundo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
+#import "AppDelegate.h"
+
 int main(int argc, char *argv[])
 {    
     @autoreleasepool {
-        int retVal = UIApplicationMain(argc, argv, nil, @"AppDelegate");
+        int retVal = UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
         return retVal;
     }
 }

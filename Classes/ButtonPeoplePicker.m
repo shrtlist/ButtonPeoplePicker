@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 Marco Abundo
+ * Copyright 2012 Marco Abundo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,6 +64,15 @@ const CGFloat kPadding = 5.0;
     [super viewWillAppear:animated];
     
     [searchField becomeFirstResponder];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Check the segue identifier
+    if ([[segue identifier] isEqualToString:@"showAddPerson"])
+    {
+        [[segue destinationViewController] setDelegate:self];
+    }
 }
 
 #pragma mark - Memory management
@@ -211,10 +220,11 @@ const CGFloat kPadding = 5.0;
 {
 	[tableView setHidden:YES];
 
+    // Conditionally perform segue:
     // If this is the last row in filteredPeople, take special action
 	if (indexPath.row == filteredPeople.count)
     {
-		[self displayAddPersonViewController];
+        [self performSegueWithIdentifier:@"showAddPerson" sender:self];
 	}
 	else
     {

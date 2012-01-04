@@ -15,15 +15,13 @@
 		8407DD54130F1FF600F5713F /* AddView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8407DD4E130F1FF600F5713F /* AddView.m */; };
 		8407DD55130F1FF600F5713F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8407DD50130F1FF600F5713F /* AppDelegate.m */; };
 		8407DD56130F1FF600F5713F /* ButtonPeoplePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8407DD52130F1FF600F5713F /* ButtonPeoplePicker.m */; };
-		8407DD5C130F202E00F5713F /* AddPersonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD58130F202E00F5713F /* AddPersonView.xib */; };
-		8407DD5D130F202E00F5713F /* AddView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD59130F202E00F5713F /* AddView.xib */; };
-		8407DD5E130F202E00F5713F /* ButtonPeoplePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD5A130F202E00F5713F /* ButtonPeoplePicker.xib */; };
 		8407DD63130F205F00F5713F /* bottom-button-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD60130F205F00F5713F /* bottom-button-bg.png */; };
 		8407DD64130F205F00F5713F /* ButtonCorners.png in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD61130F205F00F5713F /* ButtonCorners.png */; };
 		8407DD65130F205F00F5713F /* ButtonCorners@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD62130F205F00F5713F /* ButtonCorners@2x.png */; };
 		8407DD69131067EA00F5713F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8407DD68131067EA00F5713F /* AddressBookUI.framework */; };
 		8419FB9A14A42045007B2854 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8419FB9914A42045007B2854 /* Default@2x.png */; };
 		8419FBF514A4C544007B2854 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 8419FBF414A4C544007B2854 /* README.markdown */; };
+		84F86B7514B2651C006FA89C /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84F86B7414B2651C006FA89C /* MainStoryboard_iPhone.storyboard */; };
 		8E1075130FE22BF900355D09 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E1075120FE22BF900355D09 /* AddressBook.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,15 +40,13 @@
 		8407DD51130F1FF600F5713F /* ButtonPeoplePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonPeoplePicker.h; sourceTree = "<group>"; };
 		8407DD52130F1FF600F5713F /* ButtonPeoplePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonPeoplePicker.m; sourceTree = "<group>"; };
 		8407DD57130F200700F5713F /* ButtonPeoplePicker_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonPeoplePicker_Prefix.pch; sourceTree = "<group>"; };
-		8407DD58130F202E00F5713F /* AddPersonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddPersonView.xib; sourceTree = "<group>"; };
-		8407DD59130F202E00F5713F /* AddView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddView.xib; sourceTree = "<group>"; };
-		8407DD5A130F202E00F5713F /* ButtonPeoplePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonPeoplePicker.xib; sourceTree = "<group>"; };
 		8407DD60130F205F00F5713F /* bottom-button-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bottom-button-bg.png"; path = "Images/bottom-button-bg.png"; sourceTree = "<group>"; };
 		8407DD61130F205F00F5713F /* ButtonCorners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonCorners.png; path = Images/ButtonCorners.png; sourceTree = "<group>"; };
 		8407DD62130F205F00F5713F /* ButtonCorners@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCorners@2x.png"; path = "Images/ButtonCorners@2x.png"; sourceTree = "<group>"; };
 		8407DD68131067EA00F5713F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		8419FB9914A42045007B2854 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Images/Default@2x.png"; sourceTree = "<group>"; };
 		8419FBF414A4C544007B2854 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
+		84F86B7414B2651C006FA89C /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E1075120FE22BF900355D09 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -119,9 +115,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				83D515B70FF0BD6B00AD43CA /* Xibs */,
 				83D515AB0FF0BD5F00AD43CA /* Images */,
 				8D1107310486CEB800E47090 /* Info.plist */,
+				84F86B7414B2651C006FA89C /* MainStoryboard_iPhone.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -147,16 +143,6 @@
 				8407DD62130F205F00F5713F /* ButtonCorners@2x.png */,
 			);
 			name = Images;
-			sourceTree = "<group>";
-		};
-		83D515B70FF0BD6B00AD43CA /* Xibs */ = {
-			isa = PBXGroup;
-			children = (
-				8407DD58130F202E00F5713F /* AddPersonView.xib */,
-				8407DD59130F202E00F5713F /* AddView.xib */,
-				8407DD5A130F202E00F5713F /* ButtonPeoplePicker.xib */,
-			);
-			name = Xibs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,14 +198,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8407DD5C130F202E00F5713F /* AddPersonView.xib in Resources */,
-				8407DD5D130F202E00F5713F /* AddView.xib in Resources */,
-				8407DD5E130F202E00F5713F /* ButtonPeoplePicker.xib in Resources */,
 				8407DD63130F205F00F5713F /* bottom-button-bg.png in Resources */,
 				8407DD64130F205F00F5713F /* ButtonCorners.png in Resources */,
 				8407DD65130F205F00F5713F /* ButtonCorners@2x.png in Resources */,
 				8419FB9A14A42045007B2854 /* Default@2x.png in Resources */,
 				8419FBF514A4C544007B2854 /* README.markdown in Resources */,
+				84F86B7514B2651C006FA89C /* MainStoryboard_iPhone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

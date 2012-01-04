@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 Marco Abundo
+ * Copyright 2012 Marco Abundo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 
 #import "AppDelegate.h"
-#import "AddView.h"
 
 @implementation AppDelegate
 
@@ -25,23 +24,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    AddView *viewController = [[AddView alloc] initWithNibName:@"AddView" bundle:nil];
-    
-    UINavigationController *navController = [[UINavigationController alloc]
-                                             initWithRootViewController:viewController];
-    
-    // Set the navigationBar title
-    navController.navigationBar.topItem.title = @"ButtonPeoplePicker Demo";
-    
-    [window setRootViewController:navController];
-    [window makeKeyAndVisible];
-
     return YES;
 }
-
 
 @end

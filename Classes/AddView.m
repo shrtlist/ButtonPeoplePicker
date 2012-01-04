@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 Marco Abundo
+ * Copyright 2012 Marco Abundo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,14 +25,15 @@
 
 @synthesize namesLabel;
 
-#pragma mark - Button actions
+#pragma mark - UIStoryboard
 
-// Action receiver for the clicking of 'Show ButtonPeoplePicker' button
--(IBAction)showButtonPeoplePicker:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-	ButtonPeoplePicker *buttonPeoplePicker = [[ButtonPeoplePicker alloc] init];
-    [buttonPeoplePicker setDelegate:self];
-    [self presentModalViewController:buttonPeoplePicker animated:YES];
+    // Check the segue identifier
+    if ([[segue identifier] isEqualToString:@"showButtonPeoplePicker"])
+    {
+        [[segue destinationViewController] setDelegate:self];
+    }
 }
 
 #pragma mark - Update Person info
@@ -67,7 +68,6 @@
 	
 	CFRelease(addressBook);
 }
-
 
 #pragma mark - ButtonPeoplePickerDelegate conformance
 
