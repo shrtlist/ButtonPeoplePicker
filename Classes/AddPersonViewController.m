@@ -39,7 +39,7 @@
 	[firstNameTextField becomeFirstResponder];
 }
 
-#pragma mark - Button actions
+#pragma mark - Action methods
 
 // Action receiver for the clicking of Add button
 - (IBAction)addClick:(id)sender

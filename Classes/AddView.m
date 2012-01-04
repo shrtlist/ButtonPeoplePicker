@@ -25,12 +25,14 @@
 
 @synthesize namesLabel;
 
+static NSString *kSegueIdentifier = @"showButtonPeoplePicker";
+
 #pragma mark - UIStoryboard
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Check the segue identifier
-    if ([[segue identifier] isEqualToString:@"showButtonPeoplePicker"])
+    if ([[segue identifier] isEqualToString:kSegueIdentifier])
     {
         [[segue destinationViewController] setDelegate:self];
     }

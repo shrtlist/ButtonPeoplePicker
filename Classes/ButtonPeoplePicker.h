@@ -45,6 +45,9 @@
 
 @end
 
+/**
+ * A delegate implements this protocol to be notified when the picker is finished.
+ */
 @protocol ButtonPeoplePickerDelegate
 - (void)buttonPeoplePickerDidFinish:(ButtonPeoplePicker *)controller;
 @end

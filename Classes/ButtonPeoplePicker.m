@@ -41,6 +41,7 @@
 @synthesize doneButton;
 
 const CGFloat kPadding = 5.0;
+static NSString *kSegueIdentifier = @"showAddPerson";
 
 #pragma mark - View lifecycle methods
 
@@ -62,14 +63,15 @@ const CGFloat kPadding = 5.0;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+
+    // Keep the keyboard up
     [searchField becomeFirstResponder];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Check the segue identifier
-    if ([[segue identifier] isEqualToString:@"showAddPerson"])
+    if ([[segue identifier] isEqualToString:kSegueIdentifier])
     {
         [[segue destinationViewController] setDelegate:self];
     }
@@ -89,7 +91,7 @@ const CGFloat kPadding = 5.0;
 	return YES;
 }
 
-#pragma mark - Target-action methods
+#pragma mark - Action methods
 
 // Action receiver for the clicking of Done button
 -(IBAction)doneClick:(id)sender
@@ -224,7 +226,7 @@ const CGFloat kPadding = 5.0;
     // If this is the last row in filteredPeople, take special action
 	if (indexPath.row == filteredPeople.count)
     {
-        [self performSegueWithIdentifier:@"showAddPerson" sender:self];
+        [self performSegueWithIdentifier:kSegueIdentifier sender:self];
 	}
 	else
     {
