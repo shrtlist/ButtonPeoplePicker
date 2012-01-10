@@ -20,11 +20,4 @@
 
 @synthesize window;
 
-#pragma mark - UIApplicationDelegate methods
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    return YES;
-}
-
 @end

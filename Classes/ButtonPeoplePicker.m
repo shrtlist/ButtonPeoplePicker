@@ -184,16 +184,9 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{	
-	static NSString *kCellID = @"cellID";
-	
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellID];
-	
-	if (cell == nil)
-    {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellID];
-	}
-    
+{
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
+   
     cell.accessoryType = UITableViewCellAccessoryNone;
 		
 	// If this is the last row in filteredPeople, take special action
