@@ -27,7 +27,7 @@
 
 static NSString *kSegueIdentifier = @"showButtonPeoplePicker";
 
-#pragma mark - UIStoryboard
+#pragma mark - View lifecycle
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

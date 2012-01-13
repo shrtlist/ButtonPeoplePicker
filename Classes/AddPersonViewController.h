@@ -24,10 +24,10 @@
 @property (nonatomic, strong) NSString *email;
 @property (nonatomic, unsafe_unretained) NSString *initialText;
 
-@property (nonatomic, strong) IBOutlet UITextField *firstNameTextField;
-@property (nonatomic, strong) IBOutlet UITextField *lastNameTextField;
-@property (nonatomic, strong) IBOutlet UITextField *emailTextField;
-@property (nonatomic, strong) IBOutlet UIButton *addButton;
+@property (nonatomic, weak) IBOutlet UITextField *firstNameTextField;
+@property (nonatomic, weak) IBOutlet UITextField *lastNameTextField;
+@property (nonatomic, weak) IBOutlet UITextField *emailTextField;
+@property (nonatomic, weak) IBOutlet UIButton *addButton;
 
 - (IBAction)addClick:(id)sender;
 - (IBAction)cancelClick:(id)sender;
