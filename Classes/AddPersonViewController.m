@@ -16,6 +16,16 @@
 
 #import "AddPersonViewController.h"
 
+@interface AddPersonViewController () // Class extension
+@property (nonatomic, weak) IBOutlet UITextField *firstNameTextField;
+@property (nonatomic, weak) IBOutlet UITextField *lastNameTextField;
+@property (nonatomic, weak) IBOutlet UITextField *emailTextField;
+@property (nonatomic, weak) IBOutlet UIButton *addButton;
+
+- (IBAction)addClick:(id)sender;
+- (IBAction)cancelClick:(id)sender;
+@end
+
 @implementation AddPersonViewController
 
 @synthesize delegate;

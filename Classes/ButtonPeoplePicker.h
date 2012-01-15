@@ -35,15 +35,6 @@
 @property (nonatomic, weak) id <ButtonPeoplePickerDelegate> delegate;
 @property (nonatomic, strong, readonly) NSArray *group;
 
-@property (nonatomic, weak) IBOutlet UILabel *deleteLabel;
-@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, weak) IBOutlet UITableView *contactsTableView;
-@property (nonatomic, weak) IBOutlet UISearchBar *searchField;
-@property (nonatomic, weak) IBOutlet UIBarButtonItem *doneButton;
-
-- (IBAction)cancelClick:(id)sender;
-- (IBAction)doneClick:(id)sender;
-
 @end
 
 /**

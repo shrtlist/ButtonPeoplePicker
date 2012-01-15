@@ -18,8 +18,16 @@
 #import <AddressBookUI/AddressBookUI.h>
 
 @interface ButtonPeoplePicker () // Class extension
+@property (nonatomic, weak) IBOutlet UILabel *deleteLabel;
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, weak) IBOutlet UITableView *contactsTableView;
+@property (nonatomic, weak) IBOutlet UISearchBar *searchField;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *doneButton;
 @property (nonatomic, strong) NSMutableArray *filteredPeople;
 @property (nonatomic, strong) NSArray *people;
+
+- (IBAction)cancelClick:(id)sender;
+- (IBAction)doneClick:(id)sender;
 - (void)layoutScrollView;
 - (void)addPersonToGroup:(ABRecordID)abRecordID;
 - (void)removePersonFromGroup:(ABRecordID)abRecordID;

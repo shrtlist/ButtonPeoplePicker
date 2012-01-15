@@ -18,6 +18,4 @@
 
 @interface AddView : UIViewController <ButtonPeoplePickerDelegate>
 
-@property (nonatomic, weak) IBOutlet UILabel *namesLabel;
-
 @end

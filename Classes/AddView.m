@@ -18,6 +18,8 @@
 #import <AddressBook/AddressBook.h>
 
 @interface AddView () // Class extension
+@property (nonatomic, weak) IBOutlet UILabel *namesLabel;
+
 - (void)updatePersonInfo:(NSArray *)group;
 @end
 

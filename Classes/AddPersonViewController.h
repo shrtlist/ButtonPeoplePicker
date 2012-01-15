@@ -24,14 +24,6 @@
 @property (nonatomic, strong, readonly) NSString *email;
 @property (nonatomic, copy) NSString *initialText;
 
-@property (nonatomic, weak) IBOutlet UITextField *firstNameTextField;
-@property (nonatomic, weak) IBOutlet UITextField *lastNameTextField;
-@property (nonatomic, weak) IBOutlet UITextField *emailTextField;
-@property (nonatomic, weak) IBOutlet UIButton *addButton;
-
-- (IBAction)addClick:(id)sender;
-- (IBAction)cancelClick:(id)sender;
-
 @end
 
 @protocol AddPersonViewControllerDelegate
