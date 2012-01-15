@@ -31,7 +31,8 @@
 
 @synthesize delegate;
 @synthesize people;
-@synthesize group;
+// Synthesize a property named "group", but wire it to the member variable named "_group".
+@synthesize group = _group;
 @synthesize filteredPeople;
 @synthesize deleteLabel;
 @synthesize scrollView;
@@ -41,6 +42,13 @@
 
 const CGFloat kPadding = 5.0;
 static NSString *kSegueIdentifier = @"showAddPerson";
+
+#pragma mark - Implement getter
+
+- (NSArray *)group
+{
+    return [_group copy];
+}
 
 #pragma mark - View lifecycle methods
 
@@ -53,7 +61,7 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 	
 	self.people = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
     
-    self.group = [NSMutableArray array];
+    _group = [NSMutableArray array];
 	
 	// Create a filtered list that will contain people for the search results table.
 	self.filteredPeople = [NSMutableArray array];
@@ -105,7 +113,7 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 // Action receiver for the clicking of Cancel button
 - (IBAction)cancelClick:(id)sender
 {
-	[group removeAllObjects];
+	[_group removeAllObjects];
 	[delegate buttonPeoplePickerDidFinish:self];
 }
 
@@ -307,9 +315,9 @@ static NSString *kSegueIdentifier = @"showAddPerson";
     NSNumber *personID = [NSNumber numberWithInt:abRecordID];
 
     // Check for an existing entry for this person
-    if (![group containsObject:personID])
+    if (![_group containsObject:personID])
     {
-        [group addObject:personID];
+        [_group addObject:personID];
         [self layoutScrollView];
     }
 }
@@ -318,7 +326,7 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 {
     NSNumber *personID = [NSNumber numberWithInt:abRecordID];
 
-	[group removeObject:personID];
+	[_group removeObject:personID];
 	[self layoutScrollView];
 }
 
@@ -339,7 +347,7 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 	CGFloat xPosition = kPadding;
 	CGFloat yPosition = kPadding;
 
-	for (NSNumber *personID in group)
+	for (NSNumber *personID in _group)
     {
 		ABRecordID abRecordID = (ABRecordID)[personID intValue];
 
@@ -397,7 +405,7 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 		[deleteLabel setFrame:labelFrame];
 	}
     
-    if (group.count > 0)
+    if (_group.count > 0)
     {
         [doneButton setEnabled:YES];
     }

@@ -29,10 +29,11 @@
 {
 	UIButton *selectedButton;
 	ABAddressBookRef addressBook;
+    NSMutableArray *_group;
 }
 
 @property (nonatomic, weak) id <ButtonPeoplePickerDelegate> delegate;
-@property (nonatomic, strong) NSMutableArray *group;
+@property (nonatomic, strong, readonly) NSArray *group;
 
 @property (nonatomic, weak) IBOutlet UILabel *deleteLabel;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
