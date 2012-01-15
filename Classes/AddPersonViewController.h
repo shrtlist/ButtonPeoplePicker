@@ -19,10 +19,10 @@
 @interface AddPersonViewController : UIViewController <UITextFieldDelegate>
 
 @property (nonatomic, weak) id <AddPersonViewControllerDelegate> delegate;
-@property (nonatomic, strong) NSString *firstName;
-@property (nonatomic, strong) NSString *lastName;
-@property (nonatomic, strong) NSString *email;
-@property (nonatomic, unsafe_unretained) NSString *initialText;
+@property (nonatomic, strong, readonly) NSString *firstName;
+@property (nonatomic, strong, readonly) NSString *lastName;
+@property (nonatomic, strong, readonly) NSString *email;
+@property (nonatomic, copy) NSString *initialText;
 
 @property (nonatomic, weak) IBOutlet UITextField *firstNameTextField;
 @property (nonatomic, weak) IBOutlet UITextField *lastNameTextField;

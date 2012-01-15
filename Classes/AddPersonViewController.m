@@ -28,6 +28,23 @@
 @synthesize emailTextField;
 @synthesize addButton;
 
+#pragma mark - Implement getters
+
+- (NSString *)firstName
+{
+    return firstNameTextField.text;
+}
+
+- (NSString *)lastName
+{
+    return lastNameTextField.text;
+}
+
+- (NSString *)email
+{
+    return emailTextField.text;
+}
+
 #pragma mark - View lifecycle methods
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -44,10 +61,6 @@
 // Action receiver for the clicking of Add button
 - (IBAction)addClick:(id)sender
 {
-    self.firstName = firstNameTextField.text;
-	self.lastName = lastNameTextField.text;
-	self.email = emailTextField.text;
-
 	[delegate addPersonViewControllerDidFinish:self];
 }
 
