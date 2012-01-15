@@ -59,6 +59,13 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 	self.filteredPeople = [NSMutableArray array];
 }
 
+- (void)viewDidUnload
+{
+	CFRelease(addressBook);
+
+    [super viewDidUnload];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -78,13 +85,6 @@ static NSString *kSegueIdentifier = @"showAddPerson";
         // Set its initial text based on the searchField text
         [[segue destinationViewController] setInitialText:searchField.text];
     }
-}
-
-#pragma mark - Memory management
-
-- (void)dealloc
-{
-	CFRelease(addressBook);
 }
 
 #pragma mark - Respond to touch and become first responder.
