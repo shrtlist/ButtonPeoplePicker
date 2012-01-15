@@ -23,7 +23,6 @@
 - (void)layoutScrollView;
 - (void)addPersonToGroup:(ABRecordID)abRecordID;
 - (void)removePersonFromGroup:(ABRecordID)abRecordID;
-- (void)displayAddPersonViewController;
 - (void)filterContentForSearchText:(NSString*)searchText;
 @end
 
@@ -73,7 +72,11 @@ static NSString *kSegueIdentifier = @"showAddPerson";
     // Check the segue identifier
     if ([[segue identifier] isEqualToString:kSegueIdentifier])
     {
+        // Set the destination view controller's delegate
         [[segue destinationViewController] setDelegate:self];
+        
+        // Set its initial text based on the searchField text
+        [[segue destinationViewController] setInitialText:searchField.text];
     }
 }
 
@@ -409,23 +412,6 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 
 	[scrollView setHidden:NO];
 	[searchField becomeFirstResponder];
-}
-
-#pragma mark - Display the AddPersonViewController modally
-
--(void)displayAddPersonViewController
-{
-    // Instantiate the AddPersonViewController
-	AddPersonViewController *addPersonViewController = [[AddPersonViewController alloc] init];
-    
-    // Set its initial text based on the searchField text
-	[addPersonViewController setInitialText:searchField.text];
-    
-    // Set it's delegate
-	[addPersonViewController setDelegate:self];
-    
-    // Present it modally
-	[self presentModalViewController:addPersonViewController animated:YES];
 }
 
 #pragma mark - AddPersonViewControllerDelegate conformance
