@@ -27,3 +27,7 @@ iOS 5.0 and later.
 
 ## License
 The source code is available under the Apache License, Version 2.0
+
+## Contributing
+
+Forks, patches and other feedback are always welcome.
