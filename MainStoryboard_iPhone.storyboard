@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11C74" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="utF-32-ilI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="utF-32-ilI">
     <dependencies>
         <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
+        <!--Add View-->
         <scene sceneID="qo6-Xc-cXc">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TBK-co-Gsh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -52,6 +53,7 @@
             </objects>
             <point key="canvasLocation" x="20" y="122"/>
         </scene>
+        <!--Button People Picker-->
         <scene sceneID="Kau-Vz-XZV">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cGE-gk-6Y7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -88,7 +90,7 @@
                             </searchBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" id="CHn-VH-Z2z">
                                 <rect key="frame" x="0.0" y="88" width="320" height="156"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                                 <subviews>
                                     <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Press the delete key to remove the selected contact" lineBreakMode="tailTruncation" minimumFontSize="10" id="lxV-Pb-Pxl">
                                         <rect key="frame" x="5" y="0.0" width="300" height="21"/>
@@ -151,6 +153,7 @@
             </objects>
             <point key="canvasLocation" x="520" y="122"/>
         </scene>
+        <!--Add Person View Controller-->
         <scene sceneID="VAY-Rk-Sdf">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b65-HV-E4Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
