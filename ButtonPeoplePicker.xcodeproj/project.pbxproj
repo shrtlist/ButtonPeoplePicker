@@ -21,6 +21,8 @@
 		8407DD69131067EA00F5713F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8407DD68131067EA00F5713F /* AddressBookUI.framework */; };
 		8419FB9A14A42045007B2854 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8419FB9914A42045007B2854 /* Default@2x.png */; };
 		8419FBF514A4C544007B2854 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 8419FBF414A4C544007B2854 /* README.markdown */; };
+		846CC7DC17489266000F5E43 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 846CC7DA17489266000F5E43 /* Default.png */; };
+		846CC7DD17489266000F5E43 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 846CC7DB17489266000F5E43 /* Default-568h@2x.png */; };
 		84F86B7514B2651C006FA89C /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84F86B7414B2651C006FA89C /* MainStoryboard_iPhone.storyboard */; };
 		8E1075130FE22BF900355D09 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E1075120FE22BF900355D09 /* AddressBook.framework */; };
 /* End PBXBuildFile section */
@@ -46,6 +48,8 @@
 		8407DD68131067EA00F5713F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		8419FB9914A42045007B2854 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Images/Default@2x.png"; sourceTree = "<group>"; };
 		8419FBF414A4C544007B2854 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
+		846CC7DA17489266000F5E43 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Images/Default.png; sourceTree = "<group>"; };
+		846CC7DB17489266000F5E43 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Images/Default-568h@2x.png"; sourceTree = "<group>"; };
 		84F86B7414B2651C006FA89C /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E1075120FE22BF900355D09 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -137,7 +141,9 @@
 		83D515AB0FF0BD5F00AD43CA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				846CC7DA17489266000F5E43 /* Default.png */,
 				8419FB9914A42045007B2854 /* Default@2x.png */,
+				846CC7DB17489266000F5E43 /* Default-568h@2x.png */,
 				8407DD60130F205F00F5713F /* bottom-button-bg.png */,
 				8407DD61130F205F00F5713F /* ButtonCorners.png */,
 				8407DD62130F205F00F5713F /* ButtonCorners@2x.png */,
@@ -204,6 +210,8 @@
 				8419FB9A14A42045007B2854 /* Default@2x.png in Resources */,
 				8419FBF514A4C544007B2854 /* README.markdown in Resources */,
 				84F86B7514B2651C006FA89C /* MainStoryboard_iPhone.storyboard in Resources */,
+				846CC7DC17489266000F5E43 /* Default.png in Resources */,
+				846CC7DD17489266000F5E43 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
