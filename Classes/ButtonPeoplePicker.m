@@ -1,10 +1,10 @@
 /*
- * Copyright 2012 Marco Abundo
+ * Copyright 2013 shrtlist.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *    http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -15,7 +15,6 @@
  */
 
 #import "ButtonPeoplePicker.h"
-#import <AddressBookUI/AddressBookUI.h>
 
 @interface ButtonPeoplePicker () // Class extension
 @property (nonatomic, weak) IBOutlet UILabel *deleteLabel;
@@ -25,38 +24,16 @@
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *doneButton;
 @property (nonatomic, strong) NSMutableArray *filteredPeople;
 @property (nonatomic, strong) NSArray *people;
-
-- (IBAction)cancelClick:(id)sender;
-- (IBAction)doneClick:(id)sender;
-- (void)layoutScrollView;
-- (void)addPersonToGroup:(ABRecordID)abRecordID;
-- (void)removePersonFromGroup:(ABRecordID)abRecordID;
-- (void)filterContentForSearchText:(NSString*)searchText;
+@property (nonatomic, strong) NSMutableArray *group;
 @end
 
-
 @implementation ButtonPeoplePicker
-
-@synthesize delegate;
-@synthesize people;
-// Synthesize a property named "group", but wire it to the member variable named "_group".
-@synthesize group = _group;
-@synthesize filteredPeople;
-@synthesize deleteLabel;
-@synthesize scrollView;
-@synthesize contactsTableView;
-@synthesize searchField;
-@synthesize doneButton;
-
-const CGFloat kPadding = 5.0;
-static NSString *kSegueIdentifier = @"showAddPerson";
-
-#pragma mark - Implement getter
-
-- (NSArray *)group
 {
-    return [_group copy];
+	UIButton *selectedButton;
+	ABAddressBookRef addressBook;
 }
+
+static CGFloat const kPadding = 5.0;
 
 #pragma mark - View lifecycle methods
 
@@ -64,12 +41,14 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
+    
+    //[self registerForKeyboardNotifications];
 
 	addressBook = ABAddressBookCreate();
 	
 	self.people = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
     
-    _group = [NSMutableArray array];
+    self.group = [NSMutableArray array];
 	
 	// Create a filtered list that will contain people for the search results table.
 	self.filteredPeople = [NSMutableArray array];
@@ -87,20 +66,7 @@ static NSString *kSegueIdentifier = @"showAddPerson";
     [super viewWillAppear:animated];
 
     // Keep the keyboard up
-    [searchField becomeFirstResponder];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Check the segue identifier
-    if ([[segue identifier] isEqualToString:kSegueIdentifier])
-    {
-        // Set the destination view controller's delegate
-        [[segue destinationViewController] setDelegate:self];
-        
-        // Set its initial text based on the searchField text
-        [[segue destinationViewController] setInitialText:searchField.text];
-    }
+    [self.searchField becomeFirstResponder];
 }
 
 #pragma mark - Respond to touch and become first responder.
@@ -110,19 +76,72 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 	return YES;
 }
 
+#pragma mark - Memory management
+
+- (void)dealloc
+{
+    self.delegate = nil;
+
+    // Unregister for notifications
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Register for keyboard notifications
+
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
+}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your application might not need or want this behavior.
+//    CGRect aRect = self.view.frame;
+//    aRect.size.height -= kbSize.height;
+//    if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
+//        CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y-kbSize.height);
+//        [self.scrollView setContentOffset:scrollPoint animated:YES];
+//    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+}
+
 #pragma mark - Action methods
 
 // Action receiver for the clicking of Done button
 -(IBAction)doneClick:(id)sender
 {
-	[delegate buttonPeoplePickerDidFinish:self];
+    NSArray *tmpArray = [NSArray arrayWithArray:self.group];
+	[self.delegate buttonPeoplePickerDidFinish:tmpArray];
 }
 
 // Action receiver for the clicking of Cancel button
 - (IBAction)cancelClick:(id)sender
 {
-	[_group removeAllObjects];
-	[delegate buttonPeoplePickerDidFinish:self];
+	[self.group removeAllObjects];
+	[self.delegate buttonPeoplePickerDidCancel];
 }
 
 // Action receiver for the selecting of name button
@@ -131,7 +150,7 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 	selectedButton = (UIButton *)sender;
 	
 	// Clear other button states
-	for (UIView *subview in scrollView.subviews)
+	for (UIView *subview in self.scrollView.subviews)
     {
 		if ([subview isKindOfClass:[UIButton class]] && subview != selectedButton)
         {
@@ -142,12 +161,12 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 	if (selectedButton.selected)
     {
 		selectedButton.selected = NO;
-		deleteLabel.hidden = YES;
+		self.deleteLabel.hidden = YES;
 	}
 	else
     {
 		selectedButton.selected = YES;
-		deleteLabel.hidden = NO;
+		self.deleteLabel.hidden = NO;
 	}
 
 	[self becomeFirstResponder];
@@ -156,19 +175,19 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 // Action receiver for when the searchField text changed
 - (void)textFieldDidChange
 {
-	if (searchField.text.length > 0)
+	if (self.searchField.text.length > 0)
     {
-		[contactsTableView setHidden:NO];
-		[self filterContentForSearchText:searchField.text];
-		[contactsTableView reloadData];
+		[self.contactsTableView setHidden:NO];
+		[self filterContentForSearchText:self.searchField.text];
+		[self.contactsTableView reloadData];
 	}
 	else
     {
-		[contactsTableView setHidden:YES];
+		[self.contactsTableView setHidden:YES];
 	}
 }
 
-#pragma mark - UIKeyInput conformance
+#pragma mark - UIKeyInput protocol conformance
 
 - (BOOL)hasText
 {
@@ -180,7 +199,7 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 - (void)deleteBackward
 {	
 	// Hide the delete label
-	deleteLabel.hidden = YES;
+	self.deleteLabel.hidden = YES;
 
 	NSString *name = selectedButton.titleLabel.text;
 	
@@ -193,13 +212,13 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 	[self removePersonFromGroup:abRecordID];
 }
 
-#pragma mark - UITableViewDataSource conformance
+#pragma mark - UITableViewDataSource protocol conformance
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 	// do we have search text? if yes, are there search results? if yes, return number of results, otherwise, return 1 (add email row)
 	// if there are no search results, the table is empty, so return 0
-	return searchField.text.length > 0 ? MAX( 1, filteredPeople.count ) : 0 ;
+	return self.searchField.text.length > 0 ? MAX( 1, self.filteredPeople.count ) : 0 ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -209,15 +228,15 @@ static NSString *kSegueIdentifier = @"showAddPerson";
     cell.accessoryType = UITableViewCellAccessoryNone;
 		
 	// If this is the last row in filteredPeople, take special action
-	if (filteredPeople.count == indexPath.row)
+	if (self.filteredPeople.count == indexPath.row)
     {
-		cell.textLabel.text	= @"Add Person";
+		cell.textLabel.text	= @"Add new contact";
         cell.detailTextLabel.text = nil;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	}
 	else
     {
-		ABRecordID abRecordID = (ABRecordID)[[filteredPeople objectAtIndex:indexPath.row] intValue];
+		ABRecordID abRecordID = (ABRecordID)[[self.filteredPeople objectAtIndex:indexPath.row] intValue];
 		
 		ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(addressBook, abRecordID);
 		
@@ -234,22 +253,26 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 {
 	[tableView setHidden:YES];
 
-    // Conditionally perform segue:
     // If this is the last row in filteredPeople, take special action
-	if (indexPath.row == filteredPeople.count)
+	if (indexPath.row == self.filteredPeople.count)
     {
-        [self performSegueWithIdentifier:kSegueIdentifier sender:self];
+        ABNewPersonViewController *newPersonViewController = [[ABNewPersonViewController alloc] init];
+        newPersonViewController.newPersonViewDelegate = self;
+        
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:newPersonViewController];
+        
+        [self presentModalViewController:navController animated:YES];
 	}
 	else
     {
-		NSNumber *personID = [filteredPeople objectAtIndex:indexPath.row];
+		NSNumber *personID = [self.filteredPeople objectAtIndex:indexPath.row];
         
         ABRecordID abRecordID = [personID intValue];
 		
 		[self addPersonToGroup:abRecordID];
 	}
 
-	searchField.text = nil;
+	self.searchField.text = nil;
 }
 
 #pragma mark - Update the filteredPeople array based on the search text.
@@ -257,7 +280,7 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 - (void)filterContentForSearchText:(NSString*)searchText
 {
 	// First clear the filtered array.
-	[filteredPeople removeAllObjects];
+	[self.filteredPeople removeAllObjects];
 
 	// beginswith[cd] predicate
 	NSPredicate *beginsPredicate = [NSPredicate predicateWithFormat:@"(SELF beginswith[cd] %@)", searchText];
@@ -267,7 +290,7 @@ static NSString *kSegueIdentifier = @"showAddPerson";
      add items that match to the filtered array.
 	 */
 	
-	for (id record in people)
+	for (id record in self.people)
     {
         ABRecordRef person = (__bridge ABRecordRef)record;
 
@@ -285,24 +308,24 @@ static NSString *kSegueIdentifier = @"showAddPerson";
             ABRecordID abRecordID = ABRecordGetRecordID(person);
 
             // Add the matching abRecordID to filteredPeople
-            [filteredPeople addObject:[NSNumber numberWithInt:abRecordID]];
+            [self.filteredPeople addObject:[NSNumber numberWithInt:abRecordID]];
         }
 	}
 }
 
-#pragma mark - UISearchBarDelegate conformance
+#pragma mark - UISearchBarDelegate protocol conformance
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    if (searchField.text.length > 0)
+    if (self.searchField.text.length > 0)
     {
-		[contactsTableView setHidden:NO];
-		[self filterContentForSearchText:searchField.text];
-		[contactsTableView reloadData];
+		[self.contactsTableView setHidden:NO];
+		[self filterContentForSearchText:self.searchField.text];
+		[self.contactsTableView reloadData];
 	}
 	else
     {
-		[contactsTableView setHidden:YES];
+		[self.contactsTableView setHidden:YES];
 	}
 }
 
@@ -323,9 +346,9 @@ static NSString *kSegueIdentifier = @"showAddPerson";
     NSNumber *personID = [NSNumber numberWithInt:abRecordID];
 
     // Check for an existing entry for this person
-    if (![_group containsObject:personID])
+    if (![self.group containsObject:personID])
     {
-        [_group addObject:personID];
+        [self.group addObject:personID];
         [self layoutScrollView];
     }
 }
@@ -334,7 +357,7 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 {
     NSNumber *personID = [NSNumber numberWithInt:abRecordID];
 
-	[_group removeObject:personID];
+	[self.group removeObject:personID];
 	[self layoutScrollView];
 }
 
@@ -343,7 +366,7 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 -(void)layoutScrollView
 {
 	// Remove existing buttons
-	for (UIView *subview in scrollView.subviews)
+	for (UIView *subview in self.scrollView.subviews)
     {
 		if ([subview isKindOfClass:[UIButton class]])
         {
@@ -351,11 +374,11 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 		}
 	}
     
-	CGFloat maxWidth = scrollView.frame.size.width - kPadding;
+	CGFloat maxWidth = self.scrollView.frame.size.width - kPadding;
 	CGFloat xPosition = kPadding;
 	CGFloat yPosition = kPadding;
 
-	for (NSNumber *personID in _group)
+	for (NSNumber *personID in self.group)
     {
 		ABRecordID abRecordID = (ABRecordID)[personID intValue];
 
@@ -402,82 +425,35 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 		[button setFrame:buttonFrame];
         
         // Add the button to its superview
-		[scrollView addSubview:button];
+		[self.scrollView addSubview:button];
 		
 		// Calculate xPosition for the next button in the loop
 		xPosition += button.frame.size.width + kPadding;
 		
 		// Reposition the delete label
-		CGRect labelFrame = deleteLabel.frame;
+		CGRect labelFrame = self.deleteLabel.frame;
 		labelFrame.origin.y = yPosition + button.frame.size.height + kPadding;
-		[deleteLabel setFrame:labelFrame];
+		[self.deleteLabel setFrame:labelFrame];
 	}
     
-    if (_group.count > 0)
+    if (self.group.count > 0)
     {
-        [doneButton setEnabled:YES];
+        [self.doneButton setEnabled:YES];
     }
     else
     {
-        [doneButton setEnabled:NO];
+        [self.doneButton setEnabled:NO];
     }
 
 	// Set the content size so it can be scrollable
     CGFloat height = yPosition + 30.0;
-	[scrollView setContentSize:CGSizeMake([scrollView bounds].size.width, height)];
+	[self.scrollView setContentSize:CGSizeMake([self.scrollView bounds].size.width, height)];
 
-	[scrollView setHidden:NO];
-	[searchField becomeFirstResponder];
+	[self.scrollView setHidden:NO];
+	[self.searchField becomeFirstResponder];
 }
 
-#pragma mark - AddPersonViewControllerDelegate conformance
-
-- (void)addPersonViewControllerDidFinish:(AddPersonViewController *)controller
-{
-    // Copy firstName, lastName and email strings from AddPersonViewController
-	NSString *firstName = [NSString stringWithString:controller.firstName];
-	NSString *lastName = [NSString stringWithString:controller.lastName];
-	NSString *email = [NSString stringWithString:controller.email];
-
-    // Create a new person record
-	ABRecordRef personRef = ABPersonCreate();
-
-    // Set the first name on the new person record
-	ABRecordSetValue(personRef, kABPersonFirstNameProperty, (__bridge CFTypeRef)firstName, nil);
-
-    // If there's a last name, set it on the new person record
-	if (lastName && (lastName.length > 0))
-    {
-		ABRecordSetValue(personRef, kABPersonLastNameProperty, (__bridge CFTypeRef)lastName, nil);
-	}
-
-    // If there's an email, set it on the new person record
-	if (email && (email.length > 0))
-	{
-		ABMutableMultiValueRef emailProperty = ABMultiValueCreateMutable(kABPersonEmailProperty);
-		ABMultiValueAddValueAndLabel(emailProperty, (__bridge CFTypeRef)email, kABHomeLabel, nil);
-		ABRecordSetValue(personRef, kABPersonEmailProperty, emailProperty, nil);
-		CFRelease(emailProperty);
-	}
-		
-	// Add the new person record to the address book
-	ABAddressBookAddRecord(addressBook, personRef, nil);
-	
-	// Save changes to the address book
-	ABAddressBookSave(addressBook, nil);
-
-    // Get the new person record ID
-	ABRecordID abRecordID = ABRecordGetRecordID(personRef);
-
-	CFRelease(personRef);
-	
-	[self addPersonToGroup:abRecordID];
-
-    // We're done, dismiss the controller
-	[self dismissModalViewControllerAnimated:YES];
-}
-
-#pragma mark - ABPeoplePickerNavigationControllerDelegate methods
+#pragma mark - ABPeoplePickerNavigationControllerDelegate protocol conformance
 
 // Displays the information of a selected person
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)picker shouldContinueAfterSelectingPerson:(ABRecordRef)person
@@ -507,6 +483,20 @@ static NSString *kSegueIdentifier = @"showAddPerson";
 	
 	// Dismiss the underlying search display controller
 	self.searchDisplayController.active = NO;
+}
+
+#pragma mark - ABNewPersonViewControllerDelegate protocol conformance
+
+- (void)newPersonViewController:(ABNewPersonViewController *)newPersonView didCompleteWithNewPerson:(ABRecordRef)person
+{
+    if (person != NULL)
+    {
+        ABRecordID abRecordID = ABRecordGetRecordID(person);
+        
+        [self addPersonToGroup:abRecordID];
+    }
+
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 @end

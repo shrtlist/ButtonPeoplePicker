@@ -1,10 +1,10 @@
 /*
- * Copyright 2012 Marco Abundo
+ * Copyright 2013 shrtlist.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *    http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -16,6 +16,6 @@
 
 #import "ButtonPeoplePicker.h"
 
-@interface AddView : UIViewController <ButtonPeoplePickerDelegate>
+@interface DemoViewController : UIViewController <ButtonPeoplePickerDelegate>
 
 @end

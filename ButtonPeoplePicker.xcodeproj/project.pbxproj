@@ -11,8 +11,6 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		8407DD53130F1FF600F5713F /* AddPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8407DD4C130F1FF600F5713F /* AddPersonViewController.m */; };
-		8407DD54130F1FF600F5713F /* AddView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8407DD4E130F1FF600F5713F /* AddView.m */; };
 		8407DD55130F1FF600F5713F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8407DD50130F1FF600F5713F /* AppDelegate.m */; };
 		8407DD56130F1FF600F5713F /* ButtonPeoplePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8407DD52130F1FF600F5713F /* ButtonPeoplePicker.m */; };
 		8407DD63130F205F00F5713F /* bottom-button-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD60130F205F00F5713F /* bottom-button-bg.png */; };
@@ -20,9 +18,9 @@
 		8407DD65130F205F00F5713F /* ButtonCorners@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD62130F205F00F5713F /* ButtonCorners@2x.png */; };
 		8407DD69131067EA00F5713F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8407DD68131067EA00F5713F /* AddressBookUI.framework */; };
 		8419FB9A14A42045007B2854 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8419FB9914A42045007B2854 /* Default@2x.png */; };
-		8419FBF514A4C544007B2854 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 8419FBF414A4C544007B2854 /* README.markdown */; };
 		846CC7DC17489266000F5E43 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 846CC7DA17489266000F5E43 /* Default.png */; };
 		846CC7DD17489266000F5E43 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 846CC7DB17489266000F5E43 /* Default-568h@2x.png */; };
+		846CC7E01748DD34000F5E43 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 846CC7DE1748DD34000F5E43 /* DemoViewController.m */; };
 		84F86B7514B2651C006FA89C /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84F86B7414B2651C006FA89C /* MainStoryboard_iPhone.storyboard */; };
 		8E1075130FE22BF900355D09 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E1075120FE22BF900355D09 /* AddressBook.framework */; };
 /* End PBXBuildFile section */
@@ -33,10 +31,6 @@
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8306E04C1213B9CE00F53872 /* ButtonPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ButtonPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8407DD4B130F1FF600F5713F /* AddPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPersonViewController.h; sourceTree = "<group>"; };
-		8407DD4C130F1FF600F5713F /* AddPersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPersonViewController.m; sourceTree = "<group>"; };
-		8407DD4D130F1FF600F5713F /* AddView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddView.h; sourceTree = "<group>"; };
-		8407DD4E130F1FF600F5713F /* AddView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddView.m; sourceTree = "<group>"; };
 		8407DD4F130F1FF600F5713F /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8407DD50130F1FF600F5713F /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		8407DD51130F1FF600F5713F /* ButtonPeoplePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonPeoplePicker.h; sourceTree = "<group>"; };
@@ -47,9 +41,10 @@
 		8407DD62130F205F00F5713F /* ButtonCorners@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCorners@2x.png"; path = "Images/ButtonCorners@2x.png"; sourceTree = "<group>"; };
 		8407DD68131067EA00F5713F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		8419FB9914A42045007B2854 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Images/Default@2x.png"; sourceTree = "<group>"; };
-		8419FBF414A4C544007B2854 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		846CC7DA17489266000F5E43 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Images/Default.png; sourceTree = "<group>"; };
 		846CC7DB17489266000F5E43 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Images/Default-568h@2x.png"; sourceTree = "<group>"; };
+		846CC7DE1748DD34000F5E43 /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
+		846CC7DF1748DD34000F5E43 /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
 		84F86B7414B2651C006FA89C /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E1075120FE22BF900355D09 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -74,14 +69,12 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				8407DD4B130F1FF600F5713F /* AddPersonViewController.h */,
-				8407DD4C130F1FF600F5713F /* AddPersonViewController.m */,
-				8407DD51130F1FF600F5713F /* ButtonPeoplePicker.h */,
-				8407DD52130F1FF600F5713F /* ButtonPeoplePicker.m */,
-				8407DD4D130F1FF600F5713F /* AddView.h */,
-				8407DD4E130F1FF600F5713F /* AddView.m */,
 				8407DD4F130F1FF600F5713F /* AppDelegate.h */,
 				8407DD50130F1FF600F5713F /* AppDelegate.m */,
+				8407DD51130F1FF600F5713F /* ButtonPeoplePicker.h */,
+				8407DD52130F1FF600F5713F /* ButtonPeoplePicker.m */,
+				846CC7DF1748DD34000F5E43 /* DemoViewController.h */,
+				846CC7DE1748DD34000F5E43 /* DemoViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -97,7 +90,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				8419FBF414A4C544007B2854 /* README.markdown */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -208,7 +200,6 @@
 				8407DD64130F205F00F5713F /* ButtonCorners.png in Resources */,
 				8407DD65130F205F00F5713F /* ButtonCorners@2x.png in Resources */,
 				8419FB9A14A42045007B2854 /* Default@2x.png in Resources */,
-				8419FBF514A4C544007B2854 /* README.markdown in Resources */,
 				84F86B7514B2651C006FA89C /* MainStoryboard_iPhone.storyboard in Resources */,
 				846CC7DC17489266000F5E43 /* Default.png in Resources */,
 				846CC7DD17489266000F5E43 /* Default-568h@2x.png in Resources */,
@@ -223,10 +214,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				8407DD53130F1FF600F5713F /* AddPersonViewController.m in Sources */,
-				8407DD54130F1FF600F5713F /* AddView.m in Sources */,
 				8407DD55130F1FF600F5713F /* AppDelegate.m in Sources */,
 				8407DD56130F1FF600F5713F /* ButtonPeoplePicker.m in Sources */,
+				846CC7E01748DD34000F5E43 /* DemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

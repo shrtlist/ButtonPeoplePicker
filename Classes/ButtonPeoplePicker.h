@@ -1,10 +1,10 @@
 /*
- * Copyright 2012 Marco Abundo
+ * Copyright 2013 shrtlist.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *    http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -20,26 +20,22 @@
 
 @protocol ButtonPeoplePickerDelegate;
 
-@interface ButtonPeoplePicker : UIViewController <AddPersonViewControllerDelegate,
-                                                  ABPeoplePickerNavigationControllerDelegate,
+@interface ButtonPeoplePicker : UIViewController <ABPeoplePickerNavigationControllerDelegate,
+                                                  ABNewPersonViewControllerDelegate,
                                                   UISearchBarDelegate,
 												  UITableViewDataSource,
 												  UITableViewDelegate,
 												  UIKeyInput>
-{
-	UIButton *selectedButton;
-	ABAddressBookRef addressBook;
-    NSMutableArray *_group;
-}
 
 @property (nonatomic, weak) id <ButtonPeoplePickerDelegate> delegate;
-@property (nonatomic, strong, readonly) NSArray *group;
 
 @end
 
 /**
- * A delegate implements this protocol to be notified when the picker is finished.
+ * A delegate implements this protocol to be notified
+ * when the picker has finished or canceled.
  */
 @protocol ButtonPeoplePickerDelegate
-- (void)buttonPeoplePickerDidFinish:(ButtonPeoplePicker *)controller;
+- (void)buttonPeoplePickerDidFinish:(NSArray *)group;
+- (void)buttonPeoplePickerDidCancel;
 @end

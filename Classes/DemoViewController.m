@@ -1,10 +1,10 @@
 /*
- * Copyright 2012 Marco Abundo
+ * Copyright 2013 shrtlist.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *    http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -14,16 +14,14 @@
  * limitations under the License.
  */
 
-#import "AddView.h"
+#import "DemoViewController.h"
 #import <AddressBook/AddressBook.h>
 
-@interface AddView () // Class extension
+@interface DemoViewController () // Class extension
 @property (nonatomic, weak) IBOutlet UILabel *namesLabel;
-
-- (void)updatePersonInfo:(NSArray *)group;
 @end
 
-@implementation AddView
+@implementation DemoViewController
 
 @synthesize namesLabel;
 
@@ -48,7 +46,7 @@ static NSString *kSegueIdentifier = @"showButtonPeoplePicker";
 
 	NSMutableString *namesString = [NSMutableString string];
 	
-	for (int i = 0; i < group.count; i++) {
+	for (NSUInteger i = 0; i < group.count; i++) {
 		
 		NSNumber *personID = (NSNumber *)[group objectAtIndex:i];
 		
@@ -73,12 +71,18 @@ static NSString *kSegueIdentifier = @"showButtonPeoplePicker";
 	CFRelease(addressBook);
 }
 
-#pragma mark - ButtonPeoplePickerDelegate conformance
+#pragma mark - ButtonPeoplePickerDelegate protocol conformance
 
-- (void)buttonPeoplePickerDidFinish:(ButtonPeoplePicker *)controller
+- (void)buttonPeoplePickerDidFinish:(NSArray *)group
 {
-	[self updatePersonInfo:controller.group];
+	[self updatePersonInfo:group];
 	
+	// Dismiss the ButtonPeoplePicker.
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)buttonPeoplePickerDidCancel
+{	
 	// Dismiss the ButtonPeoplePicker.
 	[self dismissModalViewControllerAnimated:YES];
 }
