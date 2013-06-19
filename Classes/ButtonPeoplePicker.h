@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-#import "AddPersonViewController.h"
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 
