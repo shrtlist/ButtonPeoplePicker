@@ -34,7 +34,7 @@
  * A delegate implements this protocol to be notified
  * when the picker has finished or canceled.
  */
-@protocol ButtonPeoplePickerDelegate
+@protocol ButtonPeoplePickerDelegate <NSObject>
 - (void)buttonPeoplePickerDidFinish:(NSArray *)group;
 - (void)buttonPeoplePickerDidCancel;
 @end
