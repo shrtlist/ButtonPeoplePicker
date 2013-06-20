@@ -17,7 +17,14 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 
-@protocol ButtonPeoplePickerDelegate;
+/**
+ * A delegate implements this protocol to be notified
+ * when the picker has finished or canceled.
+ */
+@protocol ButtonPeoplePickerDelegate <NSObject>
+- (void)buttonPeoplePickerDidFinish:(NSArray *)group;
+- (void)buttonPeoplePickerDidCancel;
+@end
 
 @interface ButtonPeoplePicker : UIViewController <ABPeoplePickerNavigationControllerDelegate,
                                                   ABNewPersonViewControllerDelegate,
@@ -26,15 +33,6 @@
 												  UITableViewDelegate,
 												  UIKeyInput>
 
-@property (nonatomic, weak) id <ButtonPeoplePickerDelegate> delegate;
+@property (nonatomic, weak) id<ButtonPeoplePickerDelegate> delegate;
 
-@end
-
-/**
- * A delegate implements this protocol to be notified
- * when the picker has finished or canceled.
- */
-@protocol ButtonPeoplePickerDelegate <NSObject>
-- (void)buttonPeoplePickerDidFinish:(NSArray *)group;
-- (void)buttonPeoplePickerDidCancel;
 @end
