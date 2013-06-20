@@ -145,8 +145,8 @@ static CGFloat const kPadding = 5.0;
 }
 
 // Action receiver for the selecting of name button
-- (void)buttonSelected:(id)sender {
-
+- (void)buttonSelected:(id)sender
+{
 	selectedButton = (UIButton *)sender;
 	
 	// Clear other button states
@@ -247,7 +247,7 @@ static CGFloat const kPadding = 5.0;
 	return cell;
 }
 
-#pragma mark - UITableViewDelegate conformance
+#pragma mark - UITableViewDelegate protocol conformance
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
