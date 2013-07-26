@@ -383,20 +383,19 @@ static CGFloat const kPadding = 5.0;
 		UIImage *selectedBackgroundImage = [UIImage imageNamed:@"bottom-button-bg.png"];
 		selectedBackgroundImage = [selectedBackgroundImage stretchableImageWithLeftCapWidth:3.5 
                                                                                topCapHeight:3.5];
+        
+        UIFont *font = [UIFont systemFontOfSize:16.0];
 
-		// Create the button
+		// Create the custom button
 		UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
 		[button setTitle:name forState:UIControlStateNormal];
-		
-		// Use the identifier as a tag for future reference
-		//[button setTag:identifier];
-		[button.titleLabel setFont:[UIFont systemFontOfSize:16.0]];
+		[button.titleLabel setFont:font];
 		[button setBackgroundImage:normalBackgroundImage forState:UIControlStateNormal];
 		[button setBackgroundImage:selectedBackgroundImage forState:UIControlStateSelected];
 		[button addTarget:self action:@selector(buttonSelected:) forControlEvents:UIControlEventTouchUpInside];
 
 		// Get the width and height of the name string given a font size
-        CGSize nameSize = [name sizeWithFont:[UIFont systemFontOfSize:16.0]];
+        CGSize nameSize = [name sizeWithFont:font];
 
 		if ((xPosition + nameSize.width + kPadding) > maxWidth)
         {
