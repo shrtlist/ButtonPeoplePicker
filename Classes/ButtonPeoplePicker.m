@@ -445,7 +445,6 @@ static CGFloat const kPadding = 5.0;
     CGFloat height = yPosition + 30.0;
 	[self.scrollView setContentSize:CGSizeMake([self.scrollView bounds].size.width, height)];
 
-	[self.scrollView setHidden:NO];
 	[self.searchField becomeFirstResponder];
 }
 
