@@ -43,8 +43,6 @@ static CGFloat const kPadding = 5.0;
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
-    
-    //[self registerForKeyboardNotifications];
 
 	addressBook = ABAddressBookCreate();
 	
