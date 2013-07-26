@@ -27,9 +27,9 @@
 @implementation ButtonPeoplePicker
 {
 	ABAddressBookRef addressBook;
-    
+
     NSMutableArray *filteredPeople;
-    NSMutableArray *group;
+    NSMutableOrderedSet *group;
     NSArray *people;
     
 	UIButton *selectedButton;
@@ -50,7 +50,7 @@ static CGFloat const kPadding = 5.0;
 	
 	people = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
     
-    group = [NSMutableArray array];
+    group = [NSMutableOrderedSet orderedSet];
 	
 	// Create a filtered list that will contain people for the search results table.
 	filteredPeople = [NSMutableArray array];
@@ -135,7 +135,7 @@ static CGFloat const kPadding = 5.0;
 // Action receiver for the clicking of Done button
 -(IBAction)doneClick:(id)sender
 {
-    NSArray *tmpArray = [NSArray arrayWithArray:group];
+    NSArray *tmpArray = [group array];
 	[self.delegate buttonPeoplePickerDidFinish:tmpArray];
 }
 
@@ -347,12 +347,8 @@ static CGFloat const kPadding = 5.0;
 {
     NSNumber *personID = [NSNumber numberWithInt:abRecordID];
 
-    // Check for an existing entry for this person
-    if (![group containsObject:personID])
-    {
-        [group addObject:personID];
-        [self layoutScrollView];
-    }
+    [group addObject:personID];
+    [self layoutScrollView];
 }
 
 - (void)removePersonFromGroup:(ABRecordID)abRecordID
