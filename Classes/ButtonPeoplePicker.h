@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-#import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 
 /**
