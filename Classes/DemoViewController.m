@@ -23,16 +23,12 @@
 
 @implementation DemoViewController
 
-@synthesize namesLabel;
-
-static NSString *kSegueIdentifier = @"showButtonPeoplePicker";
-
 #pragma mark - View lifecycle
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Check the segue identifier
-    if ([[segue identifier] isEqualToString:kSegueIdentifier])
+    if ([[segue identifier] isEqualToString:@"showButtonPeoplePicker"])
     {
         [[segue destinationViewController] setDelegate:self];
     }
@@ -66,7 +62,7 @@ static NSString *kSegueIdentifier = @"showButtonPeoplePicker";
 		}
 	}
 
-	[namesLabel setText:namesString];
+	[self.namesLabel setText:namesString];
 	
 	CFRelease(addressBook);
 }
