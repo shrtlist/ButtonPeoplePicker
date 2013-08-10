@@ -44,21 +44,10 @@ static CGFloat const kPadding = 5.0;
 {
     [super viewDidLoad];
 
-	addressBook = ABAddressBookCreate();
-	
-	people = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
-    
-    group = [NSMutableOrderedSet orderedSet];
-	
-	// Create a filtered list that will contain people for the search results table.
-	filteredPeople = [NSMutableArray array];
-}
+    addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
 
-- (void)viewDidUnload
-{
-	CFRelease(addressBook);
-
-    [super viewDidUnload];
+    // Check whether we are authorized to access the user's address book data
+    [self checkAddressBookAccess];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -80,10 +69,75 @@ static CGFloat const kPadding = 5.0;
 
 - (void)dealloc
 {
+    if(addressBook)
+    {
+        CFRelease(addressBook);
+    }
+    
     self.delegate = nil;
 
     // Unregister for notifications
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Address Book access
+
+// Check the authorization status of our application for Address Book
+- (void)checkAddressBookAccess
+{
+    switch (ABAddressBookGetAuthorizationStatus())
+    {
+            // Update our UI if the user has granted access to their Contacts
+        case kABAuthorizationStatusAuthorized:
+            [self accessGrantedForAddressBook];
+            break;
+            // Prompt the user for access to Contacts if there is no definitive answer
+        case kABAuthorizationStatusNotDetermined :
+            [self requestAddressBookAccess];
+            break;
+            // Display a message if the user has denied or restricted access to Contacts
+        case kABAuthorizationStatusDenied:
+        case kABAuthorizationStatusRestricted:
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Privacy Warning", @"Privacy Warning")
+                                                            message:NSLocalizedString(@"Permission was not granted for Contacts.", @"Permission was not granted for Contacts.")
+                                                           delegate:nil
+                                                  cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+// Prompt the user for access to their Address Book data
+- (void)requestAddressBookAccess
+{
+    ButtonPeoplePicker* __weak weakSelf = self;
+    
+    ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
+                                             {
+                                                 if (granted)
+                                                 {
+                                                     dispatch_async(dispatch_get_main_queue(), ^{
+                                                         [weakSelf accessGrantedForAddressBook];
+                                                         
+                                                     });
+                                                 }
+                                             });
+}
+
+// This method is called when the user has granted access to their address book data.
+- (void)accessGrantedForAddressBook
+{
+	people = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
+    
+    group = [NSMutableOrderedSet orderedSet];
+	
+	// Create a filtered list that will contain people for the search results table.
+	filteredPeople = [NSMutableArray array];
 }
 
 #pragma mark - Register for keyboard notifications
