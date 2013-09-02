@@ -24,3 +24,7 @@ The source code is available under the Apache License, Version 2.0
 ### Contributing
 
 Forks, patches and other feedback are always welcome.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/shrtlist/buttonpeoplepicker/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
