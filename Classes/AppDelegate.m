@@ -18,6 +18,4 @@
 
 @implementation AppDelegate
 
-@synthesize window;
-
 @end
