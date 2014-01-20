@@ -298,7 +298,7 @@ static CGFloat const kPadding = 5.0;
 
 #pragma mark - Update the filteredPeople array based on the search text.
 
-- (void)filterContentForSearchText:(NSString*)searchText
+- (void)filterContentForSearchText:(NSString *)searchText
 {
 	// First clear the filtered array.
 	[_filteredPeople removeAllObjects];
