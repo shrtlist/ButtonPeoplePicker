@@ -72,12 +72,12 @@
 {
 	[self updatePersonInfo:abRecordIDs];
 
-	[buttonPeoplePicker dismissModalViewControllerAnimated:YES];
+	[buttonPeoplePicker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)buttonPeoplePickerDidCancel:(ButtonPeoplePicker *)buttonPeoplePicker
 {
-	[buttonPeoplePicker dismissModalViewControllerAnimated:YES];
+	[buttonPeoplePicker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 @end

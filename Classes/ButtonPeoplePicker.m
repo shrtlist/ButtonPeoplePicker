@@ -284,7 +284,7 @@ static CGFloat const kPadding = 5.0;
         
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:newPersonViewController];
         
-        [self presentModalViewController:navController animated:YES];
+        [self presentViewController:navController animated:YES completion:NULL];
 	}
 	else
     {
@@ -354,7 +354,7 @@ static CGFloat const kPadding = 5.0;
 	peoplePicker.peoplePickerDelegate = self;
 	
 	// Show the people picker modally
-	[self presentModalViewController:peoplePicker animated:YES];
+	[self presentViewController:peoplePicker animated:YES completion:NULL];
 }
 
 #pragma mark - Add and remove a person to/from the group
@@ -422,7 +422,7 @@ static CGFloat const kPadding = 5.0;
 		[button addTarget:self action:@selector(buttonSelected:) forControlEvents:UIControlEventTouchUpInside];
 
 		// Get the width and height of the name string given a font size
-        CGSize nameSize = [name sizeWithFont:font];
+        CGSize nameSize = [name sizeWithAttributes:@{NSFontAttributeName:font}];
 
 		if ((xPosition + nameSize.width + kPadding) > maxWidth)
         {
@@ -473,7 +473,7 @@ static CGFloat const kPadding = 5.0;
 	[self addPersonToGroup:person];
     
 	// Dismiss the people picker
-	[self dismissModalViewControllerAnimated:YES];
+	[picker dismissViewControllerAnimated:YES completion:NULL];
 	
 	// Dismiss the underlying search display controller
 	self.searchDisplayController.active = NO;
@@ -491,7 +491,7 @@ static CGFloat const kPadding = 5.0;
 - (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
 {
 	// Dismiss the people picker
-	[self dismissModalViewControllerAnimated:YES];
+    [peoplePicker dismissViewControllerAnimated:YES completion:NULL];
 	
 	// Dismiss the underlying search display controller
 	self.searchDisplayController.active = NO;
@@ -506,7 +506,7 @@ static CGFloat const kPadding = 5.0;
         [self addPersonToGroup:person];
     }
 
-	[self dismissModalViewControllerAnimated:YES];
+    [newPersonView dismissViewControllerAnimated:YES completion:NULL];
 }
 
 @end
