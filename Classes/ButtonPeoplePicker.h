@@ -28,7 +28,7 @@
 @property (nonatomic, weak) id<ButtonPeoplePickerDelegate> delegate;
 
 // The Address Book to browse. All contacts returned will be from that ABAddressBook instance.
-// If not set, a new ABAddressBook will be created the first time the property is accessed.
+// If not set, a new ABAddressBookRef will be created the first time the property is accessed.
 @property (nonatomic, readwrite) ABAddressBookRef addressBook;
 
 @end
