@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="utF-32-ilI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="V9Z-k9-Scj">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Demo View Controller-->
+        <!--Demo View Controller - ButtonPeoplePicker Demo-->
         <scene sceneID="qo6-Xc-cXc">
             <objects>
                 <viewController id="utF-32-ilI" customClass="DemoViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tZS-zU-rF1">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" id="GU8-vk-4KV">
@@ -20,66 +20,38 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8XX-sm-hcg">
-                                <rect key="frame" x="20" y="200" width="280" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <rect key="frame" x="20" y="224" width="280" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <state key="normal" title="Show ButtonPeoplePicker">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
                                 <connections>
-                                    <segue destination="Px6-WH-Kf2" kind="modal" identifier="showButtonPeoplePicker" modalTransitionStyle="coverVertical" id="HkQ-3p-J6L"/>
+                                    <segue destination="3yy-nS-gdI" kind="modal" identifier="showButtonPeoplePicker" id="LMN-dl-pUk"/>
                                 </connections>
                             </button>
-                            <navigationBar contentMode="scaleToFill" id="VQI-qL-Ije">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="ButtonPeoplePicker Demo" id="cjo-NG-pbk"/>
-                                </items>
-                            </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="ButtonPeoplePicker Demo" id="PSw-mw-eRp"/>
                     <connections>
                         <outlet property="namesLabel" destination="GU8-vk-4KV" id="Sjk-Zh-xA9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TBK-co-Gsh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="20" y="122"/>
+            <point key="canvasLocation" x="546" y="122"/>
         </scene>
-        <!--Button People Picker-->
+        <!--Button People Picker - Add Contacts-->
         <scene sceneID="Kau-Vz-XZV">
             <objects>
                 <viewController id="Px6-WH-Kf2" customClass="ButtonPeoplePicker" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="teD-Hw-czN">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" id="iOX-09-kV4">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Add Contacts" id="jPu-bc-1PD">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="s2O-Xp-TS0">
-                                            <connections>
-                                                <action selector="cancelClick:" destination="Px6-WH-Kf2" id="gw9-2H-vZP"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="Gup-ZO-oRP">
-                                            <connections>
-                                                <action selector="doneClick:" destination="Px6-WH-Kf2" id="AYX-Ty-0V9"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <searchBar contentMode="redraw" placeholder="Name or organization" showsBookmarkButton="YES" id="m60-qj-rP5">
-                                <rect key="frame" x="0.0" y="44" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" keyboardType="alphabet"/>
                                 <connections>
@@ -87,8 +59,8 @@
                                 </connections>
                             </searchBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" id="CHn-VH-Z2z">
-                                <rect key="frame" x="0.0" y="88" width="320" height="156"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                                <rect key="frame" x="0.0" y="108" width="320" height="156"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Press the delete key to remove the selected contact" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="lxV-Pb-Pxl">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="21"/>
@@ -98,38 +70,35 @@
                                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                             </scrollView>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="LF5-oJ-HrE">
-                                <rect key="frame" x="0.0" y="88" width="320" height="156"/>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="LF5-oJ-HrE">
+                                <rect key="frame" x="0.0" y="108" width="320" height="156"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellID" textLabel="NLV-0D-o1g" detailTextLabel="z6E-uD-vIx" style="IBUITableViewCellStyleSubtitle" id="o9v-ic-2Vj">
                                         <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o9v-ic-2Vj" id="aL1-fq-J9I">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NLV-0D-o1g">
-                                                    <rect key="frame" x="10" y="2" width="50" height="22"/>
+                                                    <rect key="frame" x="15" y="2" width="49" height="22"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Organization" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z6E-uD-vIx">
-                                                    <rect key="frame" x="10" y="24" width="80" height="18"/>
+                                                    <rect key="frame" x="15" y="24" width="82" height="17"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -140,7 +109,18 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="5eX-MC-zw1"/>
+                    <navigationItem key="navigationItem" title="Add Contacts" id="5eX-MC-zw1">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="s2O-Xp-TS0">
+                            <connections>
+                                <action selector="cancelClick:" destination="Px6-WH-Kf2" id="gw9-2H-vZP"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="Gup-ZO-oRP">
+                            <connections>
+                                <action selector="doneClick:" destination="Px6-WH-Kf2" id="AYX-Ty-0V9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="contactsTableView" destination="LF5-oJ-HrE" id="keO-Jn-BXS"/>
                         <outlet property="deleteLabel" destination="lxV-Pb-Pxl" id="rFF-GK-KH2"/>
@@ -151,27 +131,45 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cGE-gk-6Y7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="520" y="122"/>
+            <point key="canvasLocation" x="1572" y="122"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="4uB-N6-Mjg">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="V9Z-k9-Scj" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="be1-ob-mUs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="utF-32-ilI" kind="relationship" relationship="rootViewController" id="eph-t2-S2F"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JMZ-Ax-daa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="20" y="122"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="DCr-jh-fwM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3yy-nS-gdI" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="32E-co-Q4l">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Px6-WH-Kf2" kind="relationship" relationship="rootViewController" id="uhy-pY-5g2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vff-kc-8q4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1046" y="122"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="ButtonPeoplePicker" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ButtonPeoplePicker.h"/>
-            <relationships>
-                <relationship kind="outlet" name="contactsTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="deleteLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="searchField" candidateClass="UISearchBar"/>
-            </relationships>
-        </class>
-        <class className="DemoViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DemoViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="namesLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

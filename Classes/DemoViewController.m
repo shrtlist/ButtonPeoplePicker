@@ -15,6 +15,7 @@
  */
 
 #import "DemoViewController.h"
+#import "ButtonPeoplePicker.h"
 #import <AddressBook/AddressBook.h>
 
 @interface DemoViewController () // Class extension
@@ -30,7 +31,9 @@
     // Check the segue identifier
     if ([[segue identifier] isEqualToString:@"showButtonPeoplePicker"])
     {
-        [[segue destinationViewController] setDelegate:self];
+        UINavigationController *navController = segue.destinationViewController;
+        ButtonPeoplePicker *picker = (ButtonPeoplePicker *)navController.topViewController;
+        picker.delegate = self;
     }
 }
 
