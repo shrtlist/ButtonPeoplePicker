@@ -36,17 +36,23 @@
 
 #pragma mark - Update Person info
 
-- (void)updatePersonInfo:(NSArray *)abPersonRefs
+- (void)updatePersonInfo:(NSArray *)abRecordIDs
 {
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+
 	NSMutableString *namesString = [NSMutableString string];
 	
-	for (NSUInteger i = 0; i < abPersonRefs.count; i++) {
+	for (NSUInteger i = 0; i < abRecordIDs.count; i++) {
 		
-		ABRecordRef abPerson = (__bridge ABRecordRef)[abPersonRefs objectAtIndex:i];
+		NSNumber *number = [abRecordIDs objectAtIndex:i];
+        
+        ABRecordID abRecordID = [number intValue];
+        
+        ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(addressBook, abRecordID);
 
 		NSString *name = (__bridge_transfer NSString *)ABRecordCopyCompositeName(abPerson);
 		
-		if (i < (abPersonRefs.count - 1))
+		if (i < (abRecordIDs.count - 1))
         {
 			[namesString appendString:[NSString stringWithFormat:@"%@, ", name]];
 		}
@@ -62,9 +68,9 @@
 #pragma mark - ButtonPeoplePickerDelegate protocol conformance
 
 - (void)buttonPeoplePickerDidFinish:(ButtonPeoplePicker *)buttonPeoplePicker
-                   withABPersonRefs:(NSArray *)abPersonRefs
+                    withABRecordIDs:(NSArray *)abRecordIDs
 {
-	[self updatePersonInfo:abPersonRefs];
+	[self updatePersonInfo:abRecordIDs];
 
 	[buttonPeoplePicker dismissModalViewControllerAnimated:YES];
 }

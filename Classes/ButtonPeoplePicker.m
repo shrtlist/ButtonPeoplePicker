@@ -174,8 +174,9 @@ static CGFloat const kPadding = 5.0;
 // Action receiver for the clicking of Done button
 - (IBAction)doneClick:(id)sender
 {
-    NSArray *abPersonRefs = [_group array];
-	[self.delegate buttonPeoplePickerDidFinish:self withABPersonRefs:abPersonRefs];
+    NSArray *abRecordIDs = [_group array];
+    
+	[self.delegate buttonPeoplePickerDidFinish:self withABRecordIDs:abRecordIDs];
 }
 
 // Action receiver for the clicking of Cancel button
@@ -375,13 +376,19 @@ static CGFloat const kPadding = 5.0;
 
 - (void)addPersonToGroup:(ABRecordRef)abRecordRef
 {
-    [_group addObject:(__bridge id)abRecordRef];
+    ABRecordID abRecordID = ABRecordGetRecordID(abRecordRef);
+    NSNumber *number = [NSNumber numberWithInt:abRecordID];
+
+    [_group addObject:number];
     [self layoutScrollView];
 }
 
 - (void)removePersonFromGroup:(ABRecordRef)abRecordRef
 {
-	[_group removeObject:(__bridge id)abRecordRef];
+    ABRecordID abRecordID = ABRecordGetRecordID(abRecordRef);
+    NSNumber *number = [NSNumber numberWithInt:abRecordID];
+    
+	[_group removeObject:number];
 	[self layoutScrollView];
 }
 
@@ -402,9 +409,10 @@ static CGFloat const kPadding = 5.0;
 	CGFloat xPosition = kPadding;
 	CGFloat yPosition = kPadding;
 
-	for (id abRecord in _group)
+	for (NSNumber *number in _group)
     {
-		ABRecordRef abPerson = (__bridge ABRecordRef)abRecord;
+        ABRecordID abRecordID = [number intValue];
+        ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(self.addressBook, abRecordID);
 
         // Copy the name associated with this person record
 		NSString *name = (__bridge_transfer NSString *)ABRecordCopyCompositeName(abPerson);

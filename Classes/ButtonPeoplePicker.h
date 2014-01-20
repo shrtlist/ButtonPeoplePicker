@@ -35,13 +35,14 @@
 
 @protocol ButtonPeoplePickerDelegate <NSObject>
 
-// Called after the user has pressed Done
-// The delegate is responsible for dismissing the buttonPeoplePicker
+// Called after the user has pressed Done.
+// The delegate is responsible for dismissing the buttonPeoplePicker.
+// abRecordIDs - array of NSNumbers representing ABRecordIDs selected
 - (void)buttonPeoplePickerDidFinish:(ButtonPeoplePicker *)buttonPeoplePicker
-                   withABPersonRefs:(NSArray *)abPersonRefs;
+                   withABRecordIDs:(NSArray *)abRecordIDs;
 
-// Called after the user has pressed Cancel
-// The delegate is responsible for dismissing the ButtonPeoplePicker
+// Called after the user has pressed Cancel.
+// The delegate is responsible for dismissing the ButtonPeoplePicker.
 - (void)buttonPeoplePickerDidCancel:(ButtonPeoplePicker *)buttonPeoplePicker;
 
 @end
