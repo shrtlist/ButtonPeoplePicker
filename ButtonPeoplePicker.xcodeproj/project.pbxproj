@@ -11,13 +11,10 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		57903C84188DC41A00DA9EC2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57903C83188DC41A00DA9EC2 /* Images.xcassets */; };
 		8407DD55130F1FF600F5713F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8407DD50130F1FF600F5713F /* AppDelegate.m */; };
 		8407DD56130F1FF600F5713F /* ButtonPeoplePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8407DD52130F1FF600F5713F /* ButtonPeoplePicker.m */; };
-		8407DD63130F205F00F5713F /* bottom-button-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD60130F205F00F5713F /* bottom-button-bg.png */; };
-		8407DD64130F205F00F5713F /* ButtonCorners.png in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD61130F205F00F5713F /* ButtonCorners.png */; };
-		8407DD65130F205F00F5713F /* ButtonCorners@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8407DD62130F205F00F5713F /* ButtonCorners@2x.png */; };
 		8407DD69131067EA00F5713F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8407DD68131067EA00F5713F /* AddressBookUI.framework */; };
-		846CC7DD17489266000F5E43 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 846CC7DB17489266000F5E43 /* Default-568h@2x.png */; };
 		846CC7E01748DD34000F5E43 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 846CC7DE1748DD34000F5E43 /* DemoViewController.m */; };
 		84F86B7514B2651C006FA89C /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84F86B7414B2651C006FA89C /* MainStoryboard_iPhone.storyboard */; };
 		8E1075130FE22BF900355D09 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E1075120FE22BF900355D09 /* AddressBook.framework */; };
@@ -28,17 +25,14 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		57903C83188DC41A00DA9EC2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ButtonPeoplePicker/Images.xcassets; sourceTree = "<group>"; };
 		8306E04C1213B9CE00F53872 /* ButtonPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ButtonPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8407DD4F130F1FF600F5713F /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8407DD50130F1FF600F5713F /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		8407DD51130F1FF600F5713F /* ButtonPeoplePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonPeoplePicker.h; sourceTree = "<group>"; };
 		8407DD52130F1FF600F5713F /* ButtonPeoplePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonPeoplePicker.m; sourceTree = "<group>"; };
 		8407DD57130F200700F5713F /* ButtonPeoplePicker_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonPeoplePicker_Prefix.pch; sourceTree = "<group>"; };
-		8407DD60130F205F00F5713F /* bottom-button-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bottom-button-bg.png"; path = "Images/bottom-button-bg.png"; sourceTree = "<group>"; };
-		8407DD61130F205F00F5713F /* ButtonCorners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonCorners.png; path = Images/ButtonCorners.png; sourceTree = "<group>"; };
-		8407DD62130F205F00F5713F /* ButtonCorners@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCorners@2x.png"; path = "Images/ButtonCorners@2x.png"; sourceTree = "<group>"; };
 		8407DD68131067EA00F5713F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
-		846CC7DB17489266000F5E43 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Images/Default-568h@2x.png"; sourceTree = "<group>"; };
 		846CC7DE1748DD34000F5E43 /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
 		846CC7DF1748DD34000F5E43 /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
 		84F86B7414B2651C006FA89C /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
@@ -107,7 +101,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				83D515AB0FF0BD5F00AD43CA /* Images */,
+				57903C83188DC41A00DA9EC2 /* Images.xcassets */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				84F86B7414B2651C006FA89C /* MainStoryboard_iPhone.storyboard */,
 			);
@@ -124,17 +118,6 @@
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		83D515AB0FF0BD5F00AD43CA /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				846CC7DB17489266000F5E43 /* Default-568h@2x.png */,
-				8407DD60130F205F00F5713F /* bottom-button-bg.png */,
-				8407DD61130F205F00F5713F /* ButtonCorners.png */,
-				8407DD62130F205F00F5713F /* ButtonCorners@2x.png */,
-			);
-			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,11 +173,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8407DD63130F205F00F5713F /* bottom-button-bg.png in Resources */,
-				8407DD64130F205F00F5713F /* ButtonCorners.png in Resources */,
-				8407DD65130F205F00F5713F /* ButtonCorners@2x.png in Resources */,
+				57903C84188DC41A00DA9EC2 /* Images.xcassets in Resources */,
 				84F86B7514B2651C006FA89C /* MainStoryboard_iPhone.storyboard in Resources */,
-				846CC7DD17489266000F5E43 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +199,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -239,6 +221,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
@@ -271,6 +255,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
