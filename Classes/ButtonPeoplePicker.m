@@ -214,21 +214,6 @@ static CGFloat const kPadding = 5.0;
 	[self becomeFirstResponder];
 }
 
-// Action receiver for when the searchField text changed
-- (void)textFieldDidChange
-{
-	if (self.searchField.text.length > 0)
-    {
-		[self.contactsTableView setHidden:NO];
-		[self filterContentForSearchText:self.searchField.text];
-		[self.contactsTableView reloadData];
-	}
-	else
-    {
-		[self.contactsTableView setHidden:YES];
-	}
-}
-
 #pragma mark - UIKeyInput protocol conformance
 
 - (BOOL)hasText
