@@ -22,34 +22,16 @@
 @end
 
 @implementation DemoViewController
-{
-    ABAddressBookRef _addressBook;
-}
 
 #pragma mark - View lifecycle
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    _addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
-}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Check the segue identifier
     if ([[segue identifier] isEqualToString:@"showButtonPeoplePicker"])
     {
-        [[segue destinationViewController] setAddressBook:_addressBook];
         [[segue destinationViewController] setDelegate:self];
     }
-}
-
-#pragma mark - Memory management
-
-- (void)dealloc
-{
-    CFRelease(_addressBook);
 }
 
 #pragma mark - Update Person info
