@@ -5,10 +5,10 @@ Button-style contact picker to select multiple people from the iPhone Address Bo
 `DemoViewController` - A demo view controller for the example iPhone Xcode storyboard project showing how to include a `ButtonPeoplePicker` in your own applications.
   
 ### Build Requirements
-Xcode 4.2, iOS 5.0 SDK, LLVM Compiler 3.0, Automated Reference Counting (ARC).
+Xcode 5, iOS 7.0 SDK, Automated Reference Counting (ARC).
 
 ### Runtime Requirements
-iOS 5.0 and later.
+iOS 7.0 and later.
  
 ### Screenshots
 
