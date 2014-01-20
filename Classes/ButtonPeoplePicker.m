@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 shrtlist.com
+ * Copyright 2014 shrtlist.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,13 +26,11 @@
 
 @implementation ButtonPeoplePicker
 {
-	ABAddressBookRef addressBook;
-
-    NSMutableArray *filteredPeople;
-    NSMutableOrderedSet *group;
-    NSArray *people;
+    NSMutableArray *_filteredPeople;
+    NSMutableOrderedSet *_group;
+    NSArray *_people;
     
-	UIButton *selectedButton;
+	UIButton *_selectedButton;
 }
 
 static CGFloat const kPadding = 5.0;
@@ -40,11 +38,14 @@ static CGFloat const kPadding = 5.0;
 #pragma mark - View lifecycle methods
 
 // Perform additional initialization after the nib file is loaded
-- (void)viewDidLoad 
+- (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+    
+    if (self.addressBook == NULL)
+    {
+        _addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+    }
 
     // Check whether we are authorized to access the user's address book data
     [self checkAddressBookAccess];
@@ -69,12 +70,7 @@ static CGFloat const kPadding = 5.0;
 
 - (void)dealloc
 {
-    if(addressBook)
-    {
-        CFRelease(addressBook);
-    }
-    
-    self.delegate = nil;
+    _delegate = nil;
 
     // Unregister for notifications
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -117,7 +113,7 @@ static CGFloat const kPadding = 5.0;
 {
     ButtonPeoplePicker* __weak weakSelf = self;
     
-    ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
+    ABAddressBookRequestAccessWithCompletion(self.addressBook, ^(bool granted, CFErrorRef error)
                                              {
                                                  if (granted)
                                                  {
@@ -132,12 +128,12 @@ static CGFloat const kPadding = 5.0;
 // This method is called when the user has granted access to their address book data.
 - (void)accessGrantedForAddressBook
 {
-	people = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
+	_people = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(self.addressBook);
     
-    group = [NSMutableOrderedSet orderedSet];
+    _group = [NSMutableOrderedSet orderedSet];
 	
 	// Create a filtered list that will contain people for the search results table.
-	filteredPeople = [NSMutableArray array];
+	_filteredPeople = [NSMutableArray array];
 }
 
 #pragma mark - Register for keyboard notifications
@@ -155,9 +151,9 @@ static CGFloat const kPadding = 5.0;
 }
 
 // Called when the UIKeyboardDidShowNotification is sent.
-- (void)keyboardWasShown:(NSNotification*)aNotification
+- (void)keyboardWasShown:(NSNotification *)aNotification
 {
-    NSDictionary* info = [aNotification userInfo];
+    NSDictionary *info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
@@ -166,51 +162,51 @@ static CGFloat const kPadding = 5.0;
 }
 
 // Called when the UIKeyboardWillHideNotification is sent
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+- (void)keyboardWillBeHidden:(NSNotification *)aNotification
 {
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
     self.scrollView.contentInset = contentInsets;
     self.scrollView.scrollIndicatorInsets = contentInsets;
 }
 
-#pragma mark - Action methods
+#pragma mark - Target-action methods
 
 // Action receiver for the clicking of Done button
--(IBAction)doneClick:(id)sender
+- (IBAction)doneClick:(id)sender
 {
-    NSArray *tmpArray = [group array];
-	[self.delegate buttonPeoplePickerDidFinish:tmpArray];
+    NSArray *abPersonRefs = [_group array];
+	[self.delegate buttonPeoplePickerDidFinish:self withABPersonRefs:abPersonRefs];
 }
 
 // Action receiver for the clicking of Cancel button
 - (IBAction)cancelClick:(id)sender
 {
-	[group removeAllObjects];
-	[self.delegate buttonPeoplePickerDidCancel];
+	[_group removeAllObjects];
+	[self.delegate buttonPeoplePickerDidCancel:self];
 }
 
 // Action receiver for the selecting of name button
 - (void)buttonSelected:(id)sender
 {
-	selectedButton = (UIButton *)sender;
+	_selectedButton = (UIButton *)sender;
 	
 	// Clear other button states
 	for (UIView *subview in self.scrollView.subviews)
     {
-		if ([subview isKindOfClass:[UIButton class]] && subview != selectedButton)
+		if ([subview isKindOfClass:[UIButton class]] && subview != _selectedButton)
         {
 			((UIButton *)subview).selected = NO;
 		}
 	}
 
-	if (selectedButton.selected)
+	if (_selectedButton.selected)
     {
-		selectedButton.selected = NO;
+		_selectedButton.selected = NO;
 		self.deleteLabel.hidden = YES;
 	}
 	else
     {
-		selectedButton.selected = YES;
+		_selectedButton.selected = YES;
 		self.deleteLabel.hidden = NO;
 	}
 
@@ -246,15 +242,13 @@ static CGFloat const kPadding = 5.0;
 	// Hide the delete label
 	self.deleteLabel.hidden = YES;
 
-	NSString *name = selectedButton.titleLabel.text;
+	NSString *name = _selectedButton.titleLabel.text;
 	
-	NSArray *personArray = (__bridge_transfer NSArray *)ABAddressBookCopyPeopleWithName(addressBook, (__bridge CFStringRef)name);
+	NSArray *personArray = (__bridge_transfer NSArray *)ABAddressBookCopyPeopleWithName(self.addressBook, (__bridge CFStringRef)name);
 	
 	ABRecordRef person = (__bridge ABRecordRef)([personArray objectAtIndex:0]);
 
-	ABRecordID abRecordID = ABRecordGetRecordID(person);
-
-	[self removePersonFromGroup:abRecordID];
+	[self removePersonFromGroup:person];
 }
 
 #pragma mark - UITableViewDataSource protocol conformance
@@ -263,7 +257,7 @@ static CGFloat const kPadding = 5.0;
 {
 	// do we have search text? if yes, are there search results? if yes, return number of results, otherwise, return 1 (add email row)
 	// if there are no search results, the table is empty, so return 0
-	return self.searchField.text.length > 0 ? MAX( 1, filteredPeople.count ) : 0 ;
+	return self.searchField.text.length > 0 ? MAX( 1, _filteredPeople.count ) : 0 ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -272,8 +266,8 @@ static CGFloat const kPadding = 5.0;
    
     cell.accessoryType = UITableViewCellAccessoryNone;
 		
-	// If this is the last row in filteredPeople, take special action
-	if (filteredPeople.count == indexPath.row)
+	// If this is the last row in _filteredPeople, take special action
+	if (_filteredPeople.count == indexPath.row)
     {
 		cell.textLabel.text	= @"Add new contact";
         cell.detailTextLabel.text = nil;
@@ -281,10 +275,8 @@ static CGFloat const kPadding = 5.0;
 	}
 	else
     {
-		ABRecordID abRecordID = (ABRecordID)[[filteredPeople objectAtIndex:indexPath.row] intValue];
-		
-		ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(addressBook, abRecordID);
-		
+		ABRecordRef abPerson = (__bridge ABRecordRef)([_filteredPeople objectAtIndex:indexPath.row]);
+
         cell.textLabel.text = (__bridge_transfer NSString *)ABRecordCopyCompositeName(abPerson);
         cell.detailTextLabel.text = (__bridge_transfer NSString *)ABRecordCopyValue(abPerson, kABPersonOrganizationProperty);
 	}
@@ -298,8 +290,8 @@ static CGFloat const kPadding = 5.0;
 {
 	[tableView setHidden:YES];
 
-    // If this is the last row in filteredPeople, take special action
-	if (indexPath.row == filteredPeople.count)
+    // If this is the last row in _filteredPeople, take special action
+	if (indexPath.row == _filteredPeople.count)
     {
         ABNewPersonViewController *newPersonViewController = [[ABNewPersonViewController alloc] init];
         newPersonViewController.newPersonViewDelegate = self;
@@ -310,11 +302,9 @@ static CGFloat const kPadding = 5.0;
 	}
 	else
     {
-		NSNumber *personID = [filteredPeople objectAtIndex:indexPath.row];
-        
-        ABRecordID abRecordID = [personID intValue];
+		ABRecordRef abRecordRef = (__bridge ABRecordRef)([_filteredPeople objectAtIndex:indexPath.row]);
 		
-		[self addPersonToGroup:abRecordID];
+		[self addPersonToGroup:abRecordRef];
 	}
 
 	self.searchField.text = nil;
@@ -325,7 +315,7 @@ static CGFloat const kPadding = 5.0;
 - (void)filterContentForSearchText:(NSString*)searchText
 {
 	// First clear the filtered array.
-	[filteredPeople removeAllObjects];
+	[_filteredPeople removeAllObjects];
 
 	// beginswith[cd] predicate
 	NSPredicate *beginsPredicate = [NSPredicate predicateWithFormat:@"(SELF beginswith[cd] %@)", searchText];
@@ -335,7 +325,7 @@ static CGFloat const kPadding = 5.0;
      add items that match to the filtered array.
 	 */
 	
-	for (id record in people)
+	for (id record in _people)
     {
         ABRecordRef person = (__bridge ABRecordRef)record;
 
@@ -350,10 +340,8 @@ static CGFloat const kPadding = 5.0;
             [beginsPredicate evaluateWithObject:lastName] ||
             [beginsPredicate evaluateWithObject:organization])
         {
-            ABRecordID abRecordID = ABRecordGetRecordID(person);
-
-            // Add the matching abRecordID to filteredPeople
-            [filteredPeople addObject:[NSNumber numberWithInt:abRecordID]];
+            // Add the matching person to _filteredPeople
+            [_filteredPeople addObject:(__bridge id)person];
         }
 	}
 }
@@ -376,7 +364,6 @@ static CGFloat const kPadding = 5.0;
 
 - (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar
 {
-	// Create the people picker
 	ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
 	peoplePicker.peoplePickerDelegate = self;
 	
@@ -386,19 +373,15 @@ static CGFloat const kPadding = 5.0;
 
 #pragma mark - Add and remove a person to/from the group
 
-- (void)addPersonToGroup:(ABRecordID)abRecordID
+- (void)addPersonToGroup:(ABRecordRef)abRecordRef
 {
-    NSNumber *personID = [NSNumber numberWithInt:abRecordID];
-
-    [group addObject:personID];
+    [_group addObject:(__bridge id)abRecordRef];
     [self layoutScrollView];
 }
 
-- (void)removePersonFromGroup:(ABRecordID)abRecordID
+- (void)removePersonFromGroup:(ABRecordRef)abRecordRef
 {
-    NSNumber *personID = [NSNumber numberWithInt:abRecordID];
-
-	[group removeObject:personID];
+	[_group removeObject:(__bridge id)abRecordRef];
 	[self layoutScrollView];
 }
 
@@ -419,12 +402,9 @@ static CGFloat const kPadding = 5.0;
 	CGFloat xPosition = kPadding;
 	CGFloat yPosition = kPadding;
 
-	for (NSNumber *personID in group)
+	for (id abRecord in _group)
     {
-		ABRecordID abRecordID = (ABRecordID)[personID intValue];
-
-        // Get the person record for abRecordID
-		ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(addressBook, abRecordID);
+		ABRecordRef abPerson = (__bridge ABRecordRef)abRecord;
 
         // Copy the name associated with this person record
 		NSString *name = (__bridge_transfer NSString *)ABRecordCopyCompositeName(abPerson);
@@ -476,7 +456,7 @@ static CGFloat const kPadding = 5.0;
 		[self.deleteLabel setFrame:labelFrame];
 	}
     
-    if (group.count > 0)
+    if (_group.count > 0)
     {
         [self.doneButton setEnabled:YES];
     }
@@ -497,7 +477,7 @@ static CGFloat const kPadding = 5.0;
 // Displays the information of a selected person
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)picker shouldContinueAfterSelectingPerson:(ABRecordRef)person
 {
-	[self addPersonToGroup:ABRecordGetRecordID(person)];
+	[self addPersonToGroup:person];
     
 	// Dismiss the people picker
 	[self dismissModalViewControllerAnimated:YES];
@@ -530,9 +510,7 @@ static CGFloat const kPadding = 5.0;
 {
     if (person != NULL)
     {
-        ABRecordID abRecordID = ABRecordGetRecordID(person);
-        
-        [self addPersonToGroup:abRecordID];
+        [self addPersonToGroup:person];
     }
 
 	[self dismissModalViewControllerAnimated:YES];

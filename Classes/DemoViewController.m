@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 shrtlist.com
+ * Copyright 2014 shrtlist.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,37 +22,49 @@
 @end
 
 @implementation DemoViewController
+{
+    ABAddressBookRef _addressBook;
+}
 
 #pragma mark - View lifecycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    _addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Check the segue identifier
     if ([[segue identifier] isEqualToString:@"showButtonPeoplePicker"])
     {
+        [[segue destinationViewController] setAddressBook:_addressBook];
         [[segue destinationViewController] setDelegate:self];
     }
 }
 
+#pragma mark - Memory management
+
+- (void)dealloc
+{
+    CFRelease(_addressBook);
+}
+
 #pragma mark - Update Person info
 
-- (void)updatePersonInfo:(NSArray *)group
+- (void)updatePersonInfo:(NSArray *)abPersonRefs
 {
-	ABAddressBookRef addressBook = ABAddressBookCreate();
-
 	NSMutableString *namesString = [NSMutableString string];
 	
-	for (NSUInteger i = 0; i < group.count; i++) {
+	for (NSUInteger i = 0; i < abPersonRefs.count; i++) {
 		
-		NSNumber *personID = (NSNumber *)[group objectAtIndex:i];
-		
-		ABRecordID abRecordID = (ABRecordID)[personID intValue];
-		
-		ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(addressBook, abRecordID);
+		ABRecordRef abPerson = (__bridge ABRecordRef)[abPersonRefs objectAtIndex:i];
 
 		NSString *name = (__bridge_transfer NSString *)ABRecordCopyCompositeName(abPerson);
 		
-		if (i < (group.count - 1))
+		if (i < (abPersonRefs.count - 1))
         {
 			[namesString appendString:[NSString stringWithFormat:@"%@, ", name]];
 		}
@@ -63,24 +75,21 @@
 	}
 
 	[self.namesLabel setText:namesString];
-	
-	CFRelease(addressBook);
 }
 
 #pragma mark - ButtonPeoplePickerDelegate protocol conformance
 
-- (void)buttonPeoplePickerDidFinish:(NSArray *)group
+- (void)buttonPeoplePickerDidFinish:(ButtonPeoplePicker *)buttonPeoplePicker
+                   withABPersonRefs:(NSArray *)abPersonRefs
 {
-	[self updatePersonInfo:group];
-	
-	// Dismiss the ButtonPeoplePicker.
-	[self dismissModalViewControllerAnimated:YES];
+	[self updatePersonInfo:abPersonRefs];
+
+	[buttonPeoplePicker dismissModalViewControllerAnimated:YES];
 }
 
-- (void)buttonPeoplePickerDidCancel
-{	
-	// Dismiss the ButtonPeoplePicker.
-	[self dismissModalViewControllerAnimated:YES];
+- (void)buttonPeoplePickerDidCancel:(ButtonPeoplePicker *)buttonPeoplePicker
+{
+	[buttonPeoplePicker dismissModalViewControllerAnimated:YES];
 }
 
 @end

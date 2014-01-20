@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 shrtlist.com
+ * Copyright 2014 shrtlist.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,7 @@
 
 #import <AddressBookUI/AddressBookUI.h>
 
-/**
- * A delegate implements this protocol to be notified
- * when the picker has finished or canceled.
- */
-@protocol ButtonPeoplePickerDelegate <NSObject>
-- (void)buttonPeoplePickerDidFinish:(NSArray *)group;
-- (void)buttonPeoplePickerDidCancel;
-@end
+@protocol ButtonPeoplePickerDelegate;
 
 @interface ButtonPeoplePicker : UIViewController <ABPeoplePickerNavigationControllerDelegate,
                                                   ABNewPersonViewControllerDelegate,
@@ -33,5 +26,22 @@
 												  UIKeyInput>
 
 @property (nonatomic, weak) id<ButtonPeoplePickerDelegate> delegate;
+
+// The Address Book to browse. All contacts returned will be from that ABAddressBook instance.
+// If not set, a new ABAddressBook will be created the first time the property is accessed.
+@property (nonatomic, readwrite) ABAddressBookRef addressBook;
+
+@end
+
+@protocol ButtonPeoplePickerDelegate <NSObject>
+
+// Called after the user has pressed Done
+// The delegate is responsible for dismissing the buttonPeoplePicker
+- (void)buttonPeoplePickerDidFinish:(ButtonPeoplePicker *)buttonPeoplePicker
+                   withABPersonRefs:(NSArray *)abPersonRefs;
+
+// Called after the user has pressed Cancel
+// The delegate is responsible for dismissing the ButtonPeoplePicker
+- (void)buttonPeoplePickerDidCancel:(ButtonPeoplePicker *)buttonPeoplePicker;
 
 @end
