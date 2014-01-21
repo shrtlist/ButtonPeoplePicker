@@ -42,6 +42,12 @@ static CGFloat const kPadding = 5.0;
 {
     [super viewDidLoad];
     
+    UITapGestureRecognizer *singleTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTapped:)];
+    singleTapGestureRecognizer.numberOfTapsRequired = 1;
+    singleTapGestureRecognizer.enabled = YES;
+    singleTapGestureRecognizer.cancelsTouchesInView = YES;
+    [self.scrollView addGestureRecognizer:singleTapGestureRecognizer];
+    
     if (self.addressBook == NULL)
     {
         _addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
@@ -212,6 +218,24 @@ static CGFloat const kPadding = 5.0;
 	}
 
 	[self becomeFirstResponder];
+}
+
+// Action receiver when scrollView is tapped
+- (void)scrollViewTapped:(UITapGestureRecognizer *)gestureRecognizer
+{
+    CGPoint tapPoint = [gestureRecognizer locationInView:nil];
+    UIView *viewTouched = [gestureRecognizer.view hitTest:tapPoint withEvent:nil];
+    
+    if ([viewTouched isKindOfClass:[UIButton class]])
+    {
+        // Do nothing;
+    }
+    else
+    {
+        // Deselect button and hide label
+		_selectedButton.selected = NO;
+		self.deleteLabel.hidden = YES;
+    }
 }
 
 #pragma mark - UIKeyInput protocol conformance
