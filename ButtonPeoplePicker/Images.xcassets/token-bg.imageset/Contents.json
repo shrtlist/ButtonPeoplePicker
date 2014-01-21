@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "ButtonCorners.png"
+      "filename" : "token-bg.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "ButtonCorners@2x.png"
+      "filename" : "token-bg@2x.png"
     }
   ],
   "info" : {

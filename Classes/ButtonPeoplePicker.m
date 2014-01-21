@@ -426,7 +426,7 @@ static CGFloat const kPadding = 5.0;
 		NSString *name = (__bridge_transfer NSString *)ABRecordCopyCompositeName(abPerson);
 
 		// Create the button background images
-		UIImage *normalBackgroundImage = [UIImage imageNamed:@"ButtonCorners.png"];
+		UIImage *normalBackgroundImage = [UIImage imageNamed:@"token-bg.png"];
 		normalBackgroundImage = [normalBackgroundImage stretchableImageWithLeftCapWidth:3.5 
                                                                            topCapHeight:3.5];
 		
