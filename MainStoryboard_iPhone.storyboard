@@ -59,7 +59,7 @@
                                 </connections>
                             </searchBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" id="CHn-VH-Z2z">
-                                <rect key="frame" x="0.0" y="108" width="320" height="156"/>
+                                <rect key="frame" x="0.0" y="108" width="320" height="372"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Press the delete key to remove the selected contact" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="lxV-Pb-Pxl">
