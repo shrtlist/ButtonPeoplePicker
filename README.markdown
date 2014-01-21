@@ -12,11 +12,9 @@ iOS 7.0 and later.
  
 ### Screenshots
 
-![](https://github.com/shrtlist/ButtonPeoplePicker/raw/master/Screenshots/AddPeople.png)
-
 ![](https://github.com/shrtlist/ButtonPeoplePicker/raw/master/Screenshots/SelectForDelete.png)
 
-![](https://github.com/shrtlist/ButtonPeoplePicker/raw/master/Screenshots/AddEmail.png)
+![](https://github.com/shrtlist/ButtonPeoplePicker/raw/master/Screenshots/AddNewContact.png)
 
 ### License
 The source code is available under the Apache License, Version 2.0
