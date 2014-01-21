@@ -64,6 +64,8 @@
 			[namesString appendString:[NSString stringWithFormat:@"%@", name]];
 		}
 	}
+    
+    CFRelease(addressBook);
 
 	[self.namesLabel setText:namesString];
 }
