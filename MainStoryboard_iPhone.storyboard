@@ -61,15 +61,6 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" id="CHn-VH-Z2z">
                                 <rect key="frame" x="0.0" y="108" width="320" height="372"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Press the delete key to remove the selected contact" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="lxV-Pb-Pxl">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </label>
-                                </subviews>
                             </scrollView>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="LF5-oJ-HrE">
                                 <rect key="frame" x="0.0" y="108" width="320" height="156"/>
@@ -123,7 +114,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="contactsTableView" destination="LF5-oJ-HrE" id="keO-Jn-BXS"/>
-                        <outlet property="deleteLabel" destination="lxV-Pb-Pxl" id="rFF-GK-KH2"/>
                         <outlet property="doneButton" destination="Gup-ZO-oRP" id="k1K-oL-W4b"/>
                         <outlet property="scrollView" destination="CHn-VH-Z2z" id="Cff-xq-Lmi"/>
                         <outlet property="searchField" destination="m60-qj-rP5" id="NhV-Re-SSw"/>

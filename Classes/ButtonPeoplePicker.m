@@ -17,7 +17,6 @@
 #import "ButtonPeoplePicker.h"
 
 @interface ButtonPeoplePicker () // Class extension
-@property (nonatomic, weak) IBOutlet UILabel *deleteLabel;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UITableView *contactsTableView;
 @property (nonatomic, weak) IBOutlet UISearchBar *searchField;
@@ -210,12 +209,10 @@ static CGFloat const kPadding = 5.0;
 	if (_selectedButton.selected)
     {
 		_selectedButton.selected = NO;
-		self.deleteLabel.hidden = YES;
 	}
 	else
     {
 		_selectedButton.selected = YES;
-		self.deleteLabel.hidden = NO;
 	}
 
 	[self becomeFirstResponder];
@@ -226,7 +223,6 @@ static CGFloat const kPadding = 5.0;
 {
     // Deselect button and hide label
     _selectedButton.selected = NO;
-    self.deleteLabel.hidden = YES;
 }
 
 #pragma mark - UIKeyInput protocol conformance
@@ -239,10 +235,7 @@ static CGFloat const kPadding = 5.0;
 - (void)insertText:(NSString *)text {}
 
 - (void)deleteBackward
-{	
-	// Hide the delete label
-	self.deleteLabel.hidden = YES;
-
+{
 	NSString *name = _selectedButton.titleLabel.text;
 	
 	NSArray *personArray = (__bridge_transfer NSArray *)ABAddressBookCopyPeopleWithName(self.addressBook, (__bridge CFStringRef)name);
@@ -472,11 +465,6 @@ static CGFloat const kPadding = 5.0;
 		
 		// Calculate xPosition for the next button in the loop
 		xPosition += button.frame.size.width + kPadding;
-		
-		// Reposition the delete label
-		CGRect labelFrame = self.deleteLabel.frame;
-		labelFrame.origin.y = yPosition + button.frame.size.height + kPadding;
-		[self.deleteLabel setFrame:labelFrame];
 	}
     
     if (_group.count > 0)
