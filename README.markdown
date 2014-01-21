@@ -1,4 +1,4 @@
-Button-style contact picker to select multiple people from the iPhone Address Book, with type-ahead and auto-completion.
+Button-style contact picker to select multiple, distinct people from the iPhone Address Book, with type-ahead and auto-completion.
 
 `ButtonPeoplePicker` - A custom view controller that encapsulates the contact picker functionality. This is the only class you need to interact with. Presented via a modal storyboard segue in this demo.
 
