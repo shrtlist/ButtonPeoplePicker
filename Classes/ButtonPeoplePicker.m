@@ -46,6 +46,7 @@ static CGFloat const kPadding = 5.0;
     singleTapGestureRecognizer.numberOfTapsRequired = 1;
     singleTapGestureRecognizer.enabled = YES;
     singleTapGestureRecognizer.cancelsTouchesInView = YES;
+    singleTapGestureRecognizer.delegate = self;
     [self.scrollView addGestureRecognizer:singleTapGestureRecognizer];
     
     if (self.addressBook == NULL)
@@ -223,19 +224,9 @@ static CGFloat const kPadding = 5.0;
 // Action receiver when scrollView is tapped
 - (void)scrollViewTapped:(UITapGestureRecognizer *)gestureRecognizer
 {
-    CGPoint tapPoint = [gestureRecognizer locationInView:nil];
-    UIView *viewTouched = [gestureRecognizer.view hitTest:tapPoint withEvent:nil];
-    
-    if ([viewTouched isKindOfClass:[UIButton class]])
-    {
-        // Do nothing;
-    }
-    else
-    {
-        // Deselect button and hide label
-		_selectedButton.selected = NO;
-		self.deleteLabel.hidden = YES;
-    }
+    // Deselect button and hide label
+    _selectedButton.selected = NO;
+    self.deleteLabel.hidden = YES;
 }
 
 #pragma mark - UIKeyInput protocol conformance
@@ -379,6 +370,21 @@ static CGFloat const kPadding = 5.0;
 	
 	// Show the people picker modally
 	[self presentViewController:peoplePicker animated:YES completion:NULL];
+}
+
+#pragma mark - UIGestureRecognizer delegate protocol conformance
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    BOOL shouldReceiveTouch = NO;
+
+    // Only receive touches on scrollView, not on subviews
+    if (touch.view == self.scrollView)
+    {
+        shouldReceiveTouch = YES;
+    }
+    
+    return shouldReceiveTouch;
 }
 
 #pragma mark - Add and remove a person to/from the group

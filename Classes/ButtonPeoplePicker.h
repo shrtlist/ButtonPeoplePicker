@@ -23,7 +23,8 @@
                                                   UISearchBarDelegate,
 												  UITableViewDataSource,
 												  UITableViewDelegate,
-												  UIKeyInput>
+												  UIKeyInput,
+                                                  UIGestureRecognizerDelegate>
 
 @property (nonatomic, weak) id<ButtonPeoplePickerDelegate> delegate;
 
