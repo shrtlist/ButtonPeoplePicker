@@ -15,7 +15,6 @@
  */
 
 #import "DemoViewController.h"
-#import "ButtonPeoplePicker.h"
 #import <AddressBook/AddressBook.h>
 
 @interface DemoViewController () // Class extension
