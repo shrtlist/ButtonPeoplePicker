@@ -82,16 +82,6 @@ static CGFloat const kPadding = 5.0;
 	return YES;
 }
 
-#pragma mark - Memory management
-
-- (void)dealloc
-{
-    _delegate = nil;
-
-    // Unregister for notifications
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 #pragma mark - Address Book access
 
 // Check the authorization status of our application for Address Book
@@ -150,39 +140,6 @@ static CGFloat const kPadding = 5.0;
 	
 	// Create a filtered list that will contain people for the search results table.
 	_filteredPeople = [NSMutableArray array];
-}
-
-#pragma mark - Register for keyboard notifications
-
-- (void)registerForKeyboardNotifications
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardDidShowNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeHidden:)
-                                                 name:UIKeyboardWillHideNotification object:nil];
-    
-}
-
-// Called when the UIKeyboardDidShowNotification is sent.
-- (void)keyboardWasShown:(NSNotification *)aNotification
-{
-    NSDictionary *info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
-    self.scrollView.contentInset = contentInsets;
-    self.scrollView.scrollIndicatorInsets = contentInsets;
-}
-
-// Called when the UIKeyboardWillHideNotification is sent
-- (void)keyboardWillBeHidden:(NSNotification *)aNotification
-{
-    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-    self.scrollView.contentInset = contentInsets;
-    self.scrollView.scrollIndicatorInsets = contentInsets;
 }
 
 #pragma mark - Target-action methods
@@ -251,7 +208,7 @@ static CGFloat const kPadding = 5.0;
 - (void)insertText:(NSString *)text {}
 
 - (void)deleteBackward
-{    
+{
     ABRecordID abRecordID = _selectedButton.tag;
     ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(self.addressBook, abRecordID);
 
