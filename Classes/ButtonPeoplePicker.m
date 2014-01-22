@@ -36,11 +36,21 @@ static CGFloat const kPadding = 5.0;
 
 #pragma mark - View lifecycle methods
 
-// Perform additional initialization after the nib file is loaded
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    if (!self.tokenColor)
+    {
+        _tokenColor = [UIColor blueColor];
+    }
+    
+    if (!self.selectedTokenColor)
+    {
+        _selectedTokenColor = [UIColor blackColor];
+    }
+    
+    // Add a tap gesture recognizer to our scrollView
     UITapGestureRecognizer *singleTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTapped:)];
     singleTapGestureRecognizer.numberOfTapsRequired = 1;
     singleTapGestureRecognizer.enabled = YES;
@@ -202,17 +212,17 @@ static CGFloat const kPadding = 5.0;
     {
 		if ([subview isKindOfClass:[UIButton class]] && subview != _selectedButton)
         {
-			((UIButton *)subview).selected = NO;
+			((UIButton *)subview).backgroundColor = self.tokenColor;
 		}
 	}
 
-	if (_selectedButton.selected)
+	if (_selectedButton.backgroundColor == self.selectedTokenColor)
     {
-		_selectedButton.selected = NO;
+		_selectedButton.backgroundColor = self.tokenColor;
 	}
 	else
     {
-		_selectedButton.selected = YES;
+		_selectedButton.backgroundColor = self.selectedTokenColor;
 	}
 
 	[self becomeFirstResponder];
@@ -221,8 +231,14 @@ static CGFloat const kPadding = 5.0;
 // Action receiver when scrollView is tapped
 - (void)scrollViewTapped:(UITapGestureRecognizer *)gestureRecognizer
 {
-    // Deselect button and hide label
-    _selectedButton.selected = NO;
+    // Clear button states
+	for (UIView *subview in self.scrollView.subviews)
+    {
+		if ([subview isKindOfClass:[UIButton class]])
+        {
+			((UIButton *)subview).backgroundColor = self.tokenColor;
+		}
+	}
 }
 
 #pragma mark - UIKeyInput protocol conformance
@@ -402,7 +418,7 @@ static CGFloat const kPadding = 5.0;
 
 #pragma mark - Update Person info
 
--(void)layoutScrollView
+- (void)layoutScrollView
 {
 	// Remove existing buttons
 	for (UIView *subview in self.scrollView.subviews)
@@ -424,24 +440,15 @@ static CGFloat const kPadding = 5.0;
 
         // Copy the name associated with this person record
 		NSString *name = (__bridge_transfer NSString *)ABRecordCopyCompositeName(abPerson);
-
-		// Create the button background images
-		UIImage *normalBackgroundImage = [UIImage imageNamed:@"token-bg.png"];
-		normalBackgroundImage = [normalBackgroundImage stretchableImageWithLeftCapWidth:3.5 
-                                                                           topCapHeight:3.5];
-		
-		UIImage *selectedBackgroundImage = [UIImage imageNamed:@"bottom-button-bg.png"];
-		selectedBackgroundImage = [selectedBackgroundImage stretchableImageWithLeftCapWidth:3.5 
-                                                                               topCapHeight:3.5];
         
         UIFont *font = [UIFont systemFontOfSize:16.0];
 
-		// Create the custom button
+		// Create the button
 		UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
 		[button setTitle:name forState:UIControlStateNormal];
 		[button.titleLabel setFont:font];
-		[button setBackgroundImage:normalBackgroundImage forState:UIControlStateNormal];
-		[button setBackgroundImage:selectedBackgroundImage forState:UIControlStateSelected];
+        [button setBackgroundColor:self.tokenColor];
+        [button.layer setCornerRadius:4.0];
 		[button addTarget:self action:@selector(buttonSelected:) forControlEvents:UIControlEventTouchUpInside];
 
 		// Get the width and height of the name string given a font size

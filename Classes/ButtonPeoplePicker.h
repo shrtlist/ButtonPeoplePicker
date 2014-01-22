@@ -32,6 +32,12 @@
 // If not set, a new ABAddressBookRef will be created the first time the property is accessed.
 @property (nonatomic, readwrite) ABAddressBookRef addressBook;
 
+// Color of tokens. Default is blueColor
+@property (nonatomic, strong) UIColor *tokenColor;
+
+// Color of selected token. Default is blackColor.
+@property (nonatomic, strong) UIColor *selectedTokenColor;
+
 @end
 
 @protocol ButtonPeoplePickerDelegate <NSObject>
