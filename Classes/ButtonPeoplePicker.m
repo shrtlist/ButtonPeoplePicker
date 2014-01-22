@@ -375,6 +375,7 @@ static CGFloat const kPadding = 5.0;
 - (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar
 {
 	ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
+    peoplePicker.addressBook = self.addressBook;
 	peoplePicker.peoplePickerDelegate = self;
 	
 	// Show the people picker modally
