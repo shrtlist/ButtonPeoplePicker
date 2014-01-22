@@ -251,14 +251,11 @@ static CGFloat const kPadding = 5.0;
 - (void)insertText:(NSString *)text {}
 
 - (void)deleteBackward
-{
-	NSString *name = _selectedButton.titleLabel.text;
-	
-	NSArray *personArray = (__bridge_transfer NSArray *)ABAddressBookCopyPeopleWithName(self.addressBook, (__bridge CFStringRef)name);
-	
-	ABRecordRef person = (__bridge ABRecordRef)([personArray objectAtIndex:0]);
+{    
+    ABRecordID abRecordID = _selectedButton.tag;
+    ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(self.addressBook, abRecordID);
 
-	[self removePersonFromGroup:person];
+	[self removePersonFromGroup:abPerson];
 }
 
 #pragma mark - UITableViewDataSource protocol conformance
@@ -450,6 +447,7 @@ static CGFloat const kPadding = 5.0;
 		[button.titleLabel setFont:font];
         [button setBackgroundColor:self.tokenColor];
         [button.layer setCornerRadius:4.0];
+        [button setTag:abRecordID];
 		[button addTarget:self action:@selector(buttonSelected:) forControlEvents:UIControlEventTouchUpInside];
 
 		// Get the width and height of the name string given a font size
