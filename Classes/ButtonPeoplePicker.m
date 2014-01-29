@@ -396,7 +396,7 @@ static CGFloat const kPadding = 5.0;
         // Copy the name associated with this person record
 		NSString *name = (__bridge_transfer NSString *)ABRecordCopyCompositeName(abPerson);
         
-        UIFont *font = [UIFont systemFontOfSize:16.0];
+        UIFont *font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
 
 		// Create the button
 		UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
