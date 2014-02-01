@@ -209,7 +209,8 @@ static CGFloat const kPadding = 5.0;
 
 - (void)deleteBackward
 {
-    ABRecordID abRecordID = _selectedButton.tag;
+    // Cast tag value to ABRecordID type
+    ABRecordID abRecordID = (ABRecordID)_selectedButton.tag;
     ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(self.addressBook, abRecordID);
 
 	[self removePersonFromGroup:abPerson];
