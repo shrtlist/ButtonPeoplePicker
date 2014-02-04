@@ -21,16 +21,14 @@
 @property (nonatomic, weak) IBOutlet UITableView *contactsTableView;
 @property (nonatomic, weak) IBOutlet UISearchBar *searchField;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *doneButton;
+
+@property (nonatomic, strong) NSMutableArray *filteredPeople;
+@property (nonatomic, strong) NSMutableOrderedSet *group;
+@property (nonatomic, strong) NSArray *people;
+@property (nonatomic, strong) UIButton *selectedButton;
 @end
 
 @implementation ButtonPeoplePicker
-{
-    NSMutableArray *_filteredPeople;
-    NSMutableOrderedSet *_group;
-    NSArray *_people;
-    
-	UIButton *_selectedButton;
-}
 
 static CGFloat const kPadding = 5.0;
 
@@ -136,10 +134,10 @@ static CGFloat const kPadding = 5.0;
 {
 	_people = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(self.addressBook);
     
-    _group = [NSMutableOrderedSet orderedSet];
+    self.group = [NSMutableOrderedSet orderedSet];
 	
 	// Create a filtered list that will contain people for the search results table.
-	_filteredPeople = [NSMutableArray array];
+	self.filteredPeople = [NSMutableArray array];
 }
 
 #pragma mark - Target-action methods
@@ -147,7 +145,7 @@ static CGFloat const kPadding = 5.0;
 // Action receiver for the clicking of Done button
 - (IBAction)doneClick:(id)sender
 {
-    NSArray *abRecordIDs = [_group array];
+    NSArray *abRecordIDs = [self.group array];
     
 	[self.delegate buttonPeoplePickerDidFinish:self withABRecordIDs:abRecordIDs];
 }
@@ -155,31 +153,31 @@ static CGFloat const kPadding = 5.0;
 // Action receiver for the clicking of Cancel button
 - (IBAction)cancelClick:(id)sender
 {
-	[_group removeAllObjects];
+	[self.group removeAllObjects];
 	[self.delegate buttonPeoplePickerDidCancel:self];
 }
 
 // Action receiver for the selecting of name button
 - (void)buttonSelected:(id)sender
 {
-	_selectedButton = (UIButton *)sender;
+	self.selectedButton = (UIButton *)sender;
 	
 	// Clear other button states
 	for (UIView *subview in self.scrollView.subviews)
     {
-		if ([subview isKindOfClass:[UIButton class]] && subview != _selectedButton)
+		if ([subview isKindOfClass:[UIButton class]] && subview != self.selectedButton)
         {
 			((UIButton *)subview).backgroundColor = self.tokenColor;
 		}
 	}
 
-	if (_selectedButton.backgroundColor == self.selectedTokenColor)
+	if (self.selectedButton.backgroundColor == self.selectedTokenColor)
     {
-		_selectedButton.backgroundColor = self.tokenColor;
+		self.selectedButton.backgroundColor = self.tokenColor;
 	}
 	else
     {
-		_selectedButton.backgroundColor = self.selectedTokenColor;
+		self.selectedButton.backgroundColor = self.selectedTokenColor;
 	}
 
 	[self becomeFirstResponder];
@@ -210,7 +208,7 @@ static CGFloat const kPadding = 5.0;
 - (void)deleteBackward
 {
     // Cast tag value to ABRecordID type
-    ABRecordID abRecordID = (ABRecordID)_selectedButton.tag;
+    ABRecordID abRecordID = (ABRecordID)self.selectedButton.tag;
     ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(self.addressBook, abRecordID);
 
 	[self removePersonFromGroup:abPerson];
@@ -222,7 +220,7 @@ static CGFloat const kPadding = 5.0;
 {
 	// do we have search text? if yes, are there search results? if yes, return number of results, otherwise, return 1 (add email row)
 	// if there are no search results, the table is empty, so return 0
-	return self.searchField.text.length > 0 ? MAX( 1, _filteredPeople.count ) : 0 ;
+	return self.searchField.text.length > 0 ? MAX( 1, self.filteredPeople.count ) : 0 ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -231,8 +229,8 @@ static CGFloat const kPadding = 5.0;
    
     cell.accessoryType = UITableViewCellAccessoryNone;
 		
-	// If this is the last row in _filteredPeople, take special action
-	if (_filteredPeople.count == indexPath.row)
+	// If this is the last row in filteredPeople, take special action
+	if (self.filteredPeople.count == indexPath.row)
     {
 		cell.textLabel.text	= @"Add new contact";
         cell.detailTextLabel.text = nil;
@@ -240,7 +238,7 @@ static CGFloat const kPadding = 5.0;
 	}
 	else
     {
-		ABRecordRef abPerson = (__bridge ABRecordRef)([_filteredPeople objectAtIndex:indexPath.row]);
+		ABRecordRef abPerson = (__bridge ABRecordRef)([self.filteredPeople objectAtIndex:indexPath.row]);
 
         cell.textLabel.text = (__bridge_transfer NSString *)ABRecordCopyCompositeName(abPerson);
         cell.detailTextLabel.text = (__bridge_transfer NSString *)ABRecordCopyValue(abPerson, kABPersonOrganizationProperty);
@@ -255,8 +253,8 @@ static CGFloat const kPadding = 5.0;
 {
 	[tableView setHidden:YES];
 
-    // If this is the last row in _filteredPeople, take special action
-	if (indexPath.row == _filteredPeople.count)
+    // If this is the last row in filteredPeople, take special action
+	if (indexPath.row == self.filteredPeople.count)
     {
         ABNewPersonViewController *newPersonViewController = [[ABNewPersonViewController alloc] init];
         newPersonViewController.newPersonViewDelegate = self;
@@ -267,7 +265,7 @@ static CGFloat const kPadding = 5.0;
 	}
 	else
     {
-		ABRecordRef abRecordRef = (__bridge ABRecordRef)([_filteredPeople objectAtIndex:indexPath.row]);
+		ABRecordRef abRecordRef = (__bridge ABRecordRef)([self.filteredPeople objectAtIndex:indexPath.row]);
 		
 		[self addPersonToGroup:abRecordRef];
 	}
@@ -280,7 +278,7 @@ static CGFloat const kPadding = 5.0;
 - (void)filterContentForSearchText:(NSString *)searchText
 {
 	// First clear the filtered array.
-	[_filteredPeople removeAllObjects];
+	[self.filteredPeople removeAllObjects];
 
 	// beginswith[cd] predicate
 	NSPredicate *beginsPredicate = [NSPredicate predicateWithFormat:@"(SELF beginswith[cd] %@)", searchText];
@@ -290,7 +288,7 @@ static CGFloat const kPadding = 5.0;
      add items that match to the filtered array.
 	 */
 	
-	for (id record in _people)
+	for (id record in self.people)
     {
         ABRecordRef person = (__bridge ABRecordRef)record;
 
@@ -305,8 +303,8 @@ static CGFloat const kPadding = 5.0;
             [beginsPredicate evaluateWithObject:lastName] ||
             [beginsPredicate evaluateWithObject:organization])
         {
-            // Add the matching person to _filteredPeople
-            [_filteredPeople addObject:(__bridge id)person];
+            // Add the matching person to filteredPeople
+            [self.filteredPeople addObject:(__bridge id)person];
         }
 	}
 }
@@ -359,7 +357,7 @@ static CGFloat const kPadding = 5.0;
     ABRecordID abRecordID = ABRecordGetRecordID(abRecordRef);
     NSNumber *number = [NSNumber numberWithInt:abRecordID];
 
-    [_group addObject:number];
+    [self.group addObject:number];
     [self layoutScrollView];
 }
 
@@ -368,7 +366,7 @@ static CGFloat const kPadding = 5.0;
     ABRecordID abRecordID = ABRecordGetRecordID(abRecordRef);
     NSNumber *number = [NSNumber numberWithInt:abRecordID];
     
-	[_group removeObject:number];
+	[self.group removeObject:number];
 	[self layoutScrollView];
 }
 
@@ -389,7 +387,7 @@ static CGFloat const kPadding = 5.0;
 	CGFloat xPosition = kPadding;
 	CGFloat yPosition = kPadding;
 
-	for (NSNumber *number in _group)
+	for (NSNumber *number in self.group)
     {
         ABRecordID abRecordID = [number intValue];
         ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(self.addressBook, abRecordID);
@@ -431,7 +429,7 @@ static CGFloat const kPadding = 5.0;
 		xPosition += button.frame.size.width + kPadding;
 	}
     
-    if (_group.count > 0)
+    if (self.group.count > 0)
     {
         [self.doneButton setEnabled:YES];
     }
