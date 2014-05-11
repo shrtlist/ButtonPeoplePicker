@@ -18,6 +18,8 @@
 
 @protocol ButtonPeoplePickerDelegate;
 
+// Important: ButtonPeoplePicker view controllers must be used with a navigation controller
+// in order to function properly.
 @interface ButtonPeoplePicker : UIViewController <ABPeoplePickerNavigationControllerDelegate,
                                                   ABNewPersonViewControllerDelegate,
                                                   UISearchBarDelegate,
