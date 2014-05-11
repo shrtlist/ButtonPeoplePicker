@@ -41,30 +41,23 @@
 - (void)updatePersonInfo:(NSOrderedSet *)abRecordIDs
 {
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
-
-	NSMutableString *namesString = [NSMutableString string];
+    
+    NSMutableArray *namesArray = [NSMutableArray arrayWithCapacity:abRecordIDs.count];
 	
-	for (NSUInteger i = 0; i < abRecordIDs.count; i++) {
-		
-		NSNumber *number = [abRecordIDs objectAtIndex:i];
-        
+	for (NSNumber *number in abRecordIDs)
+    {
         ABRecordID abRecordID = [number intValue];
         
         ABRecordRef abPerson = ABAddressBookGetPersonWithRecordID(addressBook, abRecordID);
 
 		NSString *name = (__bridge_transfer NSString *)ABRecordCopyCompositeName(abPerson);
 		
-		if (i < (abRecordIDs.count - 1))
-        {
-			[namesString appendString:[NSString stringWithFormat:@"%@, ", name]];
-		}
-		else
-        {
-			[namesString appendString:[NSString stringWithFormat:@"%@", name]];
-		}
+		[namesArray addObject:name];
 	}
     
     CFRelease(addressBook);
+    
+    NSString *namesString = [namesArray componentsJoinedByString:@", "];
 
 	self.namesLabel.text = namesString;
 }
