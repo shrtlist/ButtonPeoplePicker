@@ -58,7 +58,7 @@ static CGFloat const kPadding = 5.0;
     
     if (self.addressBook == NULL)
     {
-        _addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+        self.addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
     }
 
     // Check whether we are authorized to access the user's address book data
