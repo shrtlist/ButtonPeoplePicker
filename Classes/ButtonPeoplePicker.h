@@ -32,7 +32,7 @@
 // If not set, a new ABAddressBookRef will be created the first time the property is accessed.
 @property (nonatomic, readwrite) ABAddressBookRef addressBook;
 
-// Color of tokens. Default is blueColor
+// Color of tokens. Default is the global tintColor
 @property (nonatomic, strong) UIColor *tokenColor;
 
 // Color of selected token. Default is blackColor.

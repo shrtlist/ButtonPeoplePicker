@@ -40,12 +40,12 @@ static CGFloat const kPadding = 5.0;
     
     if (!self.tokenColor)
     {
-        _tokenColor = [UIColor blueColor];
+        self.tokenColor = self.view.tintColor;
     }
     
     if (!self.selectedTokenColor)
     {
-        _selectedTokenColor = [UIColor blackColor];
+        self.selectedTokenColor = [UIColor blackColor];
     }
     
     // Add a tap gesture recognizer to our scrollView
