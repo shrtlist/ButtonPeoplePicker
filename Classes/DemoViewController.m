@@ -66,7 +66,7 @@
     
     CFRelease(addressBook);
 
-	[self.namesLabel setText:namesString];
+	self.namesLabel.text = namesString;
 }
 
 #pragma mark - ButtonPeoplePickerDelegate protocol conformance
