@@ -38,7 +38,7 @@
 
 #pragma mark - Update Person info
 
-- (void)updatePersonInfo:(NSArray *)abRecordIDs
+- (void)updatePersonInfo:(NSOrderedSet *)abRecordIDs
 {
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
 
@@ -72,7 +72,7 @@
 #pragma mark - ButtonPeoplePickerDelegate protocol conformance
 
 - (void)buttonPeoplePickerDidFinish:(ButtonPeoplePicker *)buttonPeoplePicker
-                    withABRecordIDs:(NSArray *)abRecordIDs
+                    withABRecordIDs:(NSOrderedSet *)abRecordIDs
 {
 	[self updatePersonInfo:abRecordIDs];
 

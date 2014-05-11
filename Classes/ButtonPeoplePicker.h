@@ -46,9 +46,9 @@
 
 // Called after the user has pressed Done.
 // The delegate is responsible for dismissing the buttonPeoplePicker.
-// abRecordIDs - array of NSNumbers representing ABRecordIDs selected
+// abRecordIDs - ordered set of NSNumbers representing ABRecordIDs selected
 - (void)buttonPeoplePickerDidFinish:(ButtonPeoplePicker *)buttonPeoplePicker
-                   withABRecordIDs:(NSArray *)abRecordIDs;
+                    withABRecordIDs:(NSOrderedSet *)abRecordIDs;
 
 // Called after the user has pressed Cancel.
 // The delegate is responsible for dismissing the ButtonPeoplePicker.

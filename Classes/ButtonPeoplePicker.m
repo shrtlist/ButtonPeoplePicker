@@ -145,7 +145,7 @@ static CGFloat const kPadding = 5.0;
 // Action receiver for the clicking of Done button
 - (IBAction)doneClick:(id)sender
 {
-    NSArray *abRecordIDs = [self.group array];
+    NSOrderedSet *abRecordIDs = [NSOrderedSet orderedSetWithOrderedSet:self.group];
     
 	[self.delegate buttonPeoplePickerDidFinish:self withABRecordIDs:abRecordIDs];
 }
